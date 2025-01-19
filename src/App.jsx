@@ -22,9 +22,9 @@ function App() {
       </div>
       <h1 className='text-white my-3 text-6xl font-bold'>Vite + React + Tailwind</h1>
       <div className="card text-center mt-2 ">
-        <button onClick={() => setCount((count) => count + 1)} 
-          className='py-3 px-5 rounded-lg bg-gray-950 text-white font-semibold hover:border'
-          >
+        <button onClick={() => setCount((count) => count + 1)}
+          className='py-3 w-24 mx-auto rounded-lg bg-gray-950 text-white font-semibold hover:border'
+        >
           count is {count}
         </button>
         <p className='text-white my-2'>
