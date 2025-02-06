@@ -17,13 +17,13 @@ function App() {
           <img src={reactLogo} className="logo react w-24 animate-customSpin" alt="React logo" />
         </a>
         <a href="https://tailwindcss.com" target="_blank">
-          <img src={tailwindLogo} className="logo react w-24 hover:drop-shadow-[0_0_15px_rgb(59,130,246)] transition-all" alt="React logo" />
+          <img src={tailwindLogo} className="logo react w-24 hover:drop-shadow-[0_0_15px_rgb(59,130,246)] transition-all" alt="Tailwind logo" />
         </a>
       </div>
       <h1 className='text-white my-3 text-6xl font-bold'>Vite + React + Tailwind</h1>
       <div className="card text-center mt-2 ">
         <button onClick={() => setCount((count) => count + 1)}
-          className='py-3 w-24 mx-auto rounded-lg bg-gray-950 text-white font-semibold hover:border'
+          className='py-2 w-24 mx-auto rounded-lg bg-gray-950 text-white font-semibold hover:border'
         >
           count is {count}
         </button>
