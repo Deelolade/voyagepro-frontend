@@ -1,8 +1,2 @@
-# React + Vite + tailwindcss
-
-
-# This template serves as an easy way of installing vite, react, tailwind all at once
-
-
-
-
+# voyagepro-frontend
+Frontend codebase for VoyagePro – a modern travel and tour booking web application. Built with React.
