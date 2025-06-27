@@ -61,7 +61,7 @@ const SignUp = () => {
               </div>
             </div>
             <div className="mt-12">
-              <div className="w-[%]">
+              <div className="">
                 <label htmlFor="" className="text-gray-500 text-sm ">
                   Email Address
                 </label>
