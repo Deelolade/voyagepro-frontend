@@ -38,7 +38,7 @@ const SignUp = () => {
             <div className="mt-28">
               <p className="text-gray-500 text-sm">Step 1/3</p>
               <h1 className="text-4xl font-semibold my-5">Create an account</h1>
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm text-center">
                 sign up with VoyagePro and unlock opportunities to shape your
                 future fun experiences.
               </p>
