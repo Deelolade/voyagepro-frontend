@@ -8,7 +8,7 @@ import OtpInput from "../../components/OTPInput";
 const Emailverification = () => {
   return (
     <>
-      <section className="flex h-screen justify-around px-20 py-8">
+      <section className="flex h-screen justify-around px-20 py-8 max-h-[100vh]">
         <div className="w-[45%] ">
           <img
             src={image}
@@ -38,7 +38,7 @@ const Emailverification = () => {
                 <OtpInput lenght={4} />
               </div>
               <div >
-                <p className=" text-center mt-8 font-light">Didn't get a code?<span className="underline"> Click to respond</span></p>
+                <p className=" text-center mt-8 font-light">Didn't get a code?<span className="underline"> Click to resend</span></p>
                 <div className="mt-6 flex flex-col ">
                   <Link
                     to="/personal"

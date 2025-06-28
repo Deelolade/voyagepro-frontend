@@ -1,20 +1,17 @@
-import { useState } from "react";
-import BreadCrumbs from "../../components/BreadCrumbs";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import image from "../../images/voyage-pro-1.png";
+import image from "../../images/voyagepro-login.png";
 import { FcGoogle } from "react-icons/fc";
 import { IoMail } from "react-icons/io5";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { useNavigate } from "react-router-dom";
 
-
-const SignUp = () => {
+const Login = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [passwordIcon, setPasswordIcon] = useState(FaEye);
-  const navigate =useNavigate();
+
   const visiblePassword = () => {
     if (passwordType === "password") {
       setPasswordType("text");
@@ -25,38 +22,37 @@ const SignUp = () => {
       setPasswordType("password");
     }
   };
+
   const ValidationSchema = yup.object().shape({
-        email: yup.string().email().required("Incorrect Email"),
-        password: yup.string().required().min(4).max(20).required("Please Enter correct Password"),
-    })
-    const { register,handleSubmit, formState:{ errors }} =useForm({
-        resolver: yupResolver(ValidationSchema)
-    })
-    const onSubmit = (data) => {
-        console.log(data)
-        navigate("/verify-email")
-    }
+      email: yup.string().email().required("Incorrect Email"),
+      password: yup.string().required().min(4).max(20).required("Please Enter correct Password"),
+      terms: yup.bool()
+  })
+  const { register,handleSubmit, formState:{ errors }} =useForm({
+      resolver: yupResolver(ValidationSchema)
+  })
+  const onSubmit = (data) => {
+      console.log(data)
+  }
   return (
     <>
-      <section className="flex h-screen justify-evenly px-20  py-8 max-h-[100vh]">
-        <div className="w-[45%] ">
+      <section className="flex h-screen justify-evenly xs:px-2 2xl:px-20 max-h-screen">
+        <div className=" xs:hidden 2xl:w-[50%] ">
           <img
             src={image}
             alt="voyage-pro-"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
         </div>
-        <div className="w-[45%] p-10 relative flex  flex-col">
-          <div className="">
-            <BreadCrumbs />
-          </div>
+        <div className="xs:w-full 2xl:w-[45%] xs:px-1 2xl:p-10 relative flex  flex-col justify-between">
+          <h1 className="text-3xl font-semibold">VoyagePro</h1>
           <div className="w-[70%]">
-            <div className="mt-28">
-              <p className="text-gray-500 text-sm">Step 1/3</p>
-              <h1 className="text-4xl font-semibold my-5">Create an account</h1>
-              <p className="text-gray-500 text-sm text-center">
-                sign up with VoyagePro and unlock opportunities to shape your
-                future fun experiences.
+            <div className="">
+              <h1 className="text-3xl font-semibold my-5">
+                Login to your account
+              </h1>
+              <p className="text-gray-500 text-sm text-left">
+                Login now to stay connected and continue to explore.
               </p>
             </div>
             <div className="mt-8">
@@ -76,16 +72,17 @@ const SignUp = () => {
                 <div className="h-[1px] w-[25%] bg-gray-400"></div>
               </div>
             </div>
-            <form onSubmit ={handleSubmit(onSubmit)} className="mt-12">
+            <form className="mt-12" onSubmit ={handleSubmit(onSubmit)}>
               <div className="">
                 <label htmlFor="" className="text-gray-500 text-sm ">
                   Email Address
                 </label>
-                <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.email ? "ring-2 ring-red-500" : "focus-within:ring-2 focus-within:ring-blue-500"}`}>
+                <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.email ? "ring-2 ring-red-500" : "focus-within:ring-2 focus-within:ring-blue-500"}
+`}>
                   <input
                     type="email"
-                    {...register('email')}
                     placeholder="Enter Email "
+                    {...register('email')}
                     className=" text-sm outline-none w-[90%]  py-1"
                   />{" "}
                   <IoMail className="scale-150 text-gray-500" />
@@ -97,36 +94,57 @@ const SignUp = () => {
                   Password
                 </label>
                 <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.password ? "ring-2 ring-red-500" : "focus-within:ring-2 focus-within:ring-blue-500"}`}>
-
                   <input
                     type={passwordType}
-                    {...register('password')}
+                     {...register('password')}
                     className=" text-sm outline-none w-[90%]  py-1"
-                    placeholder="Password (min.8 character)"
+                    placeholder="Enter password "
                   />
                   <button
                     className="scale-150 text-gray-500"
                     onClick={visiblePassword}
-                  >
+                    >
                     {passwordIcon}
                   </button>
                 </div>
                       {errors.password && <p className='text-red-400 mt-3 text-sm'>{errors.password?.message}</p>}
-
+                <div className="flex my-6 justify-between">
+                  <div className="flex space-x-2">
+                    <input
+                      type="checkbox"
+                      name=""
+                      id=""
+                      className="h-5 w-5 accent-blue-600 rounded"
+                       {...register("terms")}
+                    />
+                    <p className="text-sm text-gray-500">Remember me</p>
+                  </div>{" "}
+                  <Link
+                    to="/forgot-password"
+                    className="hover:underline text-sm text-gray-500"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
               </div>
 
               <div className=" mt-6 flex flex-col">
-                <button 
-                  className="bg-blue-600 hover:bg-blue-500 w-full  font-semibold py-2 text-xl text-center rounded-lg text-white capitalize"
+                <button
+                  className="bg-blue-600 hover:bg-blue-500 w-full  py-2 text-xl text-center rounded-lg text-white capitalize"
                 >
                   Login
                 </button>
-                <p className="text-black text-sm mt-3">
-                  already have an account ?{" "}
-                  <Link to="/login" className="underline ">Login</Link>
+                <p className="text-black text-sm mt-5 text-center">
+                  Don't have an account ?{" "}
+                  <Link to="/signup" className="underline ">
+                    Sign Up
+                  </Link>
                 </p>
               </div>
             </form>
+          </div>
+          <div className="flex  justify-between text-sm text-gray-700">
+            <p>Privacy Policy</p> <p>Copyright 2022</p>
           </div>
         </div>
       </section>
@@ -134,4 +152,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

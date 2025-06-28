@@ -6,7 +6,7 @@ import BreadCrumbs from "../../components/BreadCrumbs"
 const PersonalInfo = () => {
   return (
     <>
-      <section className="flex h-screen justify-around px-20 py-8">
+      <section className="flex h-screen justify-around px-20 py-8 max-h-[100vh]">
         <div className="w-[45%] ">
           <img
             src={image}
