@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [passwordType, setPasswordType] = useState("password");
@@ -33,6 +34,7 @@ const Login = () => {
   })
   const onSubmit = (data) => {
       console.log(data)
+          toast("Logged In  successfully !!")
   }
   return (
     <>

@@ -5,9 +5,13 @@ import PersonalInfo from "./pages/signup/PersonalInfo"
 import LandingPage from "./pages/LandingPage"
 import Login from "./pages/signin/Login"
 import ForgotPassword from "./pages/password-recovery/ForgotPassword"
+import { ToastContainer } from 'react-toastify'
+
+
 const App = () => {
   return (
     <>
+    <ToastContainer/>
     <Routes>
       <Route path="/" element={ <LandingPage /> } />
       <Route path="/signup" element={<SignUp />}/>
