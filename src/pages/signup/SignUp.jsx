@@ -46,14 +46,14 @@ const SignUp = () => {
             className="min-w-full max-h-full 2xl:object-contain  rounded-2xl"
           />
         </div>
-        <div className="xs:w-full md:w-[70%] lg:w-[50%] 2xl:w-[45%] 2xl:p-10 xs:p-5 relative flex  flex-col">
+        <div className="xs:w-full md:w-[70%] lg:w-[50%] 2xl:w-[45%] xxs: p-3 xs:p-5 2xl:p-10  relative flex  flex-col">
           <div className="">
             <BreadCrumbs />
           </div>
           <div className=" md:w-full xs:w-full xl:w-full 2xl:w-[70%]">
             <div className=" xs:mt-5 md:mt-12 lg:mt-1 xl:mt-12  2xl:mt-28">
               <p className="text-gray-500 text-sm">Step 1/3</p>
-              <h1 className="2xl:text-4xl xs:text-3xl font-semibold xs:my-2 lg:my-2 2xl:my-5  ">Create an account</h1>
+              <h1 className="xxs:text-xl xs:text-3xl 2xl:text-4xl font-semibold xs:my-2 lg:my-2 2xl:my-5  ">Create an account</h1>
               <p className="text-gray-500 text-sm 2xl:text-center xs:text-left">
                 sign up with VoyagePro and unlock opportunities to shape your future fun experiences.
               </p>
@@ -68,11 +68,11 @@ const SignUp = () => {
                 </span>
               </div>
               <div className="flex justify-center items-center space-x-3 mx-auto  lg:mt-6 xl:mt-8 2xl:mt-12 ">
-                <div className="h-[1px] 2xl:w-[25%] xs:w-[15%] bg-gray-400 "></div>
-                <p className="uppercase text-sm text-gray-500">
+                <div className="h-[1px] 2xl:w-[25%] xxs:w-[10%] xs:w-[15%] bg-gray-400 "></div>
+                <p className="uppercase text-sm text-center text-gray-500">
                   or Continue with Email
                 </p>
-                <div className="h-[1px] w-[25%] xs:w-[15%] bg-gray-400"></div>
+                <div className="h-[1px] xs:w-[15%] xxs:w-[10%] 2xl:w-[25%] bg-gray-400"></div>
               </div>
             </div>
             <form onSubmit ={handleSubmit(onSubmit)} className=" xs:my-6 lg:mt-4 xl:mt-8 2xl:mt-12 ">
