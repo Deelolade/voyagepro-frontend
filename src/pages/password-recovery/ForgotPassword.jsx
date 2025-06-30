@@ -7,8 +7,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IoMail } from "react-icons/io5";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   const ValidationSchema = yup.object().shape({
     email: yup.string().email().required("Incorrect Email"),
   });
@@ -22,6 +24,7 @@ const ForgotPassword = () => {
   const onSubmit = (data) => {
     console.log(data);
     toast("Logged In  successfully !!");
+    navigate("/email-sent")
   };
   return (
     <>

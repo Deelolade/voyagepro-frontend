@@ -6,7 +6,7 @@ const BreadCrumbs = () => {
   const currentPath = location.pathname; 
   const signupSteps = [
     {title: "Forgot Password ", path:"/forgot-password", icon: <FaChevronRight/>, currentStep: 1},
-    { title: "Email Sent", path:"/email-sent-email", icon:<FaChevronRight/>, currentStep:2},
+    { title: "Email Sent", path:"/email-sent", icon:<FaChevronRight/>, currentStep:2},
     {title: "Create New Password", path:"/create-password", icon:"", currentStep: 3}
   ]
   return (
