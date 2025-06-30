@@ -38,45 +38,44 @@ const SignUp = () => {
     }
   return (
     <>
-      <section className="flex h-screen justify-evenly px-20  py-8 max-h-[100vh]">
-        <div className="w-[45%] ">
+      <section className="flex h-screen justify-evenly md:px-5 lg:px-10 2xl:px-20  xs:px-0 xl:py-4  2xl:py-8 max-h-[100vh]">
+        <div className="2xl:w-[45%] md:hidden  ">
           <img
             src={image}
             alt="voyage-pro-"
-            className="min-w-full max-h-full object-contain rounded-2xl"
+            className="min-w-full max-h-full 2xl:object-contain  rounded-2xl"
           />
         </div>
-        <div className="w-[45%] p-10 relative flex  flex-col">
+        <div className="xs:w-full md:w-[70%] lg:w-[50%] 2xl:w-[45%] 2xl:p-10 xs:p-5 relative flex  flex-col">
           <div className="">
             <BreadCrumbs />
           </div>
-          <div className="w-[70%]">
-            <div className="mt-28">
+          <div className=" md:w-full xs:w-full xl:w-full 2xl:w-[70%]">
+            <div className=" xs:mt-5 md:mt-12 lg:mt-1 xl:mt-12  2xl:mt-28">
               <p className="text-gray-500 text-sm">Step 1/3</p>
-              <h1 className="text-4xl font-semibold my-5">Create an account</h1>
-              <p className="text-gray-500 text-sm text-center">
-                sign up with VoyagePro and unlock opportunities to shape your
-                future fun experiences.
+              <h1 className="2xl:text-4xl xs:text-3xl font-semibold xs:my-2 lg:my-2 2xl:my-5  ">Create an account</h1>
+              <p className="text-gray-500 text-sm 2xl:text-center xs:text-left">
+                sign up with VoyagePro and unlock opportunities to shape your future fun experiences.
               </p>
             </div>
-            <div className="mt-8">
-              <div className="flex space-x-3 py-2 items-center justify-center border-2 border-gray-500 w-auto  rounded-lg">
-                <span className="text-3xl">
+            <div className=" xs:mt-4 xl:mt-5 2xl:mt-8">
+              <div className="flex space-x-3 xs:py-2 2xl:py-2 items-center justify-center border-2 border-gray-500 w-auto  rounded-lg">
+                <span className="2xl:text-3xl xs:text-2xl">
                   <FcGoogle />
                 </span>
-                <span className="text-[16px] font-semibold">
+                <span className=" xs:text-sm text-[16px] font-semibold">
                   Sign Up with Google
                 </span>
               </div>
-              <div className="flex justify-center items-center space-x-3 mx-auto mt-12 ">
-                <div className="h-[1px] w-[25%] bg-gray-400 "></div>
+              <div className="flex justify-center items-center space-x-3 mx-auto  lg:mt-6 xl:mt-8 2xl:mt-12 ">
+                <div className="h-[1px] 2xl:w-[25%] xs:w-[15%] bg-gray-400 "></div>
                 <p className="uppercase text-sm text-gray-500">
                   or Continue with Email
                 </p>
-                <div className="h-[1px] w-[25%] bg-gray-400"></div>
+                <div className="h-[1px] w-[25%] xs:w-[15%] bg-gray-400"></div>
               </div>
             </div>
-            <form onSubmit ={handleSubmit(onSubmit)} className="mt-12">
+            <form onSubmit ={handleSubmit(onSubmit)} className=" xs:my-6 lg:mt-4 xl:mt-8 2xl:mt-12 ">
               <div className="">
                 <label htmlFor="" className="text-gray-500 text-sm ">
                   Email Address
@@ -104,12 +103,12 @@ const SignUp = () => {
                     className=" text-sm outline-none w-[90%]  py-1"
                     placeholder="Password (min.8 character)"
                   />
-                  <button
+                  <i
                     className="scale-150 text-gray-500"
                     onClick={visiblePassword}
                   >
                     {passwordIcon}
-                  </button>
+                  </i>
                 </div>
                       {errors.password && <p className='text-red-400 mt-3 text-sm'>{errors.password?.message}</p>}
 
