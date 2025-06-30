@@ -16,7 +16,7 @@ const PersonalInfo = () => {
     phoneNumber: yup
       .string()
       .required("Phone number is required")
-      .matches(/^\+[0-9]{7,15}$/, "Enter a valid phone number"),
+      .matches(/^(?:\+234|0)[789][01]\d{8}$/, "Enter a valid phone number"),
     state: yup.string().required("State  is required"),
     country: yup.string().required("Country is required"),
     role: yup
@@ -25,7 +25,7 @@ const PersonalInfo = () => {
       .oneOf(["user", "admin"], "Select a valid account type"),
     term: yup
       .bool()
-      .oneOf([true],"You have to agree to our terms and privacy policy "),
+      .oneOf([true], "You have to agree to our terms and privacy policy "),
   });
   const {
     register,
@@ -38,11 +38,11 @@ const PersonalInfo = () => {
     console.log(data);
     console.log();
     // navigate("/verify-email");
-    toast("Signed Up successfully !!")
+    toast("Signed Up successfully !!");
   };
   return (
     <>
-      <section className="flex h-screen justify-around px-20 py-8 max-h-[100vh]">
+      <section className="flex h-screen justify-around px-20 py-8 max-h-screen">
         <div className="w-[45%] ">
           <img
             src={image}
@@ -108,12 +108,25 @@ const PersonalInfo = () => {
                   <label htmlFor="" className="text-black text-sm ">
                     Phone Number
                   </label>
-                  <input
-                    type="text"
-                    placeholder="+234"
-                    {...register("phoneNumber")}
-                    className="w-full  text-sm outline-none py-3 px-3 rounded-lg mt-1"
-                  />{" "}
+                  <div className="flex gap-2 items-center bg-white rounded-lg">
+                    {/* Flag & Country Code Box */}
+                    <div className="flex items-center  px-4 py-3 border-r rounded-l-lg bg-gray-200">
+                      <img
+                        src="https://flagcdn.com/w40/ng.png"
+                        alt="Nigeria"
+                        className="w-5 h-5 mr-2"
+                      />
+                      {/* <span className="text-sm text-gray-700">+234</span> */}
+                    </div>
+
+                    {/* Phone Number Input */}
+                    <input
+                      type="text"
+                      placeholder="8012345678"
+                      {...register("phoneNumber")}
+                      className="text-sm outline-none py-3 px-3 rounded-lg  w-full"
+                    />
+                  </div>
                   {errors.phoneNumber && (
                     <p className="mt-2 text-red-500 text-sm">
                       {errors.phoneNumber?.message}
@@ -181,19 +194,23 @@ const PersonalInfo = () => {
               </div>
               <div className="mt-8 flex flex-col  w-[90%]">
                 <div className="my-4">
-                 <div className="flex space-x-2 ">
-                   <input
-                    type="checkbox"
-                    name=""
-                    id=""
-                    className="scale-125 "
-                    {...register("term")}
-                  />
-                  <p className="text-sm">
-                    By continuing, You agree to our Terms and Privacy Policy
-                  </p>
-                 </div>
-                  {errors.term && <p className="text-red-500 text-sm mt-2">{errors.term?.message}</p>}
+                  <div className="flex space-x-2 ">
+                    <input
+                      type="checkbox"
+                      name=""
+                      id=""
+                      className="scale-125 "
+                      {...register("term")}
+                    />
+                    <p className="text-sm">
+                      By continuing, You agree to our Terms and Privacy Policy
+                    </p>
+                  </div>
+                  {errors.term && (
+                    <p className="text-red-500 text-sm mt-2">
+                      {errors.term?.message}
+                    </p>
+                  )}
                 </div>
                 <button className="bg-blue-600 hover:bg-blue-500 py-2 text-xl text-center rounded-lg text-white capitalize">
                   Create account
