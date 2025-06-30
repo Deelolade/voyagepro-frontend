@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BreadCrumbs from "../../components/BreadCrumbs";
+import BreadCrumbs from "../../components/SignUpBreadCrumbs";
 import { Link } from "react-router-dom";
 import image from "../../images/voyage-pro-1.png";
 import { FcGoogle } from "react-icons/fc";
