@@ -42,34 +42,37 @@ const PersonalInfo = () => {
   };
   return (
     <>
-      <section className="flex h-screen justify-around px-20 py-8 max-h-screen">
-        <div className="w-[45%] ">
+      <section className="flex h-screen justify-evenly md:px-5 lg:px-10 2xl:px-20  xs:px-0 xl:py-4  2xl:py-8 max-h-[100vh]">
+        <div className="2xl:w-[45%] md:hidden ">
           <img
             src={image}
             alt="voyage-pro-"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
         </div>
-        <div className="w-[45%] p-10 relative flex  flex-col">
+        <div className="xs:w-full md:w-[70%] lg:w-[50%] 2xl:w-[45%] xxs: p-3 xs:p-5 2xl:p-10  relative flex  flex-col">
           <div className="">
             <BreadCrumbs />
           </div>
-          <div className="flex items-center space-x-2 justify-start mt-12">
-            <Link to="/verify-email" className="bg-white  p-3 rounded-lg">
-              <BiArrowBack className="scale-150" />
+          <div className="flex items-center space-x-2 justify-start xs:mt-4 xl:mt-2 2xl:mt-12">
+            <Link
+              to="/signup"
+              className="bg-white  xxs:p-1 xs:p-2 2xl:p-3 xs:rounded 2xl:rounded-lg"
+            >
+              <BiArrowBack className=" xxs:scale-90 xs:scale-125 2xl:scale-150" />
             </Link>
-            <p className="">Back</p>
+            <p className="text-sm text-black md:hidden">Back</p>
           </div>
-          <div className="mt-28 w-[70%]">
+          <div className="  md:w-full xs:w-full xl:w-full 2xl:w-[70%]  xxs:mt-4 xs:mt-10 md:mt-12 xl:mt-8 2xl:mt-20">
             <p className="text-gray-500 text-sm">Step 3/3</p>
-            <h1 className="text-2xl font-semibold my-5">
+            <h1 className="xxs:text-xl 2xl:text-2xl font-semibold xs:my-2 2xl:my-5">
               Let's complete your profile
             </h1>
             <p className="text-gray-500 text-sm text-left">
               Fill in the remaining details to complete your profile.
             </p>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex justify- gap-5 mt-5">
+              <div className="flex  2xl:gap-5 xs:mt-2 2xl:mt-5">
                 <div className="w-[50%]">
                   <label htmlFor="" className="text-black text-sm ">
                     First Name
@@ -103,14 +106,14 @@ const PersonalInfo = () => {
                   )}
                 </div>
               </div>
-              <div className="flex  gap-5 mt-8">
+              <div className="flex  gap-5 xs:mt-4 2xl:mt-8">
                 <div className="w-[50%]">
                   <label htmlFor="" className="text-black text-sm ">
                     Phone Number
                   </label>
                   <div className="flex gap-2 items-center bg-white rounded-lg">
                     {/* Flag & Country Code Box */}
-                    <div className="flex items-center  px-4 py-3 border-r rounded-l-lg bg-gray-200">
+                    <div className="flex items-center  sm:px-2 2xl:px-4 py-3 border-r rounded-l-lg bg-gray-200">
                       <img
                         src="https://flagcdn.com/w40/ng.png"
                         alt="Nigeria"
@@ -150,7 +153,7 @@ const PersonalInfo = () => {
                   )}
                 </div>
               </div>
-              <div className="flex  gap-5 mt-8">
+              <div className="flex  gap-5 xs:mt-4 2xl:mt-8">
                 <div className="w-[50%]">
                   <label htmlFor="" className="text-black text-sm ">
                     Country
@@ -192,7 +195,7 @@ const PersonalInfo = () => {
                   )}
                 </div>
               </div>
-              <div className="mt-8 flex flex-col  w-[90%]">
+              <div className="mt-8 flex flex-col  w-[90%] xs:mt-4 2xl:mt-8">
                 <div className="my-4">
                   <div className="flex space-x-2 ">
                     <input

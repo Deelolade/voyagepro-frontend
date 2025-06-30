@@ -22,8 +22,8 @@ const Emailverification = () => {
           </div>
 
           <div className="flex items-center space-x-2 justify-start xs:mt-4 2xl:mt-12">
-            <Link to="/signup" className="bg-white xs:p-2 2xl:p-3 rounded-lg">
-              <BiArrowBack className="xs:scale-125 2xl:scale-150" />
+            <Link to="/signup" className="bg-white  xxs:p-1 xs:p-2 2xl:p-3 xs:rounded 2xl:rounded-lg">
+              <BiArrowBack className=" xxs:scale-90 xs:scale-125 2xl:scale-150" />
             </Link>
             <p className="text-sm text-black md:hidden">Back</p>
           </div>
