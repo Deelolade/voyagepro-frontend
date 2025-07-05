@@ -18,14 +18,21 @@ module.exports = {
         height: {
           screen: "100dvh",
         },
-        fontFamily: {
-          archivo: ["Archivo", "sans-serif"],
-          bebasNeue: ["BebasNeue", "sans-serif"],
-          cabinetGrotesk: ["CabinetGrotesk", "sans-serif"],
-          clashDisplay: ["ClashDisplay", "sans-serif"],
-          familjenGrotesk: ["FamiljenGrotesk", "sans-serif"],
-          switzer: ["Switzer", "sans-serif"],
+        colors:{
+          blue: "#0056D2",
+          red:"#D04715",
+          green:"#50C878",
+          orange:"#FF6B35"
         },
+        backgroundColor:{
+          blue: "#0056D2",
+          red:"#D04715",
+          green:"#50C878",
+          orange:"#FF6B35"
+        },
+        backgroundImage: {
+        'hero-pattern': "url('/src/images/hero-image.png')",
+      },
       },
     },
     plugins: [],

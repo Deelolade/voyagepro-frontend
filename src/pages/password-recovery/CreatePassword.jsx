@@ -39,7 +39,6 @@ const CreatePassword = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
-    toast("Logged In  successfully !!");
     navigate("/email-sent")
   };
   return (

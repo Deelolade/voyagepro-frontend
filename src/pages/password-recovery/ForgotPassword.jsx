@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const ValidationSchema = yup.object().shape({
-    email: yup.string().email().required("Incorrect Email"),
+    email: yup.string().email().required("Enter Your correct mail"),
   });
   const {
     register,
@@ -23,7 +23,7 @@ const ForgotPassword = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
-    toast("Logged In  successfully !!");
+    // toast("Logged In  successfully !!");
     navigate("/email-sent")
   };
   return (
@@ -46,7 +46,7 @@ const ForgotPassword = () => {
         </div>
         <div className="flex justify-center items-center h-[70vh]">
           <form onSubmit={handleSubmit(onSubmit)} className="bg-[#EAF2FF] p-6 rounded-xl xs:w-[90vw] 2xl:w-[491px] h-[420px] mx-auto ">
-            <h1 className="text-xl font-semibold text-center">
+            <h1 className="text-xl font-semibold text-center xs:mt-4">
               Forgot Password
             </h1>
             <p className="mt-8 text-sm text-gray-500 text-center">
