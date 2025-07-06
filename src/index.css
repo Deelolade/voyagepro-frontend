@@ -7,9 +7,28 @@ body{
     background-color: #d3d3d3;
 font-family: "Poppins", sans-serif;
 }
+html{
+  scroll-behavior: smooth;
+}
 input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px white inset !important;
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
   -webkit-text-fill-color: #000 !important;
   transition: background-color 5000s ease-in-out 0s;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer utilities {
+  .stroke-white {
+    -webkit-text-stroke: 1px white;
+  }
+  .stroke-black {
+    -webkit-text-stroke: 1px black;
+  }
 }
