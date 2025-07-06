@@ -8,6 +8,8 @@ import ForgotPassword from "./pages/password-recovery/ForgotPassword"
 import EmailSent from "./pages/password-recovery/EmailSent"
 import CreatePassword from "./pages/password-recovery/CreatePassword"
 import { ToastContainer } from 'react-toastify'
+import PackageListing from "./pages/PackageListing"
+import PackageDetails from "./pages/PackageDetails"
 
 
 const App = () => {
@@ -25,7 +27,9 @@ const App = () => {
       <Route path="/forgot-password" element={<ForgotPassword/>}/>
       <Route path="/email-sent" element={<EmailSent />}/>
       <Route path="/create-password" element={<CreatePassword/>}/>
-
+      {/* PackageDetails */}
+      <Route path="/packages" element={<PackageListing/>}/>
+      <Route path="/package-detail" element={<PackageDetails/>}/>
     </Routes>
     </>
   )

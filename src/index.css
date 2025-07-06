@@ -23,3 +23,12 @@ input:-webkit-autofill {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@layer utilities {
+  .stroke-white {
+    -webkit-text-stroke: 1px white;
+  }
+  .stroke-black {
+    -webkit-text-stroke: 1px black;
+  }
+}

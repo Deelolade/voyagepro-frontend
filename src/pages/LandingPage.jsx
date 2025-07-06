@@ -5,6 +5,8 @@ import imageOne from "../images/landing-image-1.png";
 import imageTwo from "../images/landing-image-2.png";
 import imageThree from "../images/landing-image-3.png";
 import imageFour from "../images/landing-image-4.png";
+import blogImageOne from "../images/landing-image-5.png";
+import blogImageTwo from "../images/landing-image-6.png";
 import { IoMail } from "react-icons/io5";
 import { FaLocationDot, FaPhone } from "react-icons/fa6";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
@@ -14,6 +16,11 @@ import { RiCustomerService2Fill, RiFacebookFill } from "react-icons/ri";
 import { BsTwitterX } from "react-icons/bs";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { IoLogoYoutube } from "react-icons/io";
+import { MdOutlineStar } from "react-icons/md";
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { LiaAwardSolid } from "react-icons/lia";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   const sliderRef = useRef(null);
@@ -79,11 +86,26 @@ const LandingPage = () => {
       price: "$1,100.00",
     },
   ];
+  const blogs = [
+    {
+      title: "We Make World Travel Easy!!!",
+      details:
+        "Navigating the globe effortlessly, we transform wonderful dreams into seamless adventures. with us the world becomes your accessible playground, travel simplified.",
+      image: blogImageOne,
+    },
+    {
+      title: "Beautiful Kashmir Let’s Travel",
+      details:
+        "We are ready to help you build and also realized the room design that you dream of, with our expert and also the best category recommendations from us.",
+      image: blogImageTwo,
+    },
+  ];
 
   return (
     <>
       <div className="scroll-smooth">
         <HeroSection />
+        {/* POpular Packages */}
         <section className="h-auto pl-20 py-20">
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Popular Packages</h1>
@@ -126,9 +148,9 @@ const LandingPage = () => {
                     </h3>
                     <div className="text-blue-600 font-light flex justify-between items-center ">
                       <span className="font-normal">{pkg.price}</span>
-                      <button className="px-3 py-3 bg-blue rounded-xl text-white font-medium">
+                      <Link to="" className="px-3 py-3 bg-blue rounded-xl text-white font-medium">
                         Explore
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -136,6 +158,7 @@ const LandingPage = () => {
             ))}
           </div>
         </section>
+        {/* Why Choose Us*/}
         <section className="h-auto py-20">
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Why choose Us</h1>
@@ -194,7 +217,7 @@ const LandingPage = () => {
               />
             </div>
             <div className=" max-w-2xl">
-              <h2 className="text-4xl font-semibold text-red">
+              <h2 className="text-4xl font-semibold text-orange">
                 VoyagePro............Fly
               </h2>
               <p className="mt-6 text-2xl ">
@@ -221,19 +244,20 @@ const LandingPage = () => {
                   world-class travel services with confidence and efficiency.
                 </p>
                 <div className="mt-8">
-                  <button className="text-white px-4 py-3 rounded-xl bg-blue">
+                  <Link to="/packages" className="text-white px-4 py-3 rounded-xl bg-blue">
                     Explore Packages
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
+        {/* Contact Us */}
         <section className="h-auto py-20">
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Contact Us</h1>
           </div>
-          <div className="max-w-7xl mx-auto mt-12 bg-white rounded-2xl relative">
+          <div className="max-w-7xl mx-auto mt-12 bg-white rounded-2xl relative z-50">
             <img
               src={imageFour}
               alt="Contact Us"
@@ -268,10 +292,18 @@ const LandingPage = () => {
                   </span>
                 </div>
                 <div className=" flex mt-8 space-x-8">
-                  <span><RiFacebookFill className="text-blue scale-150"/></span>
-                  <span><BsTwitterX className="text-blue scale-150"/></span>
-                  <span><PiInstagramLogoFill className="text-blue scale-150"/></span>
-                  <span><IoLogoYoutube className="text-blue scale-150"/></span>
+                  <span>
+                    <RiFacebookFill className="text-blue scale-150" />
+                  </span>
+                  <span>
+                    <BsTwitterX className="text-blue scale-150" />
+                  </span>
+                  <span>
+                    <PiInstagramLogoFill className="text-blue scale-150" />
+                  </span>
+                  <span>
+                    <IoLogoYoutube className="text-blue scale-150" />
+                  </span>
                 </div>
               </div>
               <form className="bg-gray-300 w-[100%] rounded-2xl px-6 py-10 z-10">
@@ -314,17 +346,87 @@ const LandingPage = () => {
               </form>
             </div>
           </div>
-          <div className="">
-            <div className="max-w-7xl">
-              <div className="">
-                
+          <div className="bg-green mt-20 p-10">
+            <div className="max-w-7xl mx-auto flex items-center justify-between my-3 ">
+              <div className=" flex justify-center items-center space-x-3">
+                <span>
+                  <MdOutlineStar className="text-7xl text-orange" />
+                </span>
+                <div className="">
+                  <h1 className="text-4xl font-semibold">20k</h1>
+                  <p className="text-xl">Happy clients</p>
+                </div>
               </div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
+              <div className=" flex justify-center items-center space-x-3">
+                <span>
+                  <LiaAwardSolid className="text-7xl text-orange" />
+                </span>
+                <div className="">
+                  <h1 className="text-4xl font-semibold">250+</h1>
+                  <p className="text-xl">Awards Achieved</p>
+                </div>
+              </div>
+              <div className=" flex justify-center items-center space-x-3">
+                <span>
+                  <HiOutlineUserGroup className="text-7xl text-orange" />
+                </span>
+                <div className="">
+                  <h1 className="text-4xl font-semibold">15k</h1>
+                  <p className="text-xl">Active Members</p>
+                </div>
+              </div>
+              <div className=" flex justify-center items-center space-x-3">
+                <span>
+                  <FaLocationDot className="text-7xl text-orange" />
+                </span>
+                <div className="">
+                  <h1 className="text-4xl font-semibold">20+</h1>
+                  <p className="text-xl">Tour Destination</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
+        {/* Our Blogs */}
+        <section className="h-auto py-20 pb-40 max-w-7xl mx-auto">
+          <div className="text-center  max-w-7xl mx-auto">
+            <h1 className="text-5xl font-semibold">Our Blog</h1>
+            <p className="mt-4 text-xl">
+              An incredible experience in the world
+            </p>
+          </div>
+          <div className="">
+            <div className="mt-20 flex flex-col">
+              {blogs.slice(0, 2).map((blog, idx) => {
+                return (
+                  <div
+                    className={`flex  flex-row ${
+                      idx % 2 !== 0 ? "flex-row-reverse" : ""
+                    } items-center gap-20 my-8`}
+                    key={idx}
+                  >
+                    <img
+                      src={blog.image}
+                      alt=""
+                      className="scale-110 object-cover"
+                    />
+                    <div className=" text-left">
+                      <h1 className="text-4xl font-bold my-4">{blog.title}</h1>
+                      <p className="text-lg ">{blog.details}</p>
+                      <button className="mt-12 text-blue text-2xl px-4 py-3 rounded-xl flex items-center space-x-3 group">
+                        <span>Explore Tour</span>{" "}
+                        <span className=" transition-transform duration-500 group-hover:translate-x-4 border border-blue rounded-full p-3">
+                          <FaArrowRight />
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+        <Footer/>
       </div>
     </>
   );
