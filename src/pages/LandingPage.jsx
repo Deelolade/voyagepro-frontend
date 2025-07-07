@@ -148,7 +148,7 @@ const LandingPage = () => {
                     </h3>
                     <div className="text-blue-600 font-light flex justify-between items-center ">
                       <span className="font-normal">{pkg.price}</span>
-                      <Link to="" className="px-3 py-3 bg-blue rounded-xl text-white font-medium">
+                      <Link to="/packages" className="px-3 py-3 bg-blue rounded-xl text-white font-medium">
                         Explore
                       </Link>
                     </div>
