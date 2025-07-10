@@ -1,16 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import packages from "../../consumables/packages";
 
 const initialState = {
-    selectedUsers : [],
-    selectedUser : null,
+    packages
 }
 const packageSlice = createSlice({
-    name:"chat",
+    name:"package",
     initialState,
     reducers:{
-       selectPackage:{
-
-       }
+      
     }
 })
 export const { selectPackage } =packageSlice.actions;

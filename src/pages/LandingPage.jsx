@@ -20,9 +20,11 @@ import { MdOutlineStar } from "react-icons/md";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { LiaAwardSolid } from "react-icons/lia";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import packages from "../consumables/packages";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   const sliderRef = useRef(null);
   const handleNext = () => {
     if (sliderRef.current) {
@@ -34,58 +36,7 @@ const LandingPage = () => {
       sliderRef.current.scrollLeft -= 300;
     }
   };
-  const packages = [
-    {
-      location: "Spain, Barcelona",
-      image: PackageImage,
-      price: "$987.50",
-    },
-    {
-      location: "France, Paris",
-      image: PackageImage,
-      price: "$1,200.00",
-    },
-    {
-      location: "Italy, Rome",
-      image: PackageImage,
-      price: "$980.00",
-    },
-    {
-      location: "Greece, Santorini",
-      image: PackageImage,
-      price: "$1,150.00",
-    },
-    {
-      location: "Japan, Tokyo",
-      image: PackageImage,
-      price: "$1,650.00",
-    },
-    {
-      location: "Thailand, Phuket",
-      image: PackageImage,
-      price: "$875.00",
-    },
-    {
-      location: "USA, New York",
-      image: PackageImage,
-      price: "$1,320.00",
-    },
-    {
-      location: "UAE, Dubai",
-      image: PackageImage,
-      price: "$1,500.00",
-    },
-    {
-      location: "South Africa, Cape Town",
-      image: PackageImage,
-      price: "$1,080.00",
-    },
-    {
-      location: "Brazil, Rio de Janeiro",
-      image: PackageImage,
-      price: "$1,100.00",
-    },
-  ];
+
   const blogs = [
     {
       title: "We Make World Travel Easy!!!",
@@ -100,12 +51,15 @@ const LandingPage = () => {
       image: blogImageTwo,
     },
   ];
-
+  const handlePackage = (pkg) => {
+    console.log(pkg);
+    navigate(`/packages/${pkg.id}`);
+  };
   return (
     <>
       <div className="scroll-smooth">
         <HeroSection />
-        {/* POpular Packages */}
+        {/* Popular Packages */}
         <section className="h-auto pl-20 py-20">
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Popular Packages</h1>
@@ -128,7 +82,6 @@ const LandingPage = () => {
               </button>
             </div>
           </div>
-
           {/* Slider */}
           <div
             className="flex overflow-x-auto scroll-smooth max-w-max mx-auto scrollbar-hide py-6 px-4 space-x-6 mt-10"
@@ -148,9 +101,12 @@ const LandingPage = () => {
                     </h3>
                     <div className="text-blue-600 font-light flex justify-between items-center ">
                       <span className="font-normal">{pkg.price}</span>
-                      <Link to="/packages" className="px-3 py-3 bg-blue rounded-xl text-white font-medium">
+                      <button
+                        onClick={() => handlePackage(pkg)}
+                        className="px-3 py-3 bg-blue rounded-xl text-white font-medium"
+                      >
                         Explore
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -244,7 +200,10 @@ const LandingPage = () => {
                   world-class travel services with confidence and efficiency.
                 </p>
                 <div className="mt-8">
-                  <Link to="/packages" className="text-white px-4 py-3 rounded-xl bg-blue">
+                  <Link
+                    to="/packages"
+                    className="text-white px-4 py-3 rounded-xl bg-blue"
+                  >
                     Explore Packages
                   </Link>
                 </div>
@@ -426,7 +385,7 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
