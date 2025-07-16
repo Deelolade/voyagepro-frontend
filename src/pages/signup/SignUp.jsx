@@ -52,14 +52,14 @@ const SignUp = () => {
           </div>
           <div className=" md:w-full xs:w-full xl:w-full 2xl:w-[70%]">
             <div className=" xs:mt-5 md:mt-12 lg:mt-1 xl:mt-12  2xl:mt-28">
-              <p className="text-gray-500 text-sm">Step 1/3</p>
+              <p className="text-zinc-500 text-sm">Step 1/3</p>
               <h1 className="xxs:text-xl xs:text-3xl 2xl:text-4xl font-semibold xs:my-2 lg:my-2 2xl:my-5  ">Create an account</h1>
-              <p className="text-gray-500 text-sm 2xl:text-center xs:text-left">
+              <p className="text-zinc-500 text-sm 2xl:text-center xs:text-left">
                 sign up with VoyagePro and unlock opportunities to shape your future fun experiences.
               </p>
             </div>
             <div className=" xs:mt-4 xl:mt-5 2xl:mt-8">
-              <div className="flex space-x-3 xs:py-2 2xl:py-2 items-center justify-center border-2 border-gray-500 w-auto  rounded-lg">
+              <div className="flex space-x-3 xs:py-2 2xl:py-2 items-center justify-center border-2 border-zinc-500 w-auto  rounded-lg">
                 <span className="2xl:text-3xl xs:text-2xl">
                   <FcGoogle />
                 </span>
@@ -68,34 +68,34 @@ const SignUp = () => {
                 </span>
               </div>
               <div className="flex justify-center items-center space-x-3 mx-auto  lg:mt-6 xl:mt-8 2xl:mt-12 ">
-                <div className="h-[1px] 2xl:w-[25%] xxs:w-[10%] xs:w-[15%] bg-gray-400 "></div>
-                <p className="uppercase text-sm text-center text-gray-500">
+                <div className="h-[1px] 2xl:w-[25%] xxs:w-[10%] xs:w-[15%] bg-zinc-500 "></div>
+                <p className="uppercase text-sm text-center text-zinc-500">
                   or Continue with Email
                 </p>
-                <div className="h-[1px] xs:w-[15%] xxs:w-[10%] 2xl:w-[25%] bg-gray-400"></div>
+                <div className="h-[1px] xs:w-[15%] xxs:w-[10%] 2xl:w-[25%] bg-zinc-500"></div>
               </div>
             </div>
             <form onSubmit ={handleSubmit(onSubmit)} className=" xs:my-6 lg:mt-4 xl:mt-8 2xl:mt-12 ">
               <div className="">
-                <label htmlFor="" className="text-gray-500 text-sm ">
+                <label htmlFor="" className="text-zinc-500 text-sm ">
                   Email Address
                 </label>
-                <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.email ? "ring-2 ring-red-500" : "focus-within:ring-2 focus-within:ring-blue-500"}`}>
+                <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.email ? "ring-2 ring-red" : "focus-within:ring-2 focus-within:ring-blue"}`}>
                   <input
                     type="email"
                     {...register('email')}
                     placeholder="Enter Email "
                     className=" text-sm outline-none w-[90%]  py-1"
                   />{" "}
-                  <IoMail className="scale-150 text-gray-500" />
+                  <IoMail className="scale-150 text-zinc-500" />
                 </div>
-                {errors.email && <p className='text-red-400 mt-3 text-sm'>{errors.email?.message}</p>}
+                {errors.email && <p className='text-red mt-3 text-sm'>{errors.email?.message}</p>}
               </div>
               <div className="mt-3">
-                <label htmlFor="" className="text-gray-500 text-sm ">
+                <label htmlFor="" className="text-zinc-500 text-sm ">
                   Password
                 </label>
-                <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.password ? "ring-2 ring-red-500" : "focus-within:ring-2 focus-within:ring-blue-500"}`}>
+                <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.password ? "ring-2 ring-red" : "focus-within:ring-2 focus-within:ring-blue"}`}>
 
                   <input
                     type={passwordType}
@@ -104,19 +104,19 @@ const SignUp = () => {
                     placeholder="Password (min.8 character)"
                   />
                   <i
-                    className="scale-150 text-gray-500"
+                    className="scale-150 text-zinc-500"
                     onClick={visiblePassword}
                   >
                     {passwordIcon}
                   </i>
                 </div>
-                      {errors.password && <p className='text-red-400 mt-3 text-sm'>{errors.password?.message}</p>}
+                      {errors.password && <p className='text-red mt-3 text-sm'>{errors.password?.message}</p>}
 
               </div>
 
               <div className=" mt-6 flex flex-col">
                 <button 
-                  className="bg-blue-600 hover:bg-blue-500 w-full  font-semibold py-2 text-xl text-center rounded-lg text-white capitalize"
+                  className="bg-blue/90 hover:bg-blue w-full  font-semibold py-2 text-xl text-center rounded-lg text-white capitalize"
                 >
                   Login
                 </button>

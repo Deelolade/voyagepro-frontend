@@ -216,7 +216,7 @@ const LandingPage = () => {
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Contact Us</h1>
           </div>
-          <div className="max-w-7xl mx-auto mt-12 bg-white rounded-2xl relative z-50">
+          <div className="max-w-7xl mx-auto mt-12 bg-white rounded-2xl relative ">
             <img
               src={imageFour}
               alt="Contact Us"

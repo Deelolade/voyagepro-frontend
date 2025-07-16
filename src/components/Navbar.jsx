@@ -1,27 +1,54 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const lastYRef = useRef(window.scrollY);
+  const [hidden, setHidden] = useState(false);
+  const [scrolledTop, setScrolledTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      setScrolledTop(currentY < 10); // At top, make it transparent
+
+      if (currentY > lastYRef.current && currentY > 100) {
+        // Scrolling down
+        setHidden(true);
+      } else {
+        // Scrolling up
+        setHidden(false);
+      }
+
+      lastYRef.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <>
-      <header className=" fixed w-screen z-30">
-        <nav className="flex h-[10vh] items-center justify-between max-w-6xl mx-auto ">
-          <a href="#" className="font-semibold text-3xl">VoyagePro</a>
-          <ul className="flex gap-3 w-[40%] bg-re-400 justify-between">
-            <a href="#packages" className=" text-lg">Packages</a>
-            <a to="/"className=" text-lg">About us</a>
-            <a to="/"className=" text-lg">Contact us</a>
-            <a to="/"className=" text-lg">Blog</a>
-          {/* <div className="">
-            <select name="" id="">
-              <option value="NGN">NGN</option>
-            </select>
-          </div> */}
-          </ul>
-          <Link to="/signup" className="bg-orange text-lg font-medium  py-2 px-3 rounded-lg">Register</Link>
-        </nav>
-      </header>
-    </>
+    <header
+      className={`fixed w-screen z-50 transition-all ease-in-out duration-500 
+        ${hidden ? "-translate-y-full" : "translate-y-0"} 
+        ${scrolledTop ? "bg-transparent" : "bg-white shadow-xl"}
+      `}
+    >
+      <nav className="flex h-[10vh] items-center justify-between max-w-6xl mx-auto px-4">
+        <Link to="/" className="font-semibold text-3xl">VoyagePro</Link>
+
+        <ul className="flex gap-5">
+          <Link to="/" className="text-lg">Packages</Link>
+          <Link to="/" className="text-lg">About us</Link>
+          <Link to="/" className="text-lg">Contact us</Link>
+          <Link to="/" className="text-lg">Blog</Link>
+        </ul>
+
+        <Link to="/signup" className="bg-orange text-white text-lg font-medium py-2 px-4 rounded-lg">
+          Register
+        </Link>
+      </nav>
+    </header>
   );
 };
 

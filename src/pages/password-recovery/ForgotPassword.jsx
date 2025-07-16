@@ -49,12 +49,12 @@ const ForgotPassword = () => {
             <h1 className="text-xl font-semibold text-center xs:mt-4">
               Forgot Password
             </h1>
-            <p className="mt-8 text-sm text-gray-500 text-center">
+            <p className="mt-8 text-sm text-zinc-500 text-center">
               Enter your email, and we'll send you link to reset it and get back
               into your account
             </p>
             <div className=" mt-6">
-              <label htmlFor="" className="text-gray-500 text-sm text-left ">
+              <label htmlFor="" className="text-zinc-500 text-sm text-left ">
                 Email Address
               </label>
               <div
@@ -66,18 +66,18 @@ const ForgotPassword = () => {
                   {...register("email")}
                   className=" text-sm outline-none w-[90%]  py-1"
                 />{" "}
-                <IoMail className="scale-150 text-gray-500" />
+                <IoMail className="scale-150 text-zinc-500" />
               </div>
               {errors.email && (
-                <p className="text-red-400 mt-3 text-sm">
+                <p className="text-red mt-3 text-sm">
                   {errors.email?.message}
                 </p>
               )}
             </div>
-            <button className="bg-blue-600 hover:bg-blue-500 w-full mt-12 py-2 text-xl text-center rounded-lg text-white capitalize">
+            <button className="bg-blue/90 hover:bg-blue w-full mt-12 py-2 text-xl text-center rounded-lg text-white capitalize">
               Continue
             </button>
-            <p className="text-center mt-7 text-gray-500 text-sm">
+            <p className="text-center mt-7 text-zinc-500 text-sm">
               Remember password?<Link to="/login" className="underline"> Login</Link>
             </p>
           </form>

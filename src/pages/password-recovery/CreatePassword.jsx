@@ -64,14 +64,14 @@ const CreatePassword = () => {
             <h1 className="text-xl font-semibold text-center">
               Create New Password
             </h1>
-            <p className="mt-8 text-sm text-gray-500 text-center">
+            <p className="mt-8 text-sm text-zinc-500 text-center">
               Create a new password to securelyaccess your account.
             </p>
-            <p className="text-sm text-gray-500 text-center">
+            <p className="text-sm text-zinc-500 text-center">
                 Make sure it's strong and easy for you to remember. 
             </p>
             <div className="mt-6">
-                <label htmlFor="" className="text-gray-500 text-sm ">
+                <label htmlFor="" className="text-zinc-500 text-sm ">
                  New Password
                 </label>
                 <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 `}>
@@ -83,17 +83,17 @@ const CreatePassword = () => {
                     placeholder="Password (min.8 character)"
                   />
                   <i
-                    className="scale-150 text-gray-500"
+                    className="scale-150 text-zinc-500"
                     onClick={visiblePassword}
                   >
                     {passwordIcon}
                   </i>
                 </div>
-                      {errors.password && <p className='text-red-400 mt-3 text-sm'>{errors.password?.message}</p>}
+                      {errors.password && <p className='text-red mt-3 text-sm'>{errors.password?.message}</p>}
 
               </div>
               <div className="mt-3">
-                <label htmlFor="" className="text-gray-500 text-sm ">
+                <label htmlFor="" className="text-zinc-500 text-sm ">
                   Confirm Password
                 </label>
                 <div className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 `}>
@@ -105,19 +105,19 @@ const CreatePassword = () => {
                     placeholder="Password (min.8 character)"
                   />
                   <i
-                    className="scale-150 text-gray-500"
+                    className="scale-150 text-zinc-500"
                     onClick={visiblePassword}
                   >
                     {passwordIcon}
                   </i>
                 </div>
-                      {errors.confirmPassword && <p className='text-red-400 mt-3 text-sm'>{errors.confirmPassword?.message}</p>}
+                      {errors.confirmPassword && <p className='text-red mt-3 text-sm'>{errors.confirmPassword?.message}</p>}
 
               </div>
-            <button className="bg-blue-600 hover:bg-blue-500 w-full mt-12 py-2 text-xl text-center rounded-lg text-white capitalize">
+            <button className="bg-blue hover:bg-blue/90 w-full mt-12 py-2 text-xl text-center rounded-lg text-white capitalize">
               Reset Password
             </button>
-            <p className="text-center mt-7 text-gray-500 text-sm">
+            <p className="text-center mt-7 text-zinc-500 text-sm">
               Remember password?<Link to="/login" className="underline"> Login</Link>
             </p>
           </form>

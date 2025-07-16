@@ -18,7 +18,7 @@ const BreadCrumbs = () => {
       return (
         <div key={step.path}>
           <p className={` flex space-x-2 items-center font-semibold`}>
-            <span className={` ${ isActive ? "bg-blue-500 text-white  border-none " : isCompleted ? "bg-blue-500 text-white border-none " : "bg-gray-300"}flex text-gray-400 border-2 border-gray-400 rounded-full h-6 w-6 text-center items-center justify-center text-sm`}>{step.currentStep}</span>
+            <span className={` ${ isActive ? "bg-blue text-white  border-none " : isCompleted ? "bg-blue text-white border-none " : "bg-gray-300"}flex text-gray-400 border-2 border-gray-400 rounded-full h-6 w-6 text-center items-center justify-center text-sm`}>{step.currentStep}</span>
             <span className='xs:text-sm'>{step.title}</span><span>{step.icon}</span>
           </p>
           {idx < signupSteps.length - 1 && <span className='text-gray-300'></span> }

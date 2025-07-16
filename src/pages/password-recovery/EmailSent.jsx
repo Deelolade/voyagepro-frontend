@@ -25,7 +25,7 @@ const EmailSent = () => {
           <div className="bg-[#EAF2FF] p-6 rounded-xl xs:w-[90vw] 2xl:w-[491px] mx-auto justify-between flex flex-col  ">
             <div className="">
                 <h1 className='text-2xl font-semibold text-center '>Email Sent</h1>
-            <p className="text-gray-500 mt-6 text-center text-sm">
+            <p className="text-zinc-500 mt-6 text-center text-sm">
                 we have sent you and email at voyagePro@gmail.com,check your email and follow the instructions to reset your account password.
             </p>
             </div>

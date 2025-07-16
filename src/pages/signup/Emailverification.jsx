@@ -30,7 +30,7 @@ const Emailverification = () => {
           <div className=" md:w-full xs:w-full xl:w-full 2xl:w-[70%]  flex justify-center items-center xxs:mt-4 xs:mt-10 md:mt-12 xl:mt-20 2xl:mt-36">
             <div className="">
               <p className="text-2xl text-center">Verification Code</p>
-              <p className="xs:mt-0 2xl:mt-3 text-center  text-sm font-semibold text-gray-800">
+              <p className="xs:mt-0 2xl:mt-3 text-center  text-sm font-semibold text-zinc-800">
                 Please enter the code sent to your email/phone to verify your
                 identity and continue.{" "}
               </p>
@@ -42,7 +42,7 @@ const Emailverification = () => {
                 <div className="mt-6 flex flex-col ">
                   <Link
                     to="/personal"
-                    className="bg-blue-600 hover:bg-blue-500 py-2 text-xl text-center rounded-lg text-white capitalize"
+                    className="bg-blue/90 hover:bg-blue py-2 text-xl text-center rounded-lg text-white capitalize"
                   >
                     Verify
                   </Link>

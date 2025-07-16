@@ -62,12 +62,12 @@ const Login = () => {
               <h1 className="xs:text-2xl 2xl:text-3xl font-semibold xs:my-2 2xl:my-5">
                 Login to your account
               </h1>
-              <p className="text-gray-500 text-sm text-left">
+              <p className="text-zinc-500 text-sm text-left">
                 Login now to stay connected and continue to explore.
               </p>
             </div>
             <div className="xs:mt-4 xl:mt-5 2xl:mt-8">
-              <div className="flex space-x-3 xs:py-2 2xl:py-2 items-center justify-center border-2 border-gray-500 w-auto  rounded-lg">
+              <div className="flex space-x-3 xs:py-2 2xl:py-2 items-center justify-center border-2 border-zinc-500 w-auto  rounded-lg">
                 <span className="2xl:text-3xl xs:text-2xl">
                   <FcGoogle />
                 </span>
@@ -76,11 +76,11 @@ const Login = () => {
                 </span>
               </div>
               <div className="flex justify-center items-center space-x-3 mx-auto xs:mt-5 md:mt-8  lg:mt-5 xl:mt-8 2xl:mt-12 ">
-                <div className="h-[1px] 2xl:w-[25%] xl:w-[20%] xxs:w-[15%] xs:w-[15%] bg-gray-400 "></div>
-                <p className="uppercase text-sm text-center text-gray-500">
+                <div className="h-[1px] 2xl:w-[25%] xl:w-[20%] xxs:w-[15%] xs:w-[15%] bg-zinc-400 "></div>
+                <p className="uppercase text-sm text-center text-zinc-500">
                   or Continue with Email
                 </p>
-                <div className="h-[1px] xs:w-[15%] xxs:w-[15%] xl:w-[20%] 2xl:w-[25%] bg-gray-400"></div>
+                <div className="h-[1px] xs:w-[15%] xxs:w-[15%] xl:w-[20%] 2xl:w-[25%] bg-zinc-400"></div>
               </div>
             </div>
             <form
@@ -88,14 +88,14 @@ const Login = () => {
               onSubmit={handleSubmit(onSubmit)}
             >
               <div className="">
-                <label htmlFor="" className="text-gray-500 text-sm ">
+                <label htmlFor="" className="text-zinc-500 text-sm ">
                   Email Address
                 </label>
                 <div
                   className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${
                     errors.email
-                      ? "ring-2 ring-red-500"
-                      : "focus-within:ring-2 focus-within:ring-blue-500"
+                      ? "ring-2 ring-red"
+                      : "focus-within:ring-2 focus-within:ring-blue"
                   }`}
                 >
                   <input
@@ -104,23 +104,23 @@ const Login = () => {
                     {...register("email")}
                     className=" text-sm outline-none w-[90%]  py-1"
                   />{" "}
-                  <IoMail className="scale-150 text-gray-500" />
+                  <IoMail className="scale-150 text-zinc-500" />
                 </div>
                 {errors.email && (
-                  <p className="text-red-400 mt-3 text-sm">
+                  <p className="text-red mt-3 text-sm">
                     {errors.email?.message}
                   </p>
                 )}
               </div>
               <div className="lg:mt-2 2xl:mt-3">
-                <label htmlFor="" className="text-gray-500 text-sm ">
+                <label htmlFor="" className="text-zinc-500 text-sm ">
                   Password
                 </label>
                 <div
                   className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${
                     errors.password
-                      ? "ring-2 ring-red-500"
-                      : "focus-within:ring-2 focus-within:ring-blue-500"
+                      ? "ring-2 ring-red"
+                      : "focus-within:ring-2 focus-within:ring-blue"
                   }`}
                 >
                   <input
@@ -130,14 +130,14 @@ const Login = () => {
                     placeholder="Enter password "
                   />
                   <button
-                    className="scale-150 text-gray-500"
+                    className="scale-150 text-zinc-500"
                     onClick={visiblePassword}
                   >
                     {passwordIcon}
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-red-400 mt-3 text-sm">
+                  <p className="text-red mt-3 text-sm">
                     {errors.password?.message}
                   </p>
                 )}
@@ -147,14 +147,14 @@ const Login = () => {
                       type="checkbox"
                       name=""
                       id=""
-                      className="h-5 w-5 accent-blue-600 rounded"
+                      className="h-5 w-5 accent-blue rounded"
                       {...register("terms")}
                     />
-                    <p className="text-sm text-gray-500">Remember me</p>
+                    <p className="text-sm text-zinc-500">Remember me</p>
                   </div>{" "}
                   <Link
                     to="/forgot-password"
-                    className="hover:underline text-sm text-gray-500"
+                    className="hover:underline text-sm text-zinc-500"
                   >
                     Forgot Password?
                   </Link>
@@ -162,7 +162,7 @@ const Login = () => {
               </div>
 
               <div className=" xs:mt-3 md:mt-6 lg:mt-3 2xl:mt-6 flex flex-col">
-                <button className="bg-blue-600 hover:bg-blue-500 w-full  py-2 text-xl text-center rounded-lg text-white capitalize">
+                <button className="bg-blue/90 hover:bg-blue w-full  py-2 text-xl text-center rounded-lg text-white capitalize">
                   Login
                 </button>
                 <p className="text-black text-sm mt-5 text-center">
@@ -174,7 +174,7 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div className="flex  justify-between text-sm text-gray-700 ">
+          <div className="flex  justify-between text-sm text-zinc-700 ">
             <p>Privacy Policy</p> <p>Copyright 2022</p>
           </div>
         </div>
