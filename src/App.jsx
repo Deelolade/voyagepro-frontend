@@ -10,6 +10,7 @@ import CreatePassword from "./pages/password-recovery/CreatePassword";
 import { ToastContainer } from "react-toastify";
 import PackageListing from "./pages/PackageListing";
 import PackageDetails from "./pages/PackageDetails";
+import PackageForm from "./pages/PackageForm";
 
 const App = () => {
   return (
@@ -29,6 +30,8 @@ const App = () => {
         {/* PackageDetails */}
         <Route path="/packages" element={<PackageListing />} />
         <Route path="/packages/:id" element={<PackageDetails />} />
+         {/* PackageForm */}
+        <Route path="/package-form" element={<PackageForm />} />
       </Routes>
     </>
   );

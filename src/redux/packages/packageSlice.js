@@ -8,6 +8,18 @@ const packageSlice = createSlice({
     name:"package",
     initialState,
     reducers:{
+        selectPackage: (state, action) => {
+            const selectedPackage = state.packages.find(
+                (pkg) => pkg.id === action.payload
+            );
+            if (selectedPackage) {
+                return {
+                    ...state,
+                    selectedPackage,
+                };
+            }
+            return state;
+        }
       
     }
 })

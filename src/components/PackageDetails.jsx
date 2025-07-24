@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import image from "../images/landing-image-1.png";
 import { FiCalendar } from "react-icons/fi";
 import { IoLocationOutline } from "react-icons/io5";
@@ -11,13 +11,19 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { LuNotebookPen } from "react-icons/lu";
 
 const PackagesDetails = () => {
+  const navigate = useNavigate();
   const packages = useSelector((state) => state.package.packages);
   const { id } = useParams();
-  console.log("packages:", packages);
+  console.log("new packages:", packages);
   console.log("id:", id);
   const selected = packages.find((pkg) => pkg.id.toString() === id);
   console.log(selected.location.trim().split(" ").slice(-1)[0]);
-  if (!selected) return <p className="text-red">Package not found.</p>;
+  if (!selected) return <p className="text-red text-center  ">Package not found.</p>;
+  {/* will include 404 page later*/}
+  const handleChange = () => {
+    navigate("/package-form", { state: { selected } });
+    console.log("Selected package:", selected);
+  }
   return (
     <>
       <section className="">
@@ -132,7 +138,7 @@ const PackagesDetails = () => {
                     </div>
                   </div>
                 </div>
-                <button className="bg-blue text-center w-full mt-8 py-3 rounded-xl text-white font-semibold">
+                <button onClick={handleChange} className="bg-blue text-center w-full mt-8 py-3 rounded-xl text-white font-semibold">
                   Book Now
                 </button>
               </div>

@@ -34,7 +34,8 @@ module.exports = {
           lightblue:"#0056D2",
           gray:"#D3D3D3",
           lightpurple:"#C5C5E2",
-          lightorange:"#FFC8AB"
+          lightorange:"#FFC8AB",
+          lightgray:"#F5F5F54D"
         },
         backgroundImage: {
         'hero-pattern': "url('/src/images/hero-image.png')",

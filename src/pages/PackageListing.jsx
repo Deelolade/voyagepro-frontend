@@ -265,10 +265,9 @@ const PackageListing = () => {
             </div>
             <div className="mt-12 w-full bg-white rounded-xl">
               {/* Header */}
-              <div className="grid grid-cols-7 py-4 px-5  me-auto font-semibold text-lg capitalize">
+              <div className="grid grid-cols-6 py-4 px-5  me-auto font-semibold text-lg capitalize">
                 <div />
                 <p>Name</p>
-                <p>Status</p>
                 <p>Price</p>
                 <p>Date</p>
                 <p>Destination</p>
@@ -280,7 +279,7 @@ const PackageListing = () => {
                   filteredPackages.map((pkg, idx) => (
                     <div
                       key={idx}
-                      className="grid grid-cols-7 items-center gap-4 py-4 px-5  ms-auto "
+                      className="grid grid-cols-6 items-center gap-4 py-4 px-5  ms-auto "
                     >
                       <img
                         src={pkg.image}
@@ -288,7 +287,7 @@ const PackageListing = () => {
                         className="h-20 w-20 object-cover rounded-lg"
                       />
                       <p className="text-sm text-zinc-500">{pkg.title}</p>
-                      <span
+                      {/* <span
                         className={`text-xs text-center px-1 py-2 rounded-full text-zinc-700 ${
                           pkg.status === "completed"
                             ? "bg-green"
@@ -298,7 +297,7 @@ const PackageListing = () => {
                         }`}
                       >
                         {pkg.status}
-                      </span>
+                      </span> */}
                       <p className="text-sm text-zinc-500">{pkg.price}</p>
                       <p className="text-sm text-zinc-500">{pkg.date}</p>
                       <p className="text-sm text-zinc-500">{pkg.location}</p>
