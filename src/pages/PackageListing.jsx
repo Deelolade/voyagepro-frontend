@@ -2,11 +2,12 @@ import { useState } from "react";
 import profileImage from "../images/landing-image-1.png";
 import { FaRegBell } from "react-icons/fa";
 import { RiSearchLine } from "react-icons/ri";
-import packages from "../consumables/packages";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import { useSelector, useDispatch } from "react-redux";
+
 
 const PackageListing = () => {
+  const packages = useSelector((state) => state.package.packages);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("popularity");
@@ -19,19 +20,19 @@ const PackageListing = () => {
   };
 
  const filteredPackages = packages
-  .filter((pkg) => {
-    // Convert price from "₦250,000" or "$150" to number
-    const numericPrice = parseFloat(pkg.price.replace(/[^\d.]/g, ""));
+  // .filter((pkg) => {
+  //   // Convert price from "₦250,000" or "$150" to number
+  //   const numericPrice = parseFloat(pkg.price.replace(/[^\d.]/g, ""));
     
-    // If no price range is selected, allow all
-    if (selectedPrices.length === 0) return true;
+  //   // If no price range is selected, allow all
+  //   if (selectedPrices.length === 0) return true;
 
-    // Check if numericPrice falls in any selected range
-    return selectedPrices.some((range) => {
-      const [min, max] = range.split("-").map(Number);
-      return numericPrice >= min && numericPrice <= max;
-    });
-  })
+  //   // Check if numericPrice falls in any selected range
+  //   return selectedPrices.some((range) => {
+  //     const [min, max] = range.split("-").map(Number);
+  //     return numericPrice >= min && numericPrice <= max;
+  //   });
+  // })
   .filter(
     (pkg) =>
       pkg.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -55,9 +56,9 @@ const PackageListing = () => {
   };
   return (
     <>
-      {/* <Sidebar/> */}
       <section id="packages" className="max-h-screen h-screen flex">
         <div className="max-w-7xl mx-auto flex justify-between ">
+      {/* <Sidebar/> */}
           <div className=" w-[25vw] bg-zinc-200 p-6">
             <div className="mt-20">
               <div className="">
@@ -235,6 +236,7 @@ const PackageListing = () => {
               </div>
             </div>
           </div>
+          {/* Main section */}
           <main className="w-[70vw] p-6">
             <div className=" flex justify-between items-center">
               <h3 className="text-4xl font-semibold">Packages Listing</h3>
@@ -298,7 +300,7 @@ const PackageListing = () => {
                       >
                         {pkg.status}
                       </span> */}
-                      <p className="text-sm text-zinc-500">{pkg.price}</p>
+                      <p className="text-sm text-zinc-500">${pkg.price.toLocaleString()}</p>
                       <p className="text-sm text-zinc-500">{pkg.date}</p>
                       <p className="text-sm text-zinc-500">{pkg.location}</p>
                       <div className=" flex flex-col items-center justify-center space-y-2  ">

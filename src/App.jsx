@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import PackageListing from "./pages/PackageListing";
 import PackageDetails from "./pages/PackageDetails";
 import PackageForm from "./pages/PackageForm";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
@@ -32,6 +33,8 @@ const App = () => {
         <Route path="/packages/:id" element={<PackageDetails />} />
          {/* PackageForm */}
         <Route path="/package-form" element={<PackageForm />} />
+        {/* Dashboard */}
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </>
   );

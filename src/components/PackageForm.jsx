@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import image from "../images/landing-image-1.png";
 import imageOne from "../images/pacakge-form-1.png";
 import imageTwo from "../images/pacakge-form-2.png";
@@ -14,8 +14,9 @@ import { selectPackage } from '../redux/packages/packageSlice';
 
 
 const PackageForm = () => {
-      const dispatch = useDispatch();
-    const currentPackage = useSelector((state) => state.package.selectedPackage); 
+    const dispatch = useDispatch();
+    const [guestCount, setGuestCount] = useState(1);
+    const currentPackage = useSelector((state) => state.package.selectedPackage);
     const paymentOptions = [
         { label: "Credit/Debit card", value: "card" },
         { label: "Bank Transfer", value: "bank-transfer" },
@@ -31,15 +32,18 @@ const PackageForm = () => {
             .matches(/^(?:\+234|0)[789][01]\d{8}$/, "Enter a valid phone number"),
         travelDate: yup.string().required("Date of travel is important"),
         paymentMethod: yup.string().required("Please select a payment method"),
+        airportPickup: yup.bool(),
+        terms: yup.bool().oneOf([true], "You have to agree to our terms and privacy policy "),
+
     })
     const { control, register, handleSubmit, watch, formState: { errors } } = useForm({
         resolver: yupResolver(ValidationSchema)
     })
     const selected = watch("paymentMethod");
+    // console.log(currentPackage)
 
     const onSubmit = (data) => {
         console.log(data)
-        console.log(currentPackage)
 
     }
 
@@ -111,13 +115,28 @@ const PackageForm = () => {
                                     <div className="mt-6">
                                         <div className="">
                                             <h3 className='text-2xl font-semibold'>Number of Guests ?</h3>
-                                            <div className="flex justify-between">
-                                                <p className='text-lg'>How many guests ?</p>
-                                                <select name="" id="" className='outline-none px-2 py-1 rounded-lg'>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                    <option value="">3</option>
-                                                </select>
+                                            <div className="flex justify-between items-end">
+                                                <div className="">
+                                                    <p className='text-lg italic text-zinc-500'>${currentPackage.price.toLocaleString()}/ person</p>
+                                                    <p className="text-lg font-semibold">
+                                                        Total: ${(currentPackage.price * guestCount).toLocaleString()}
+                                                    </p>
+                                                </div>
+                                                <div className="">
+                                                    <p className='text-lg'>{currentPackage.title}</p>
+                                                    <select name="" id="" value={guestCount} onChange={(e) => setGuestCount(Number(e.target.value))} className='outline-none  px-2 py-1 rounded-lg text-base'>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div className="mt-6">
                                                 <label className="block text-lg font-semibold mb-3 text-zinc-800">
@@ -147,8 +166,37 @@ const PackageForm = () => {
                                                     </p>
                                                 )}
                                             </div>
+                                            <div className=" text-center mx-auto bg-">
+                                                <div className="flex space-x-2 justify-center mt-4">
+                                                    <input
+                                                        type="checkbox"
+                                                        name=""
+                                                        id=""
+                                                        className="h-5 w-5 accent-blue rounded"
+                                                        {...register("airportPickup")}
+                                                    />
+                                                    <p className="text-sm">Include Airport pickup</p>
+                                                </div>{" "}
+                                                <div className="flex space-x-2 my-3">
+                                                    <input
+                                                        type="checkbox"
+                                                        name=""
+                                                        id=""
+                                                        className="h-5 w-5 accent-blue rounded"
+                                                        {...register("terms")}
+                                                    />
+                                                    <p className="text-sm  ">By continuing, you agree to our Terms and Privacy Policy.</p>
+                                                </div>{" "}
+                                                {errors.terms && (
+                                                    <p className="text-red text-sm mt-1">
+                                                        {errors.terms?.message}
+                                                    </p>
+                                                )}
+                                            </div>
                                         </div>
-                                        <button>vlick</button>
+                                        <button type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-6 w-full text-center rounded-lg text-white capitalize">
+                                            Proceed (${(currentPackage.price * guestCount).toLocaleString()})
+                                        </button>
                                     </div>
                                 </form>
                             </div>

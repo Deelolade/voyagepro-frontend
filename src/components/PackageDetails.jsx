@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import image from "../images/landing-image-1.png";
 import { FiCalendar } from "react-icons/fi";
@@ -9,20 +9,27 @@ import { MdOutlineFamilyRestroom, MdStarRate } from "react-icons/md";
 import { GiMeal } from "react-icons/gi";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { LuNotebookPen } from "react-icons/lu";
+import { selectPackage } from '../redux/packages/packageSlice';
 
 const PackagesDetails = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const packages = useSelector((state) => state.package.packages);
   const { id } = useParams();
   console.log("new packages:", packages);
   console.log("id:", id);
+
   const selected = packages.find((pkg) => pkg.id.toString() === id);
   console.log(selected.location.trim().split(" ").slice(-1)[0]);
   if (!selected) return <p className="text-red text-center  ">Package not found.</p>;
+
+  console.log("Selected package:", selected);
+
   {/* will include 404 page later*/}
   const handleChange = () => {
     navigate("/package-form", { state: { selected } });
-    console.log("Selected package:", selected);
+    dispatch(selectPackage(selected.id));
   }
   return (
     <>

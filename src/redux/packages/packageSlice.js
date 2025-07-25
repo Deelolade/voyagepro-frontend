@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import packages from "../../consumables/packages";
 
 const initialState = {
-    packages
+    packages,
+    selectedPackage: null,
 }
 const packageSlice = createSlice({
     name:"package",
