@@ -13,7 +13,7 @@ const BookingConfirmation = () => {
             <section className="py-6 px-4 max-h-screen max-w-7xl mx-auto ">
                 <div className="flex justify-between items-center">
                     <h2 className='text-3xl font-semibold'>VoyagePro</h2>
-                    <h2 className='text-3xl font-semibold'>Booking Confirmation</h2>
+                    <h2 className='text-3xl font-semibold'>Bookings</h2>
                     <img src={profileImage} alt="" className='h-12 w-12 rounded-full object-cover' />
                 </div>
                 <div className=" mt-4">

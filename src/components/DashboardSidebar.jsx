@@ -4,6 +4,7 @@ import { PiSquaresFourBold } from "react-icons/pi";
 import { FaRegCaretSquareUp } from "react-icons/fa";
 import { RiSettings4Fill } from "react-icons/ri";
 import { LuClipboardList } from "react-icons/lu";
+import { Link } from "react-router-dom";
 const DashboardSidebar = () => {
   return (
     <div className='bg-white h-screen shadow-md rounded-lg p-6  flex flex-col justify-between'>
@@ -11,7 +12,7 @@ const DashboardSidebar = () => {
         <h3 className='text-3xl font-semibold mt-3'>VoyagePro</h3>
         <ul className='mt-12'>
             <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium '><span className='scale-150 me-3 '><PiSquaresFourBold/></span> Dashboard</li>
-            <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3 '><FaRegCaretSquareUp/></span>Bookings</li>
+            <Link to="/confirm" className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3 '><FaRegCaretSquareUp/></span>Bookings</Link>
             <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><LuClipboardList/></span>Package Listings</li>
             <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><RiSettings4Fill/></span>Settings</li>
         </ul>

@@ -42,6 +42,7 @@ module.exports = {
         },
         backgroundImage: {
         'hero-pattern': "url('/src/images/hero-image.png')",
+        'confirm-pattern': "url('/src/images/confirm-pattern.png')",
       },
       },
     },
