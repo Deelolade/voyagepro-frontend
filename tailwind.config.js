@@ -24,9 +24,11 @@ module.exports = {
           green:"#50C878",
           orange:"#FF6B35",
           lightblue:"#0056D2",
-          gray:"#D3D3D3"
+          gray:"#D3D3D3",
+          darkGray:"#36454F"
         },
         backgroundColor:{
+          darkGray:"#36454F",
           blue: "#0056D2",
           red:"#D04715",
           green:"#50C878",
@@ -35,7 +37,8 @@ module.exports = {
           gray:"#D3D3D3",
           lightpurple:"#C5C5E2",
           lightorange:"#FFC8AB",
-          lightgray:"#F5F5F54D"
+          lightgray:"#F5F5F54D",
+          lightgreen:"#84EBB4",
         },
         backgroundImage: {
         'hero-pattern': "url('/src/images/hero-image.png')",

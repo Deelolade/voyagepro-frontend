@@ -24,5 +24,5 @@ const packageSlice = createSlice({
       
     }
 })
-export const { selectPackage } =packageSlice.actions;
+export const { selectPackage } = packageSlice.actions;
 export default packageSlice.reducer

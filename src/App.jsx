@@ -12,6 +12,7 @@ import PackageListing from "./pages/PackageListing";
 import PackageDetails from "./pages/PackageDetails";
 import PackageForm from "./pages/PackageForm";
 import Dashboard from "./pages/Dashboard";
+import BookingConfirmation from "./pages/BookingConfirmation";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/package-form" element={<PackageForm />} />
         {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/confirm" element={<BookingConfirmation/>} />
       </Routes>
     </>
   );
