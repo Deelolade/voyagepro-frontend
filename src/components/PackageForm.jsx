@@ -14,6 +14,7 @@ import { selectPackage } from '../redux/packages/packageSlice';
 
 
 const PackageForm = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [guestCount, setGuestCount] = useState(1);
     const currentPackage = useSelector((state) => state.package.selectedPackage);
@@ -44,7 +45,7 @@ const PackageForm = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-
+        // navigate(`/packages/${data.id}`);
     }
 
     return (
