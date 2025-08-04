@@ -16,12 +16,15 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #000 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
-.scrollbar-hide::-webkit-scrollbar {
+/* For Chrome, Safari, Edge */
+.scroll-hidden::-webkit-scrollbar {
   display: none;
 }
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* For Firefox */
+.scroll-hidden {
+  scrollbar-width: none; /* hides scrollbar in Firefox */
+  -ms-overflow-style: none; /* hides scrollbar in IE 10+ */
 }
 
 @layer utilities {
