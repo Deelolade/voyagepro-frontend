@@ -14,7 +14,7 @@ import PackageForm from "./pages/PackageForm";
 import Dashboard from "./pages/Dashboard";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import ConfirmationDetails from "./pages/ConfirmationDetails";
-
+import EditPackageForm from "./pages/EditPackageForm";
 const App = () => {
   return (
     <>
@@ -35,6 +35,7 @@ const App = () => {
         <Route path="/packages/:id" element={<PackageDetails />} />
          {/* PackageForm */}
         <Route path="/package-form" element={<PackageForm />} />
+        <Route path="/edit-package" element={<EditPackageForm />} />
         {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/confirm" element={<BookingConfirmation/>} />
