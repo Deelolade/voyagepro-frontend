@@ -2,17 +2,24 @@ import { Link } from "react-router-dom";
 import image from "../../images/voyage-pro-1.png";
 import { BiArrowBack } from "react-icons/bi";
 import BreadCrumbs from "../../components/SignUpBreadCrumbs";
-import { FaChevronDown } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { signInSuccess } from "../../redux/users/userSlice";
 
 const PersonalInfo = () => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
   const ValidationSchema = yup.object().shape({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name  is required"),
+    firstname: yup.string().required("First name is required"),
+    lastname: yup.string().required("Last name  is required"),
     phoneNumber: yup
       .string()
       .required("Phone number is required")
@@ -31,10 +38,28 @@ const PersonalInfo = () => {
   } = useForm({
     resolver: yupResolver(ValidationSchema),
   });
-  const onSubmit = (data) => {
-    console.log(data);
-    // navigate("/verify-email");
-    // toast("Signed Up successfully !!");
+  const onSubmit = async(data) => {
+      const { term, ...payload } = data;
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("You must be logged in to update your profile");
+        return;
+      }
+    setLoading(true);
+    try {
+      const res = await axios.post(`${API_URL}/auth/update-profile`, payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+     dispatch(signInSuccess(res.data.user));
+      toast.success( res.data.message || "Your details have been saved successfully!");
+      setTimeout(()=> navigate("/dashboard"), 1500) 
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Error occurred while saving details");
+    }finally {
+    setLoading(false);
+  }
   };
   return (
     <>
@@ -42,7 +67,7 @@ const PersonalInfo = () => {
         <div className="2xl:w-[45%] md:hidden ">
           <img
             src={image}
-            alt="voyage-pro-"
+            alt="voyage-pro-image"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
         </div>
@@ -75,12 +100,12 @@ const PersonalInfo = () => {
                   <input
                     type="text"
                     placeholder="Enter First Name"
-                    {...register("firstName")}
+                    {...register("firstname")}
                     className="w-full  text-sm outline-none py-3 px-3 rounded-lg mt-1"
                   />{" "}
-                  {errors.firstName && (
+                  {errors.firstname && (
                     <p className="mt-1 text-red text-sm">
-                      {errors.firstName?.message}
+                      {errors.firstname?.message}
                     </p>
                   )}
                 </div>
@@ -91,12 +116,12 @@ const PersonalInfo = () => {
                   <input
                     type="text"
                     placeholder="Enter Last Name"
-                    {...register("lastName")}
+                    {...register("lastname")}
                     className=" w-full text-sm outline-none py-3 px-3 rounded-lg mt-1"
                   />{" "}
-                  {errors.lastName && (
+                  {errors.lastname && (
                     <p className="mt-1 text-red text-sm">
-                      {errors.lastName?.message}
+                      {errors.lastname?.message}
                     </p>
                   )}
                 </div>
@@ -182,7 +207,7 @@ const PersonalInfo = () => {
                   )}
                 </div>
                 <button type="submit" className="bg-blue/90 hover:bg-blue py-2 text-xl text-center rounded-lg text-white capitalize">
-                  Create account
+                   {loading ? "Saving..." : "Create account"}
                 </button>
             </form>
           </div>

@@ -1,32 +1,29 @@
-import React, { useRef, useState } from "react";
-import { useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
-const OtpInput = ({ length = 4 }) => {
+const OtpInput = ({ length = 6, onOtpChange }) => {
   const inputRefs = useRef([]);
   const [otp, setOtp] = useState(Array(length).fill(""));
-  console.log(inputRefs);
 
+  const handleChange = (idx, e) => {
+    const value = e.target.value;
+    // Only allow digits
+    if (!/^\d*$/.test(value)) return;
 
- const handleChange = (idx, e) => {
-  const value = e.target.value;
+    const newOtp = [...otp];
+    newOtp[idx] = value.slice(-1); // Keep only last digit
+    setOtp(newOtp);
 
-  // Only allow digits
-  if (!/^\d*$/.test(value)) return;
+    // Send joined OTP to parent
+    onOtpChange(newOtp.join(""));
 
-  const newOtp = [...otp];
-  newOtp[idx] = value.slice(-1); // Keep only last digit
-  setOtp(newOtp);
-
-  // Move focus to next input if current one is filled
-  if (value.length > 0 && idx < length - 1) {
-    inputRefs.current[idx + 1].focus();
-  }
-};
-
-
-  const handleClick = (idx) => {};
+    // Move focus to next input if current one is filled
+    if (value.length > 0 && idx < length - 1) {
+      inputRefs.current[idx + 1].focus();
+    }
+  };
+  // Handle backspace key
   const handleKeyDown = (idx, e) => {
-     if (e.key === "Backspace") {
+    if (e.key === "Backspace") {
       if (otp[idx] === "" && idx > 0) {
         inputRefs.current[idx - 1].focus();
       }
@@ -48,7 +45,6 @@ const OtpInput = ({ length = 4 }) => {
             key={idx}
             ref={(input) => (inputRefs.current[idx] = input)}
             onChange={(e) => handleChange(idx, e)}
-            onClick={() => handleClick(idx)}
             onKeyDown={(e) => handleKeyDown(idx, e)}
             className="w-14 h-14 m-2 rounded-lg text-2xl font-semibold text-center outline-none"
           />

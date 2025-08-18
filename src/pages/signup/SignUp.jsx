@@ -9,9 +9,15 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { signInPending } from "../../redux/users/userSlice";
 
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const API_URL = import.meta.env.VITE_API_URL;
   const [passwordType, setPasswordType] = useState("password");
   const [passwordIcon, setPasswordIcon] = useState(FaEye);
   const navigate =useNavigate();
@@ -32,9 +38,18 @@ const SignUp = () => {
     const { register,handleSubmit, formState:{ errors }} =useForm({
         resolver: yupResolver(ValidationSchema)
     })
-    const onSubmit = (data) => {
-        console.log(data)
-        navigate("/verify-email")
+    const onSubmit = async(data) => {
+        console.log(data.email)
+        const email = data.email;
+        try {
+          const res = await axios.post(`${API_URL}/auth`, data)
+          toast.success(res.data.message|| "Account created successfully!");
+          console.log(res.data);
+          dispatch(signInPending({email}))
+          navigate("/verify-email");
+        } catch (error) {
+          console.error("Error during signup:", error);
+        }
     }
   return (
     <>
@@ -118,7 +133,7 @@ const SignUp = () => {
                 <button 
                   className="bg-blue/90 hover:bg-blue w-full  font-semibold py-2 text-xl text-center rounded-lg text-white capitalize"
                 >
-                  Login
+                  Sign Up
                 </button>
                 <p className="text-black text-sm mt-3">
                   already have an account ?{" "}
