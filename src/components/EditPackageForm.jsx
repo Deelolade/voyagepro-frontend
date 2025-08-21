@@ -55,8 +55,8 @@ const PackageForm = () => {
                             className="h-12 w-12 object-cover rounded-full"
                         />
                     </div>
-                    <main className=' flex gap-10 items-start mt-6'>
-                        <div className=" sm:hidden 2xl:w-[50%] h-[720px] pt-10">
+                    <main className=' flex gap-10 items-start mt-2'>
+                        <div className=" sm:hidden 2xl:w-[50%] h-[750px] pt-10">
                             <div className=" grid grid-cols-2 grid-rows-2 h-full rounded-lg shadow-lg">
                                 <img src={imageOne} alt="" className='w-full h-full  object-cover self-end' />
                                 <img src={imageTwo} alt="" className=' w-full h-full object-cover self-start' />
@@ -68,6 +68,7 @@ const PackageForm = () => {
                             <h1 className='2xl:text-3xl font-semibold text-center mb-2'>Edit Form</h1>
                             <div className="bg-lightgray py-6 px-10 rounded-lg h-full  shadow-lg">
                                 <form onSubmit={handleSubmit(onSubmit)} className=''>
+                                    <h2 className='text-2xl font-medium'>{currentPackage.title}</h2>
                                     <div className="">
                                         <label htmlFor="" className="text-zinc-800 text-lg font-semibold ">
                                             Name

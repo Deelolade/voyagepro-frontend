@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/edit-package" element={<EditPackageForm />} />
         {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/confirm" element={<BookingConfirmation/>} />
+        <Route path="/bookings" element={<BookingConfirmation/>} />
         <Route path="/confirm-details" element={<ConfirmationDetails/>} />
       </Routes>
     </>

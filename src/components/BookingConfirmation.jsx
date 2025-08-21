@@ -5,9 +5,18 @@ import airplaneLocation from "../images/airplane-location.png";
 import airplaneTag from "../images/airplane-tag.png";
 import { BiSolidCheckCircle } from "react-icons/bi";
 import packages from '../consumables/packages';
-
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { selectPackage } from '../redux/packages/packageSlice';
 
 const BookingConfirmation = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleEditPackage = (pkg) => {
+        console.log("Edit Package Clicked", pkg);
+        navigate('/edit-package');
+        dispatch(selectPackage(pkg.id));
+    }
     return (
         <>
             <section className="py-6 px-4 max-h-screen max-w-7xl mx-auto ">
@@ -62,7 +71,9 @@ const BookingConfirmation = () => {
                                     <p className='text-lg font-medium'>{pkg.title.split(" ")[0]}</p>
                                     <div className="">
                                         <p>{pkg.trackNumber}</p>
-                                        <button className='mt-2 bg-blue py-2 px-6 text-lg text-white rounded-lg'>Edit Package</button>
+                                        <button 
+                                        onClick={()=>handleEditPackage(pkg)}
+                                        className='mt-2 bg-blue py-2 px-6 text-lg text-white rounded-lg'>Edit Package</button>
                                     </div>
                                 </div>
                             ))}
