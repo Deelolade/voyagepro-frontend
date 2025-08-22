@@ -90,7 +90,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <Link className="relative">
+                    <Link to='/package' className="relative">
                         <h2 className='text-2xl font-medium ms-3'>Manage Packages</h2>
                         <div className=" w-full h-[85%] rounded-xl p-6 mt-2  col-span-1 bg-gray border border-darkGray/50 border-dashed  hover:border-blue transition-colors duration-200">
                             <div className=" h-full flex flex-col justify-between">

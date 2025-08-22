@@ -1,10 +1,11 @@
 import React from 'react'
+import Bookings from '../../components/admin/Bookings'
 
 const AdminBookings = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+    <Bookings/>
+    </>
   )
 }
 

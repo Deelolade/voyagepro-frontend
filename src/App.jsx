@@ -16,6 +16,9 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import ConfirmationDetails from "./pages/ConfirmationDetails";
 import EditPackageForm from "./pages/EditPackageForm";
 import AdminDashboard from "./pages/admin-pages/AdminDashboard";
+import PackageData from "./pages/admin-pages/PackageData";
+import BlogManager from "./pages/admin-pages/BlogManager";
+import AdminBookings from "./pages/admin-pages/AdminBookings";
 const App = () => {
   return (
     <>
@@ -47,6 +50,9 @@ const App = () => {
 
         {/* admin routes */}
         <Route path="/admin" element={<AdminDashboard/>} />
+        <Route path="/package" element={<PackageData/>} />
+        <Route path="/blog" element={<BlogManager/>} />
+        <Route path="/booking" element={<AdminBookings/>} />
 
       </Routes>
     </>
