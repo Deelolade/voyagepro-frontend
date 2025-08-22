@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import ConfirmationDetails from "./pages/ConfirmationDetails";
 import EditPackageForm from "./pages/EditPackageForm";
+import AdminDashboard from "./pages/admin-pages/AdminDashboard";
 const App = () => {
   return (
     <>
@@ -40,6 +41,13 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/bookings" element={<BookingConfirmation/>} />
         <Route path="/confirm-details" element={<ConfirmationDetails/>} />
+
+
+
+
+        {/* admin routes */}
+        <Route path="/admin" element={<AdminDashboard/>} />
+
       </Routes>
     </>
   );
