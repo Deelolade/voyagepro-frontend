@@ -52,7 +52,7 @@ const PersonalInfo = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-     dispatch(signInSuccess(res.data.user));
+     dispatch(signInSuccess(res.data));
       toast.success( res.data.message || "Your details have been saved successfully!");
       setTimeout(()=> navigate("/dashboard"), 1500) 
     } catch (err) {

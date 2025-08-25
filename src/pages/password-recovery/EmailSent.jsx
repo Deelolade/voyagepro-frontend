@@ -1,8 +1,15 @@
-import React from 'react'
+import  { useEffect } from 'react'
 import { BiArrowBack } from "react-icons/bi";
 import ForgottenPassWordBreadCrumbs from "../../components/ForgottenPassWordBreadcrumbs";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const EmailSent = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const redirectTimeout = setTimeout(() => {
+      navigate('/create-password');
+      () => clearTimeout(redirectTimeout);
+    }, 5000);
+  })
   return (
     <>
       <section className="xs:p-2 2xl:p-20">

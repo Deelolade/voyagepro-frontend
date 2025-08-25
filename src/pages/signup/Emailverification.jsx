@@ -6,30 +6,42 @@ import { BiArrowBack } from "react-icons/bi";
 import OtpInput from "../../components/OTPInput";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getErrorMessage } from "../../helpers/errorMessage";
+import { signInSuccess } from "../../redux/users/userSlice";
 const Emailverification = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [otpValue, setOtpValue] = useState("");
   const email = useSelector((state) => state.user.currentUser?.email);
   const handleOtpChange = (value) => {
     setOtpValue(value); // This receives the joined OTP string
   };
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (otpValue.length < 6) {
       toast.error("Please enter the full OTP");
       return;
     }
+    console.log(otpValue);
     try {
       const res = await axios.post(`${API_URL}/auth/verify-email`, { otp: otpValue, email });
+      console.log(res.data);
+      const { user, token } = res.data;
+
       toast.success("Email verified successfully!");
-      localStorage.setItem("token", token); // Store token in localStorage
-      console.log("Login response:", res.data); 
-      navigate("/personal"); // 👈 redirect after success
-      const token = res.data.token;
+
+      // Save to Redux
+      dispatch(signInSuccess({ user, token }));
+
+      // Persist token
+      localStorage.setItem("token", token);
+
+      console.log("Login response:", res.data);
+      navigate("/personal");
     } catch (err) {
-      toast.error(err.response?.data?.message || "OTP verification failed");
+      toast.error(getErrorMessage(err) || "OTP verification failed");
     }
   };
   return (
@@ -57,14 +69,14 @@ const Emailverification = () => {
             <div className="">
               <p className="text-2xl text-center">Verification Code</p>
               <p className="xs:mt-0 2xl:mt-3 text-center  text-sm font-semibold text-zinc-800">
-                Please enter the code sent to your email/phone to verify your
+                Please enter the code sent to <span className="underline">{email}</span> to verify your
                 identity and continue.{" "}
               </p>
               <div className=" xs:mt-4 2xl:mt-8 flex justify-center">
-                <OtpInput lenght={4}  onOtpChange={handleOtpChange}/>
+                <OtpInput lenght={4} onOtpChange={handleOtpChange} />
               </div>
               <div >
-                <p className=" text-center xs:mt-4 2xl:mt-8 font-light">Didn't get a code?<span className="underline"> Click to resend</span></p>
+                <p className=" text-center xs:mt-4 2xl:mt-8 font-light">Didn't get a code?<span className="underline" onClick={handleSubmit}> Click to resend</span></p>
                 <div className="mt-6 flex flex-col ">
                   <button
                     onClick={handleSubmit}

@@ -8,9 +8,11 @@ import * as yup from "yup";
 import { IoMail } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
   const ValidationSchema = yup.object().shape({
     email: yup.string().email().required("Enter Your correct mail"),
   });
@@ -21,10 +23,16 @@ const ForgotPassword = () => {
   } = useForm({
     resolver: yupResolver(ValidationSchema),
   });
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     console.log(data);
-    // toast("Logged In  successfully !!");
-    navigate("/email-sent")
+     try {
+          const res = await axios.post(`${API_URL}/auth/forgot-password `, data)
+          toast.success(res.data.message|| "Logged In  successfully!");
+          console.log(res.data);
+          navigate("/email-sent")
+        } catch (error) {
+          console.error("Error during signup:", error);
+        }
   };
   return (
     <>

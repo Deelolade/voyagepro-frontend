@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import image from "../../images/voyagepro-login.png";
 import { FcGoogle } from "react-icons/fc";
 import { IoMail } from "react-icons/io5";
@@ -8,8 +8,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { signInSuccess } from "../../redux/users/userSlice";
 
 const Login = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [passwordIcon, setPasswordIcon] = useState(FaEye);
 
@@ -32,7 +36,7 @@ const Login = () => {
       .min(4)
       .max(20)
       .required("Please Enter correct Password"),
-    terms: yup.bool(),
+    rememberMe: yup.bool(),
   });
   const {
     register,
@@ -41,9 +45,19 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(ValidationSchema),
   });
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     console.log(data);
-    toast("Logged In  successfully !!");
+     try {
+      const { rememberMe, ...payload } = data;
+          const res = await axios.post(`${API_URL}/auth`, payload)
+          toast.success(res.data.message|| "Logged In  successfully!");
+          console.log(res.data);
+          dispatch(signInSuccess(res.data));
+          localStorage.setItem("token", res.data.token); // Store token in localStorage
+          navigate("/dashboard");
+        } catch (error) {
+          console.error("Error during signup:", error);
+        }
   };
   return (
     <>
@@ -148,7 +162,7 @@ const Login = () => {
                       name=""
                       id=""
                       className="h-5 w-5 accent-blue rounded"
-                      {...register("terms")}
+                      {...register("rememberMe")}
                     />
                     <p className="text-sm text-zinc-500">Remember me</p>
                   </div>{" "}

@@ -5,13 +5,18 @@ import { FaRegCaretSquareUp } from "react-icons/fa";
 import { RiSettings4Fill } from "react-icons/ri";
 import { LuClipboardList } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const DashboardSidebar = () => {
+  const currentUser =  useSelector((state) => state.user.currentUser);
+  const token =  useSelector((state) => state.user.token);
+  console.log(currentUser);
+  console.log(token);
   return (
     <div className='bg-white h-screen shadow-md rounded-lg p-6  flex flex-col justify-between'>
       <div className="">
         <h3 className='text-3xl font-semibold mt-3'>VoyagePro</h3>
         <ul className='mt-12'>
-            <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium '><span className='scale-150 me-3 '><PiSquaresFourBold/></span> Dashboard</li>
+            <Link to='' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium '><span className='scale-150 me-3 '><PiSquaresFourBold/></span> Dashboard</Link>
             <Link to="/bookings" className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3 '><FaRegCaretSquareUp/></span>Bookings</Link>
             <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><LuClipboardList/></span>Package Listings</li>
             <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><RiSettings4Fill/></span>Settings</li>
@@ -20,7 +25,7 @@ const DashboardSidebar = () => {
       <div className=" flex items-center justify-between">
         <img src={profileImage} alt="" className='w-12 h-12 rounded-full object-cover' />
             <div className="">
-                <h4 className='text-lg font-semibold'>Ihionkhan Shalom</h4>
+                <h4 className='text-sm font-semibold'>{`${currentUser.firstname} ${currentUser.lastname}  `}</h4>
             <p className='text-sm text-zinc-500'>Traveler</p>
             </div>
             <span className='scale-150'>
