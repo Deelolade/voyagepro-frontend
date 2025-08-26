@@ -5,18 +5,15 @@ import DashboardMain from '../components/DashboardMain'
 const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
-  <section className="max-w-7xl mx-auto flex gap-10">
-    {/* Sidebar */}
-    <aside className="w-1/4 ">
-      <DashboardSidebar />
-    </aside>
-
-    {/* Main Content */}
-    <main className="w-3/4 ">
-      <DashboardMain />
-    </main>
-  </section>
-</div>
+      <section className="max-w-7xl mx-auto flex gap-10">
+        <aside className="xs:w-1/4 xxs:hidden md:block ">
+          <DashboardSidebar />
+        </aside>
+        <main className="md:w-3/4 w-full">
+          <DashboardMain />
+        </main>
+      </section>
+    </div>
 
   )
 }

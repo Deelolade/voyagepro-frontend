@@ -1,5 +1,3 @@
-import React from 'react'
-import profileImage from "../images/landing-image-1.png";
 import dashboardImageOne from "../images/dashboard-image-one.png";
 import dashboardImageTwo from "../images/dashboard-image-two.png";
 import dashboardImageThree from "../images/dashboard-image-three.png";
@@ -7,10 +5,13 @@ import { IoMdStar, IoIosStarHalf } from "react-icons/io";
 import { FiGlobe } from "react-icons/fi";
 import { ImAirplane } from "react-icons/im";
 import { BiSolidCheckCircle } from "react-icons/bi";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaRegUserCircle } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
 
 const DashboardMain = () => {
+  const currentUser = useSelector(state=> state.user.currentUser)
+  console.log(currentUser)
   const Packages = [
     {
       name: "Paris, France",
@@ -43,34 +44,33 @@ const DashboardMain = () => {
   ]
   return (
     <div>
-      <section className="py-6 px-4 max-h-screen "> 
+      <section className="py-6 px-4 max-h-screen overflow-y-auto "> 
         <div className="flex justify-between items-center">
-          <h2 className='text-3xl font-semibold'>Welcome, Tinzwave</h2>
+          <h2 className='xxs:text-2xl sm:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
           <div className="flex space-x-6 items-center">
             <span><FaRegBell className='text-3xl '/></span>
-            <img src={profileImage} alt="" className='h-12 w-12 rounded-full object-cover' />
+             <span>< FaRegUserCircle className="scale-150 text-2xl"/></span>
           </div>
         </div>
         <div className="mt-6 relative">
           <div className="absolute top-6 right-8 z-20 text-sm text-gray-600 font-medium">
             <p className='text-white text-xl'>Your next trip</p>  </div>
           <div className="absolute bottom-4 left-4 z-20 text-sm text-gray-600 font-medium">
-            <p className='text-white text-lg'>Zanzibar,Tanzania</p>
-            <span className='text-white text-xl'>July 25 - July 30, 2025</span>
+            <p className='text-white text-sm sm:text-lg'>Zanzibar,Tanzania</p>
+            <span className='text-white text-lg sm:text-xl'>July 25 - July 30, 2025</span>
           </div>
-          <div className=""><img src={dashboardImageOne} alt="" className='h-64 w-full object-cover rounded-xl' />
-            <div className=""></div>
+          <div className=""><img src={dashboardImageOne} alt="" className='h-44 sm:h-64 w-full object-cover rounded-xl' />
           </div>
         </div>
-        <div className="flex mt-6 justify-between overflow-auto">
-          <div className="rounded-xl w-48 h-48 bg-sky-200/40 px-10 text-center flex flex-col justify-center space-y-3 items-center"><span className='scale-150 text-blue font-bold'><FiGlobe className='text-2xl'/></span><p className='text-xl '>Total packages</p></div>
-          <div className="rounded-xl w-48 h-48 bg-yellow-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-orange font-bold'><ImAirplane className='text-2xl'/></span><p className='text-xl '>Upcoming trips</p></div>
-          <div className="rounded-xl w-48 h-48 bg-rose-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-green font-bold'><BiSolidCheckCircle className='text-2xl' /></span><p className='text-xl '>Completed trips</p></div>
-          <div className="rounded-xl w-48 h-48 bg-zinc-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-red font-bold'><FaHeart className='text-2xl'/></span><p className='text-xl '>Wishlist</p></div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 place-items-center justify-items-center ">
+          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-sky-200/40 px-10 text-center flex flex-col justify-center space-y-3 items-center"><span className='scale-150 text-blue font-bold'><FiGlobe className='text-2xl'/></span><p className='text-xl '>Total packages</p></div>
+          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-yellow-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-orange font-bold'><ImAirplane className='text-2xl'/></span><p className='text-xl '>Upcoming trips</p></div>
+          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-rose-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-green font-bold'><BiSolidCheckCircle className='text-2xl' /></span><p className='text-xl '>Completed trips</p></div>
+          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-zinc-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-red font-bold'><FaHeart className='text-2xl'/></span><p className='text-xl '>Wishlist</p></div>
         </div>
         <div className="mt-3">
           <h4 className='text-xl font-semibold'>Total Packages </h4>
-          <div className="grid grid-cols-4 gap-6 mt-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-2">
             {Packages.map((pkg, idx) => {
               return (
                 <div className="" key={idx}>
