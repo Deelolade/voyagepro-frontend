@@ -53,41 +53,41 @@ const SignUp = () => {
     }
   return (
     <>
-      <section className="flex h-screen justify-evenly md:px-5 lg:px-10 2xl:px-20  xs:px-0 xl:py-4  2xl:py-8 max-h-[100vh]">
-        <div className="2xl:w-[45%] md:hidden  ">
+      <section className="max-h-screen flex justify-evenly gap-10 sm:py-10 sm:px-10  2xl:p-0 ">
+        <div className="2xl:w-[50%] min-h-[900px] hidden lg:block   ">
           <img
             src={image}
-            alt="voyage-pro-"
-            className="min-w-full max-h-full 2xl:object-contain  rounded-2xl"
+            alt="voyage-pro-image"
+            className="min-w-full max-h-full object-contain  rounded-2xl"
           />
         </div>
-        <div className="xs:w-full md:w-[70%] lg:w-[50%] 2xl:w-[45%] xxs: p-3 xs:p-5 2xl:p-10  relative flex  flex-col">
+        <div className="2xl:w-[50%] 2xl:p-10  relative flex  flex-col xxs:mt-6 xs:mt-8 px-4">
           <div className="">
             <BreadCrumbs />
           </div>
           <div className=" md:w-full xs:w-full xl:w-full 2xl:w-[70%]">
-            <div className=" xs:mt-5 md:mt-12 lg:mt-1 xl:mt-12  2xl:mt-28">
+            <div className=" xxs:mt-8 md:mt-12 lg:mt-20 xl:mt-20  2xl:mt-20">
               <p className="text-zinc-500 text-sm">Step 1/3</p>
-              <h1 className="xxs:text-xl xs:text-3xl 2xl:text-4xl font-semibold xs:my-2 lg:my-2 2xl:my-5  ">Create an account</h1>
-              <p className="text-zinc-500 text-sm 2xl:text-center xs:text-left">
+              <h1 className="xxs:text-2xl xs:text-3xl 2xl:text-4xl font-semibold my-3 sm:my-5  ">Create an account</h1>
+              <p className="text-zinc-500 text-sm xxs:text-left">
                 sign up with VoyagePro and unlock opportunities to shape your future fun experiences.
               </p>
             </div>
-            <div className=" xs:mt-4 xl:mt-5 2xl:mt-8">
-              <div className="flex space-x-3 xs:py-2 2xl:py-2 items-center justify-center border-2 border-zinc-500 w-auto  rounded-lg">
-                <span className="2xl:text-3xl xs:text-2xl">
+            <div className="xxs:mt-4 xl:mt-5 2xl:mt-8">
+              <div className="flex space-x-3 xxs:py-2 2xl:py-2 items-center justify-center border-2 border-zinc-500 w-auto  rounded-lg">
+                <span className="2xl:text-3xl xxs:text-2xl">
                   <FcGoogle />
                 </span>
-                <span className=" xs:text-sm text-[16px] font-semibold">
+                <span className=" xxs:text-sm text-[16px] font-semibold">
                   Sign Up with Google
                 </span>
               </div>
-              <div className="flex justify-center items-center space-x-3 mx-auto  lg:mt-6 xl:mt-8 2xl:mt-12 ">
-                <div className="h-[1px] 2xl:w-[25%] xxs:w-[10%] xs:w-[15%] bg-zinc-500 "></div>
+              <div className="flex justify-center items-center space-x-3 mx-auto xxs:mt-6 xs:mt-12 ">
+                <div className="h-[1px] xxs:w-[20%] xs:w-[30%]  2xl:w-[25%] bg-zinc-400 "></div>
                 <p className="uppercase text-sm text-center text-zinc-500">
                   or Continue with Email
                 </p>
-                <div className="h-[1px] xs:w-[15%] xxs:w-[10%] 2xl:w-[25%] bg-zinc-500"></div>
+                <div className="h-[1px] xxs:w-[20%] xs:w-[30%]  2xl:w-[25%] bg-zinc-400"></div>
               </div>
             </div>
             <form onSubmit ={handleSubmit(onSubmit)} className=" xs:my-6 lg:mt-4 xl:mt-8 2xl:mt-12 ">

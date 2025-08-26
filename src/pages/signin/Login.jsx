@@ -69,7 +69,7 @@ const Login = () => {
   return (
     <>
       <section className="flex max-h-screen justify-evenly xs:px-3 md:px-5 lg:px-10 lg:gap-10 lg:py-8 xl:py-0 xl:px-10  2xl:px-20  ">
-        <div className=" 2xl:w-[50%] hidden xxs:hidden lg:block lg:w-[50%] ">
+        <div className=" 2xl:w-[50%] hidden min-h-[900px] lg:block lg:w-[50%] ">
           <img
             src={image}
             alt="voyage-pro-"

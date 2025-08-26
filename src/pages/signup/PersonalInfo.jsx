@@ -63,30 +63,27 @@ const PersonalInfo = () => {
   };
   return (
     <>
-      <section className="flex h-screen justify-evenly md:px-5 lg:px-10 2xl:px-20  xs:px-0 xl:py-4  2xl:py-8 max-h-[100vh]">
-        <div className="2xl:w-[45%] md:hidden ">
+      <section className="flex max-h-screen justify-evenly xs:px-3 md:px-5 lg:px-10 lg:gap-10 lg:py-8 xl:py-0 xl:px-10 2xl:px-20 ">
+        <div className="2xl:w-[50%] min-h-[900px] hidden lg:block ">
           <img
             src={image}
             alt="voyage-pro-image"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
         </div>
-        <div className="xs:w-full md:w-[70%] lg:w-[50%] 2xl:w-[45%] xxs: p-3 xs:p-5 2xl:p-3  relative flex  flex-col">
+         <div className="lg:w-[50%] 2xl:p-10 relative flex  flex-col xxs:mt-6 xs:mt-8 sm:mt-2  px-4 max-w-[100%]">
           <div className="">
             <BreadCrumbs />
           </div>
-          <div className="flex items-center space-x-2 justify-start xs:mt-4 xl:mt-2 2xl:mt-4">
-            <Link
-              to="/signup"
-              className="bg-white  xxs:p-1 xs:p-2 2xl:p-3 xs:rounded 2xl:rounded-lg"
-            >
-              <BiArrowBack className=" xxs:scale-90 xs:scale-125 2xl:scale-150" />
+          <div className="flex items-center space-x-2 justify-start mt-6">
+            <Link to="/signup" className="bg-white p-2 lg:p-3 rounded 2xl:rounded-lg">
+              <BiArrowBack className=" xxs:scale-125 2xl:scale-150" />
             </Link>
             <p className="text-sm text-black md:hidden">Back</p>
           </div>
-          <div className="  md:w-full xs:w-full xl:w-full 2xl:w-[70%]  xxs:mt-4 xs:mt-10 md:mt-12 xl:mt-8 2xl:mt-5">
+          <div className="xl:w-[70%] mt-4 ">
             <p className="text-zinc-500 text-sm">Step 3/3</p>
-            <h1 className="xxs:text-xl 2xl:text-2xl font-semibold xs:my-2 2xl:my-3">
+            <h1 className="xxs:text-xl 2xl:text-2xl font-semibold 2xl:my-3">
               Let's complete your profile
             </h1>
             <p className="text-zinc-500 text-sm text-left">
@@ -94,7 +91,7 @@ const PersonalInfo = () => {
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
                 <div className="mt-4">
-                  <label htmlFor="" className=" text-black ">
+                  <label htmlFor="" className=" text-black text-sm ">
                     First Name
                   </label>
                   <input
@@ -110,7 +107,7 @@ const PersonalInfo = () => {
                   )}
                 </div>
                 <div className="mt-4">
-                  <label htmlFor="" className="text-black ">
+                  <label htmlFor="" className="text-black text-sm ">
                     Last Name
                   </label>
                   <input

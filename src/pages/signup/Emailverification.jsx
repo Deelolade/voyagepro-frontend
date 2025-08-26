@@ -32,10 +32,8 @@ const Emailverification = () => {
 
       toast.success("Email verified successfully!");
 
-      // Save to Redux
       dispatch(signInSuccess({ user, token }));
 
-      // Persist token
       localStorage.setItem("token", token);
 
       console.log("Login response:", res.data);
@@ -46,42 +44,41 @@ const Emailverification = () => {
   };
   return (
     <>
-      <section className="flex h-screen justify-evenly md:px-5 lg:px-10 2xl:px-20  xs:px-0 xl:py-4  2xl:py-8 max-h-[100vh]">
-        <div className="2xl:w-[45%] md:hidden ">
+      <section className="flex max-h-screen justify-evenly xs:px-3 md:px-5 lg:px-10 lg:gap-10 lg:py-8 xl:py-0 xl:px-10  2xl:px-20 ">
+        <div className="2xl:w-[50%] min-h-[900px] hidden lg:block ">
           <img
             src={image}
             alt="voyage-pro-"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
         </div>
-        <div className="xs:w-full md:w-[70%] lg:w-[50%] 2xl:w-[45%] xxs: p-3 xs:p-5 2xl:p-10  relative flex  flex-col">
+         <div className="2xl:w-[50%] 2xl:p-10 relative flex  flex-col xxs:mt-6 xs:mt-8 px-4 max-w-[100%]">
           <div className="">
             <BreadCrumbs />
           </div>
-
-          <div className="flex items-center space-x-2 justify-start xs:mt-4 2xl:mt-12">
-            <Link to="/signup" className="bg-white  xxs:p-1 xs:p-2 2xl:p-3 xs:rounded 2xl:rounded-lg">
-              <BiArrowBack className=" xxs:scale-90 xs:scale-125 2xl:scale-150" />
+          <div className="flex items-center space-x-2 justify-start mt-12">
+            <Link to="/signup" className="bg-white p-2 lg:p-3 rounded 2xl:rounded-lg">
+              <BiArrowBack className=" xxs:scale-125 2xl:scale-150" />
             </Link>
             <p className="text-sm text-black md:hidden">Back</p>
           </div>
-          <div className=" md:w-full xs:w-full xl:w-full 2xl:w-[70%]  flex justify-center items-center xxs:mt-4 xs:mt-10 md:mt-12 xl:mt-20 2xl:mt-36">
+          <div className="2xl:w-[70%] flex justify-center items-center mt-10 xxs:mt-20 xs:mt-36">
             <div className="">
               <p className="text-2xl text-center">Verification Code</p>
-              <p className="xs:mt-0 2xl:mt-3 text-center  text-sm font-semibold text-zinc-800">
-                Please enter the code sent to <span className="underline">{email}</span> to verify your
+              <p className="mt-3 text-center  text-sm font-semibold text-zinc-800">
+                Please enter the code sent to <span className="underline">{email || "your email"}</span> to verify your
                 identity and continue.{" "}
               </p>
-              <div className=" xs:mt-4 2xl:mt-8 flex justify-center">
+              <div className=" mt-8 flex justify-center">
                 <OtpInput  onOtpChange={handleOtpChange} />
               </div>
               <div >
-                <p className=" text-center xs:mt-4 2xl:mt-8 font-light">Didn't get a code?<span className="underline" onClick={handleSubmit}> Click to resend</span></p>
+                <p className=" text-center xs:mt-4 2xl:mt-8 font-light">Didn't get a code?<span className="underline" > Click to resend</span></p>
                 <div className="mt-6 flex flex-col ">
                   <button
                     onClick={handleSubmit}
                     className="bg-blue/90 hover:bg-blue py-2 text-xl text-center rounded-lg text-white capitalize"
-                  >
+                  > 
                     Verify
                   </button>
                 </div>
