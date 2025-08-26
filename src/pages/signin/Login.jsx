@@ -10,8 +10,10 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { signInSuccess } from "../../redux/users/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
@@ -45,60 +47,65 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(ValidationSchema),
   });
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-     try {
+    try {
       const { rememberMe, ...payload } = data;
-          const res = await axios.post(`${API_URL}/auth`, payload)
-          toast.success(res.data.message|| "Logged In  successfully!");
-          console.log(res.data);
-          dispatch(signInSuccess(res.data));
-          localStorage.setItem("token", res.data.token); // Store token in localStorage
-          navigate("/dashboard");
-        } catch (error) {
-          console.error("Error during signup:", error);
-        }
+      const res = await axios.post(`${API_URL}/auth`, payload);
+      if (res.data.redirect === "/verify-otp") {
+        toast.info(res.data.message);
+        navigate("/verify-otp", { state: { email } });
+        return;
+      }
+      toast.success(res.data.message || "Logged In  successfully!");
+      console.log(res.data);
+      dispatch(signInSuccess(res.data));
+      localStorage.setItem("token", res.data.token); 
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
   };
   return (
     <>
-      <section className="flex h-screen justify-evenly md:px-5 lg:px-10 xl:px-10  2xl:px-20  xs:px-3  max-h-[100vh]">
-        <div className=" 2xl:w-[45%] md:hidden ">
+      <section className="flex max-h-screen justify-evenly xs:px-3 md:px-5 lg:px-10 lg:gap-10 lg:py-8 xl:py-0 xl:px-10  2xl:px-20  ">
+        <div className=" 2xl:w-[50%] hidden xxs:hidden lg:block lg:w-[50%] ">
           <img
             src={image}
             alt="voyage-pro-"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
         </div>
-        <div className="xs:w-full md:w-[80%] 2xl:w-[45%] xs:px-1 2xl:p-10 relative flex flex-col justify-between">
-          <h1 className="xs:text-2xl 2xl:text-3xl font-semibold">VoyagePro</h1>
-          <div className="md:w-full xs:w-full xl:w-full 2xl:w-[70%] xs:my-1">
+        <div className="xs:w-full xxs:px-5 xxs:py-3 sm:px-8  md:w-[70%] md:py-8 lg:w-[50%] 2xl:w-[50%] 2xl:p-10 relative flex flex-col justify-between">
+          <h1 className="xxs:text-2xl xs:text-3xl 2xl:text-3xl font-semibold xxs:mb-6 lg:mb-0">VoyagePro</h1>
+          <div className="2xl:w-[70%] ">
             <div className="">
-              <h1 className="xs:text-2xl 2xl:text-3xl font-semibold xs:my-2 2xl:my-5">
+              <h1 className="xxs:text-2xl xs:text-3xl 2xl:text-3xl font-semibold xxs:my-2 2xl:my-5">
                 Login to your account
               </h1>
               <p className="text-zinc-500 text-sm text-left">
                 Login now to stay connected and continue to explore.
               </p>
             </div>
-            <div className="xs:mt-4 xl:mt-5 2xl:mt-8">
-              <div className="flex space-x-3 xs:py-2 2xl:py-2 items-center justify-center border-2 border-zinc-500 w-auto  rounded-lg">
-                <span className="2xl:text-3xl xs:text-2xl">
+            <div className="xxs:mt-4 xl:mt-5 2xl:mt-8">
+              <div className="flex space-x-3 xxs:py-2 2xl:py-2 items-center justify-center border-2 border-zinc-500 w-auto  rounded-lg">
+                <span className="2xl:text-3xl xxs:text-2xl">
                   <FcGoogle />
                 </span>
-                <span className=" xs:text-sm text-[16px] font-semibold">
+                <span className=" xxs:text-sm text-[16px] font-semibold">
                   Sign Up with Google
                 </span>
               </div>
-              <div className="flex justify-center items-center space-x-3 mx-auto xs:mt-5 md:mt-8  lg:mt-5 xl:mt-8 2xl:mt-12 ">
-                <div className="h-[1px] 2xl:w-[25%] xl:w-[20%] xxs:w-[15%] xs:w-[15%] bg-zinc-400 "></div>
+              <div className="flex justify-center items-center space-x-3 mx-auto xxs:mt-6 xs:mt-12 ">
+                <div className="h-[1px] xxs:w-[20%] xs:w-[30%]  2xl:w-[25%] bg-zinc-400 "></div>
                 <p className="uppercase text-sm text-center text-zinc-500">
                   or Continue with Email
                 </p>
-                <div className="h-[1px] xs:w-[15%] xxs:w-[15%] xl:w-[20%] 2xl:w-[25%] bg-zinc-400"></div>
+                <div className="h-[1px] xxs:w-[20%] xs:w-[30%]  2xl:w-[25%] bg-zinc-400"></div>
               </div>
             </div>
             <form
-              className="xs:mt-4 sm:mt-6 lg:mt-4 xl:mt-6 2xl:mt-12 w-full"
+              className="xxs:mt-4 sm:mt-12 w-full"
               onSubmit={handleSubmit(onSubmit)}
             >
               <div className="">
@@ -106,11 +113,10 @@ const Login = () => {
                   Email Address
                 </label>
                 <div
-                  className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${
-                    errors.email
+                  className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.email
                       ? "ring-2 ring-red"
                       : "focus-within:ring-2 focus-within:ring-blue"
-                  }`}
+                    }`}
                 >
                   <input
                     type="email"
@@ -126,16 +132,15 @@ const Login = () => {
                   </p>
                 )}
               </div>
-              <div className="lg:mt-2 2xl:mt-3">
+              <div className="mt-3">
                 <label htmlFor="" className="text-zinc-500 text-sm ">
                   Password
                 </label>
                 <div
-                  className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${
-                    errors.password
+                  className={`flex bg-white items-center justify-evenly py-2 px-2 rounded-lg mt-2 ${errors.password
                       ? "ring-2 ring-red"
                       : "focus-within:ring-2 focus-within:ring-blue"
-                  }`}
+                    }`}
                 >
                   <input
                     type={passwordType}
@@ -155,7 +160,7 @@ const Login = () => {
                     {errors.password?.message}
                   </p>
                 )}
-                <div className="flex xs:mb-2 lg:my-4 2xl:my-6 justify-between">
+                <div className="flex xxs:my-4 2xl:my-6 justify-between">
                   <div className="flex space-x-2">
                     <input
                       type="checkbox"
@@ -175,7 +180,7 @@ const Login = () => {
                 </div>
               </div>
 
-              <div className=" xs:mt-3 md:mt-6 lg:mt-3 2xl:mt-6 flex flex-col">
+              <div className=" xxs:mt-3 md:mt-6 lg:mt-3 2xl:mt-6 flex flex-col">
                 <button className="bg-blue/90 hover:bg-blue w-full  py-2 text-xl text-center rounded-lg text-white capitalize">
                   Login
                 </button>
@@ -188,7 +193,7 @@ const Login = () => {
               </div>
             </form>
           </div>
-          <div className="flex  justify-between text-sm text-zinc-700 ">
+          <div className="flex xxs:mt-6  justify-between text-sm text-zinc-700 ">
             <p>Privacy Policy</p> <p>Copyright 2022</p>
           </div>
         </div>

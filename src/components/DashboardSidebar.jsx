@@ -18,14 +18,14 @@ const DashboardSidebar = () => {
         <ul className='mt-12'>
             <Link to='' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium '><span className='scale-150 me-3 '><PiSquaresFourBold/></span> Dashboard</Link>
             <Link to="/bookings" className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3 '><FaRegCaretSquareUp/></span>Bookings</Link>
-            <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><LuClipboardList/></span>Package Listings</li>
+            <Link to='/packages' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><LuClipboardList/></span>Package Listings</Link>
             <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><RiSettings4Fill/></span>Settings</li>
         </ul>
       </div>
       <div className=" flex items-center justify-between">
         <img src={profileImage} alt="" className='w-12 h-12 rounded-full object-cover' />
             <div className="">
-                <h4 className='text-sm font-semibold'>{`${currentUser.firstname} ${currentUser.lastname}  `}</h4>
+                <h4 className='text-sm font-semibold'>{`${currentUser?.firstname} ${currentUser?.lastname}  `}</h4>
             <p className='text-sm text-zinc-500'>Traveler</p>
             </div>
             <span className='scale-150'>

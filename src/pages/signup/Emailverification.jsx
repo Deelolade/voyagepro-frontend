@@ -73,7 +73,7 @@ const Emailverification = () => {
                 identity and continue.{" "}
               </p>
               <div className=" xs:mt-4 2xl:mt-8 flex justify-center">
-                <OtpInput lenght={4} onOtpChange={handleOtpChange} />
+                <OtpInput  onOtpChange={handleOtpChange} />
               </div>
               <div >
                 <p className=" text-center xs:mt-4 2xl:mt-8 font-light">Didn't get a code?<span className="underline" onClick={handleSubmit}> Click to resend</span></p>

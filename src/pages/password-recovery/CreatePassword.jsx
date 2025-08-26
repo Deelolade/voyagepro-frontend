@@ -10,8 +10,20 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import OtpInput from "../../components/OTPInput";
+import { getErrorMessage } from "../../helpers/errorMessage";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const CreatePassword = () => {
+  const location = useLocation();
+  const API_URL = import.meta.env.VITE_API_URL;
+    const [otpValue, setOtpValue] = useState("");
+  const email = location.state?.email || localStorage.getItem("resetEmail");
+  console.log("Email passed from previous page:", email);
+  const handleOtpChange = (value) => {
+    setOtpValue(value); 
+  };
      const [passwordType, setPasswordType] = useState("password");
       const [passwordIcon, setPasswordIcon] = useState(FaEye);
       const visiblePassword = () => {
@@ -28,7 +40,6 @@ const CreatePassword = () => {
   const ValidationSchema = yup.object().shape({
     password: yup.string().required().min(4).max(20),
     confirmPassword: yup.string().required().oneOf([yup.ref('password'),null],"Password don't match")
-    
   });
   const {
     register,
@@ -37,10 +48,23 @@ const CreatePassword = () => {
   } = useForm({
     resolver: yupResolver(ValidationSchema),
   });
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate("/email-sent")
+  const onSubmit = async(data) => {
+  const payload = {
+    email: email, 
+    otp: otpValue,            
+    newPassword: data.confirmPassword, 
   };
+  console.log(payload)
+   try {
+      const res = await axios.post(`${API_URL}/auth/reset-password`, payload);
+      console.log(res.data);
+      toast.success("Email verified successfully!");
+      navigate("/login");
+    } catch (err) {
+      toast.error(getErrorMessage(err) || "OTP verification failed");
+    }
+  };
+
   return (
     <>
       <section className="xs:p-2 2xl:p-20">
@@ -65,11 +89,14 @@ const CreatePassword = () => {
               Create New Password
             </h1>
             <p className="mt-8 text-sm text-zinc-500 text-center">
-              Create a new password to securelyaccess your account.
+              Create a new password to securely access your account.
             </p>
             <p className="text-sm text-zinc-500 text-center">
                 Make sure it's strong and easy for you to remember. 
             </p>
+              <div className="mt-6 mx-auto flex justify-center">
+                <OtpInput onOtpChange={handleOtpChange}/>
+              </div>
             <div className="mt-6">
                 <label htmlFor="" className="text-zinc-500 text-sm ">
                  New Password
