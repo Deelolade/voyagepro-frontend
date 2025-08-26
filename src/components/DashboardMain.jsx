@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 
 const DashboardMain = () => {
   const currentUser = useSelector(state=> state.user.currentUser)
-  console.log(currentUser)
   const Packages = [
     {
       name: "Paris, France",
@@ -44,7 +43,7 @@ const DashboardMain = () => {
   ]
   return (
     <div>
-      <section className="py-6 px-4 max-h-screen overflow-y-auto "> 
+      <section className="py-6 px-4 max-h-screen overflow-y-auto mb-10 "> 
         <div className="flex justify-between items-center">
           <h2 className='xxs:text-2xl sm:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
           <div className="flex space-x-6 items-center">
@@ -63,10 +62,10 @@ const DashboardMain = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 place-items-center justify-items-center ">
-          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-sky-200/40 px-10 text-center flex flex-col justify-center space-y-3 items-center"><span className='scale-150 text-blue font-bold'><FiGlobe className='text-2xl'/></span><p className='text-xl '>Total packages</p></div>
-          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-yellow-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-orange font-bold'><ImAirplane className='text-2xl'/></span><p className='text-xl '>Upcoming trips</p></div>
-          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-rose-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-green font-bold'><BiSolidCheckCircle className='text-2xl' /></span><p className='text-xl '>Completed trips</p></div>
-          <div className="rounded-xl w-40 h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-zinc-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-red font-bold'><FaHeart className='text-2xl'/></span><p className='text-xl '>Wishlist</p></div>
+          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-sky-200/40 px-10 text-center flex flex-col justify-center space-y-3 items-center"><span className='scale-150 text-blue font-bold'><FiGlobe className='text-2xl'/></span><p className='text-xl '>Total packages</p></div>
+          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-yellow-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-orange font-bold'><ImAirplane className='text-2xl'/></span><p className='text-xl '>Upcoming trips</p></div>
+          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-rose-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-green font-bold'><BiSolidCheckCircle className='text-2xl' /></span><p className='text-xl '>Completed trips</p></div>
+          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-zinc-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-red font-bold'><FaHeart className='text-2xl'/></span><p className='text-xl '>Wishlist</p></div>
         </div>
         <div className="mt-3">
           <h4 className='text-xl font-semibold'>Total Packages </h4>
