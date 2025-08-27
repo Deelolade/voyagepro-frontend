@@ -192,9 +192,12 @@ const Login = () => {
               </div>
 
               <div className=" xxs:mt-3 md:mt-6 lg:mt-3 2xl:mt-6 flex flex-col">
-                <button className="bg-blue/90 hover:bg-blue w-full  py-2 text-xl text-center rounded-lg text-white capitalize">
+                <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9, rotate: -5 }}
+                 className="bg-blue/90 hover:bg-blue w-full  py-2 text-xl text-center rounded-lg text-white capitalize">
                   Login
-                </button>
+                </motion.button>
                 <p className="text-black text-sm mt-5 text-center">
                   Don't have an account ?{" "}
                   <Link to="/signup" className="underline ">

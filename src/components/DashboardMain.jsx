@@ -65,7 +65,7 @@ const DashboardMain = () => {
                   <img src={pkg.image || dashboardImageTwo } className='rounded-lg shadow-lg' />
                   <div className="mt-2">
                     <p className='text-lg'>{`${pkg.location.country}, ${pkg.location.city}`}</p>
-                    <p className='text-sm'>${pkg.pricePerAdult}</p>
+                    <p className='text-sm'>#{pkg.pricePerAdult.toLocaleString()}</p>
                     <p className='text-sm'>{pkg.days} Days</p>
                     <div className="flex items-center space-x-4">
                       <div className="flex space-x-1 mt-2">
