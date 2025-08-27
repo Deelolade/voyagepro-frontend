@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { signInSuccess } from "../../redux/users/userSlice";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -69,14 +70,24 @@ const Login = () => {
   return (
     <>
       <section className="flex max-h-screen justify-evenly xs:px-3 md:px-5 lg:px-10 lg:gap-10 lg:py-8 xl:py-0 xl:px-10  2xl:px-20  ">
-        <div className=" 2xl:w-[50%] hidden min-h-[900px] lg:block lg:w-[50%] ">
+        <motion.div
+        initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          transition={{ duration: 0.5 }}
+         className=" 2xl:w-[50%] hidden min-h-[900px] lg:block lg:w-[50%] ">
           <img
             src={image}
-            alt="voyage-pro-"
+            alt="voyage-pro-image"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
-        </div>
-        <div className="xs:w-full xxs:px-5 xxs:py-3 sm:px-8  md:w-[70%] md:py-8 lg:w-[50%] 2xl:w-[50%] 2xl:p-10 relative flex flex-col justify-between">
+        </motion.div>
+        <motion.div 
+        initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.5 }}
+        className="xs:w-full xxs:px-5 xxs:py-3 sm:px-8  md:w-[70%] md:py-8 lg:w-[50%] 2xl:w-[50%] 2xl:p-10 relative flex flex-col justify-between">
           <h1 className="xxs:text-2xl xs:text-3xl 2xl:text-3xl font-semibold xxs:mb-6 lg:mb-0">VoyagePro</h1>
           <div className="2xl:w-[70%] ">
             <div className="">
@@ -196,7 +207,7 @@ const Login = () => {
           <div className="flex xxs:mt-6  justify-between text-sm text-zinc-700 ">
             <p>Privacy Policy</p> <p>Copyright 2022</p>
           </div>
-        </div>
+        </motion.div>
       </section>
     </>
   );

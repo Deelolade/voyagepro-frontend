@@ -1,6 +1,5 @@
 import dashboardImageOne from "../images/dashboard-image-one.png";
 import dashboardImageTwo from "../images/dashboard-image-two.png";
-import dashboardImageThree from "../images/dashboard-image-three.png";
 import { IoMdStar, IoIosStarHalf } from "react-icons/io";
 import { FiGlobe } from "react-icons/fi";
 import { ImAirplane } from "react-icons/im";
@@ -22,7 +21,6 @@ const DashboardMain = () => {
       const res = await axios.get(`${API_URL}/packages`)
       localStorage.setItem("allPackages", JSON.stringify(res.data))
       setPackages(res.data)
-      console.log(res.data)
       } catch (error) {
         const cachedPackages = localStorage.getItem("allPackages")
         if(cachedPackages){

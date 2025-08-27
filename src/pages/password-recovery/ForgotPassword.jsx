@@ -9,11 +9,9 @@ import { IoMail } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { signInPending } from "../../redux/users/userSlice";
+import { motion } from "framer-motion";
 
 const ForgotPassword = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const ValidationSchema = yup.object().shape({
@@ -26,43 +24,45 @@ const ForgotPassword = () => {
   } = useForm({
     resolver: yupResolver(ValidationSchema),
   });
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-     try {
-          const res = await axios.post(`${API_URL}/auth/forgot-password `, data)
-          toast.success(res.data.message|| "Logged In  successfully!");
-          console.log(res.data);
-          localStorage.setItem("resetEmail", data.email);
-          navigate("/email-sent", { state: { email: data.email } });
-        } catch (error) {
-          console.error("Error during signup:", error);
-        }
+    try {
+      const res = await axios.post(`${API_URL}/auth/forgot-password `, data)
+      toast.success(res.data.message || "Otp sent to your email!");
+      console.log(res.data);
+      localStorage.setItem("resetEmail", data.email);
+      navigate("/email-sent", { state: { email: data.email } });
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
   };
   return (
     <>
-      <section className="xs:p-2 2xl:p-20">
-        <div className="md:flex-col 2xl:flex justify-between items-center  md:w-full xl:w-[75%] 2xl:w-[65%] ">
-          <h1 className="text-4xl font-semibold">VoyagePro</h1>
-          <div className="md:mt-6 ">
+      <section className=" 2xl:p-20 px-3 md:px-5 lg:px-10">
+        <div className="flex flex-col lg:flex-row justify-between items-center   lg:w-[70%] 2xl:w-[64%]">
+          <h1 className="mr-auto md:mr-0 text-2xl xs:text-3xl 2xl:text-4xl font-semibold">VoyagePro</h1>
+          <div className="mt-3 md:mt-6">
             <ForgottenPassWordBreadCrumbs />
           </div>
         </div>
-        <div className="flex items-center space-x-2 justify-start xs:mt-4 md:mt-6 xl:mt-2 2xl:mt-12">
-          <Link
-            to="/login"
-            className="bg-white  xxs:p-1 xs:p-2 2xl:p-3 xs:rounded 2xl:rounded-lg"
-          >
-            <BiArrowBack className=" xxs:scale-90 xs:scale-125 2xl:scale-150" />
+        <div className="flex items-center space-x-2 justify-start mt-6 mb-3">
+          <Link to="/login" className="bg-white p-2 lg:p-3 rounded 2xl:rounded-lg">
+            <BiArrowBack className=" xxs:scale-125 2xl:scale-150" />
           </Link>
           <p className="text-sm text-black md:hidden">Back</p>
         </div>
-        <div className="flex justify-center items-center h-[70vh]">
-          <form onSubmit={handleSubmit(onSubmit)} className="bg-[#EAF2FF] p-6 rounded-xl xs:w-[90vw] 2xl:w-[491px] h-[420px] mx-auto ">
+        <motion.div 
+        initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          transition={{ duration: 0.5 }}
+        className="flex justify-center items-center ">
+          <form onSubmit={handleSubmit(onSubmit)} className="bg-[#EAF2FF] p-6 rounded-xl w-[90vw] md:w-[491px] h-[420px] mx-auto">
             <h1 className="text-xl font-semibold text-center xs:mt-4">
               Forgot Password
             </h1>
             <p className="mt-8 text-sm text-zinc-500 text-center">
-              Enter your email, and we'll send you link to reset it and get back
+              Enter your email, and we'll send you a one-time password (OTP) to reset it and get back
               into your account
             </p>
             <div className=" mt-6">
@@ -93,7 +93,7 @@ const ForgotPassword = () => {
               Remember password?<Link to="/login" className="underline"> Login</Link>
             </p>
           </form>
-        </div>
+        </motion.div>
       </section>
     </>
   );

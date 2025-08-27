@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { getErrorMessage } from "../../helpers/errorMessage";
 import { signInSuccess } from "../../redux/users/userSlice";
+import { motion } from "framer-motion";
+
 const Emailverification = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
@@ -45,13 +47,18 @@ const Emailverification = () => {
   return (
     <>
       <section className="flex max-h-screen justify-evenly xs:px-3 md:px-5 lg:px-10 lg:gap-10 lg:py-8 xl:py-0 xl:px-10  2xl:px-20 ">
-        <div className="2xl:w-[50%] min-h-[900px] hidden lg:block ">
+        <motion.div
+        initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          transition={{ duration: 0.5 }}
+         className="2xl:w-[50%] min-h-[900px] hidden lg:block ">
           <img
             src={image}
             alt="voyage-pro-"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
-        </div>
+        </motion.div>
          <div className="2xl:w-[50%] 2xl:p-10 relative flex  flex-col xxs:mt-6 xs:mt-8 px-4 max-w-[100%]">
           <div className="">
             <BreadCrumbs />
@@ -62,7 +69,12 @@ const Emailverification = () => {
             </Link>
             <p className="text-sm text-black md:hidden">Back</p>
           </div>
-          <div className="2xl:w-[70%] flex justify-center items-center mt-10 xxs:mt-20 xs:mt-36">
+          <motion.div 
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          transition={{ duration: 0.5 }}
+           className="2xl:w-[70%] flex justify-center items-center mt-10 xxs:mt-20 xs:mt-36">
             <div className="">
               <p className="text-2xl text-center">Verification Code</p>
               <p className="mt-3 text-center  text-sm font-semibold text-zinc-800">
@@ -84,7 +96,7 @@ const Emailverification = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

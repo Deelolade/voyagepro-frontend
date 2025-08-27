@@ -13,6 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { signInPending } from "../../redux/users/userSlice";
+import { motion } from "framer-motion";
 
 
 const SignUp = () => {
@@ -54,14 +55,24 @@ const SignUp = () => {
   return (
     <>
       <section className="max-h-screen flex justify-evenly gap-10 sm:py-10 sm:px-10  2xl:p-0 ">
-        <div className="2xl:w-[50%] min-h-[900px] hidden lg:block   ">
+        <motion.div
+        initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          transition={{ duration: 0.5 }}
+         className=" 2xl:w-[50%] hidden min-h-[900px] lg:block lg:w-[50%] ">
           <img
             src={image}
-            alt="voyage-pro-image"
-            className="min-w-full max-h-full object-contain  rounded-2xl"
+            alt="voyage-pro-"
+            className="min-w-full max-h-full object-contain rounded-2xl"
           />
-        </div>
-        <div className="2xl:w-[50%] 2xl:p-10  relative flex  flex-col xxs:mt-6 xs:mt-8 px-4">
+        </motion.div>
+        <motion.div
+         initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.5 }}
+         className="2xl:w-[50%] 2xl:p-10  relative flex  flex-col xxs:mt-6 xs:mt-8 px-4">
           <div className="">
             <BreadCrumbs />
           </div>
@@ -142,7 +153,7 @@ const SignUp = () => {
               </div>
             </form>
           </div>
-        </div>
+        </motion.div>
       </section>
     </>
   );

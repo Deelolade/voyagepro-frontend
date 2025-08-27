@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../../redux/users/userSlice";
+import { motion } from "framer-motion";
 
 const PersonalInfo = () => {
   const dispatch = useDispatch();
@@ -64,14 +65,24 @@ const PersonalInfo = () => {
   return (
     <>
       <section className="flex max-h-screen justify-evenly xs:px-3 md:px-5 lg:px-10 lg:gap-10 lg:py-8 xl:py-0 xl:px-10 2xl:px-20 ">
-        <div className="2xl:w-[50%] min-h-[900px] hidden lg:block ">
+        <motion.div
+        initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          transition={{ duration: 0.5 }}
+           className="2xl:w-[50%] min-h-[900px] hidden lg:block ">
           <img
             src={image}
             alt="voyage-pro-image"
             className="min-w-full max-h-full object-contain rounded-2xl"
           />
-        </div>
-         <div className="lg:w-[50%] 2xl:p-10 relative flex  flex-col xxs:mt-6 xs:mt-8 sm:mt-2  px-4 max-w-[100%]">
+        </motion.div>
+         <motion.div 
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.5 }}
+           className="lg:w-[50%] 2xl:p-10 relative flex  flex-col xxs:mt-6 xs:mt-8 sm:mt-2  px-4 max-w-[100%]">
           <div className="">
             <BreadCrumbs />
           </div>
@@ -208,7 +219,7 @@ const PersonalInfo = () => {
                 </button>
             </form>
           </div>
-        </div>
+        </motion.div>
       </section>
     </>
   );
