@@ -9,7 +9,9 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from "react-router-dom";
 import DatePicker from './DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectPackage } from '../redux/packages/packageSlice';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
 
 
 
@@ -51,26 +53,32 @@ const PackageForm = () => {
     return (
         <div>
             <section className="">
-                <div className="h-screen  max-w-7xl mx-auto">
-                    <div className="flex justify-between py-4 items-center">
-                        <h3 className="text-2xl font-semibold">Voyagepro</h3>
-                        <h3 className="text-2xl font-semibold">Travel Packages Form  </h3>
-                        <img
-                            src={image}
-                            alt=""
-                            className="h-12 w-12 object-cover rounded-full"
-                        />
+                <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6">
+                    <div className="flex justify-between py-4 items-center px-3">
+                        <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
+                        <h3 className="hidden md:text-3xl lg:block font-semibold">Travel Packages Form  </h3>
+                        <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
                     </div>
-                    <main className='mt-6 flex gap-10'>
-                        <div className=" w-[50%] mt-7 ">
+                    <main className='md:mt-6 flex gap-10'>
+                        <motion.div
+                            initial={{ opacity: 0, x: -100 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 100 }}
+                            transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
+                            className=" 2xl:w-[50%] hidden  lg:block lg:w-[50%] mt-7 ">
                             <div className=" grid grid-cols-2 grid-rows-2 gap-14  ">
-                                <img src={imageOne} alt="" className='rounded-full w-[300px] h-[300px] object-cover self-end' />
-                                <img src={imageTwo} alt="" className='rounded-xl w-[400px] h-[350px] object-cover self-start' />
-                                <img src={imageThree} alt="" className='rounded-xl w-[400px] h-[350px] object-cover self-start' />
-                                <img src={imageOne} alt="" className='rounded-full w-[300px] h-[300px] object-cover self-end' />
+                                <img src={imageOne} alt="voyage-pro-image" className='rounded-full w-[300px] h-[300px] object-cover self-end' />
+                                <img src={imageTwo} alt="voyage-pro-image" className='rounded-xl w-[400px] h-[350px] object-cover self-start' />
+                                <img src={imageThree} alt="voyage-pro-image" className='rounded-xl w-[400px] h-[350px] object-cover self-start' />
+                                <img src={imageOne} alt="voyage-pro-image" className='rounded-full w-[300px] h-[300px] object-cover self-end' />
                             </div>
-                        </div>
-                        <div className="w-[50%]">
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, x: 100 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -100 }}
+                            transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
+                            className="w-[90vw] sm:w-[70vw] mx-auto lg:w-[50%]">
                             <h1 className='text-3xl font-semibold text-center mb-4'>Booking Form</h1>
                             <div className=" bg-lightgray p-6 px-10 rounded-lg h-full">
                                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -115,12 +123,12 @@ const PackageForm = () => {
                                         error={errors.travelDate} />
                                     <div className="mt-6">
                                         <div className="">
-                                            <h3 className='text-2xl font-semibold'>Number of Guests ?</h3>
+                                            <h3 className='text-lg md:text-2xl font-semibold'>Number of Guests ?</h3>
                                             <div className="flex justify-between items-end">
                                                 <div className="">
-                                                    <p className='text-lg italic text-zinc-500'>${currentPackage.price.toLocaleString()}/ person</p>
+                                                    <p className='text-lg italic text-zinc-500'>#{currentPackage.price.toLocaleString()}/ person</p>
                                                     <p className="text-lg font-semibold">
-                                                        Total: ${(currentPackage.price * guestCount).toLocaleString()}
+                                                        Total: #{(currentPackage.price * guestCount).toLocaleString()}
                                                     </p>
                                                 </div>
                                                 <div className="">
@@ -139,7 +147,7 @@ const PackageForm = () => {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="mt-6">
+                                            <div className="mt-3 md:mt-6">
                                                 <label className="block text-lg font-semibold mb-3 text-zinc-800">
                                                     Select a payment method
                                                 </label>
@@ -186,7 +194,7 @@ const PackageForm = () => {
                                                         className="h-5 w-5 accent-blue rounded"
                                                         {...register("terms")}
                                                     />
-                                                    <p className="text-sm  ">By continuing, you agree to our Terms and Privacy Policy.</p>
+                                                    <p className="text-sm w-52 md:w-fit ">By continuing, you agree to our Terms and Privacy Policy.</p>
                                                 </div>{" "}
                                                 {errors.terms && (
                                                     <p className="text-red text-sm mt-1">
@@ -195,13 +203,15 @@ const PackageForm = () => {
                                                 )}
                                             </div>
                                         </div>
-                                        <button type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-6 w-full text-center rounded-lg text-white capitalize">
-                                            Proceed (${(currentPackage.price * guestCount).toLocaleString()})
-                                        </button>
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.9, rotate: -5 }} type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-6 w-full text-center rounded-lg text-white capitalize">
+                                            Proceed (#{(currentPackage.price * guestCount).toLocaleString()})
+                                        </motion.button>
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </motion.div>
                     </main>
                 </div>
             </section>

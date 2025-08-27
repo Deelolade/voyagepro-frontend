@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import DatePicker from './DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPackage } from '../redux/packages/packageSlice';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 
 
@@ -49,11 +50,7 @@ const PackageForm = () => {
                     <div className="flex justify-between py-4 items-center lg:px-3">
                         <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
                         <h3 className="hidden md:text-3xl lg:block font-semibold">Travel Packages Form  </h3>
-                        <img
-                            src={image}
-                            alt=""
-                            className="h-12 w-12 object-cover rounded-full"
-                        />
+                        <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl"/></span>
                     </div>
                     <main className='flex  items-start '>
                         <div className="hidden lg:block 2xl:w-[50%] h-[750px] pt-10">
