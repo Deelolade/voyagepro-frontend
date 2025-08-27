@@ -8,42 +8,33 @@ import { BiSolidCheckCircle } from "react-icons/bi";
 import { FaHeart, FaRegUserCircle } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const DashboardMain = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const [packages, setPackages] = useState([]);
   const currentUser = useSelector(state=> state.user.currentUser)
-  const Packages = [
-    {
-      name: "Paris, France",
-      price: 1200,
-      days: 7,
-      image: dashboardImageTwo,
-      rate: 4.5
-    },
-    {
-      name: "Spain, Europe",
-      price: 900,
-      days: 5,
-      image: dashboardImageThree,
-      rate: 5
-    },
-    {
-      name: "Duabia, UAE",
-      price: 900,
-      days: 5,
-      image: dashboardImageTwo,
-      rate: 3.5
-    },
-    {
-      name: "New York, USA",
-      price: 900,
-      days: 5,
-      image: dashboardImageThree,
-      rate: 4.5
+
+  useEffect(()=>{
+    const fetchPackages = async()=>{
+      try {
+      const res = await axios.get(`${API_URL}/packages`)
+      localStorage.setItem("allPackages", JSON.stringify(res.data))
+      setPackages(res.data)
+      console.log(res.data)
+      } catch (error) {
+        const cachedPackages = localStorage.getItem("allPackages")
+        if(cachedPackages){
+          setPackages(JSON.parse(cachedPackages))
+        }
+      }
     }
-  ]
+    fetchPackages()
+  },[])
   return (
     <div>
-      <section className="py-6 px-4 max-h-screen overflow-y-auto mb-10 "> 
+      <section className="py-6 px-4 max-h-screen overflow-y-auto mb-10 sm:mb-0 "> 
         <div className="flex justify-between items-center">
           <h2 className='xxs:text-2xl sm:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
           <div className="flex space-x-6 items-center">
@@ -70,13 +61,13 @@ const DashboardMain = () => {
         <div className="mt-3">
           <h4 className='text-xl font-semibold'>Total Packages </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-2">
-            {Packages.map((pkg, idx) => {
+            {packages.splice( 0,4 ).map((pkg, idx) => {
               return (
                 <div className="" key={idx}>
-                  <img src={pkg.image} className='rounded-lg shadow-lg' />
+                  <img src={pkg.image || dashboardImageTwo } className='rounded-lg shadow-lg' />
                   <div className="mt-2">
-                    <p className='text-lg'>{pkg.name}</p>
-                    <p className='text-sm'>${pkg.price.toLocaleString()}</p>
+                    <p className='text-lg'>{`${pkg.location.country}, ${pkg.location.city}`}</p>
+                    <p className='text-sm'>${pkg.pricePerAdult}</p>
                     <p className='text-sm'>{pkg.days} Days</p>
                     <div className="flex items-center space-x-4">
                       <div className="flex space-x-1 mt-2">
@@ -86,7 +77,7 @@ const DashboardMain = () => {
                         <span className='text-yellow-500 text-xl'><IoMdStar /></span>
                         <span className='text-yellow-500 text-xl'><IoIosStarHalf /></span>
                       </div>
-                      <span className='text-sm text-zinc-700'>{pkg.rate}</span>
+                      <span className='text-sm text-zinc-700'>{pkg.rating}</span>
                     </div>
                     <button type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
                       Proceed
