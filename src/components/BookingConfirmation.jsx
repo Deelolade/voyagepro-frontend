@@ -8,6 +8,7 @@ import packages from '../consumables/packages';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { selectPackage } from '../redux/packages/packageSlice';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 const BookingConfirmation = () => {
     const navigate = useNavigate();
@@ -21,15 +22,15 @@ const BookingConfirmation = () => {
         <>
             <section className="py-6 px-4 max-h-screen max-w-7xl mx-auto ">
                 <div className="flex justify-between items-center">
-                    <h2 className='text-3xl font-semibold'>VoyagePro</h2>
-                    <h2 className='text-3xl font-semibold'>Bookings</h2>
-                    <img src={profileImage} alt="" className='h-12 w-12 rounded-full object-cover' />
+                    <h2 className='hidden md:text-3xl md:block font-semibold'>VoyagePro</h2>
+                    <h2 className='text-2xl md:text-3xl font-semibold'>Bookings</h2>
+                    <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl"/></span>
                 </div>
                 <div className=" mt-4">
-                    <img src={mainImage} alt="voyagepro booking confirmation image" className='h-64 w-full object-cover rounded-xl' />
+                    <img src={mainImage} alt="voyagepro booking confirmation image" className='h-44 md:h-64 w-full object-cover rounded-xl' />
                 </div>
                 <div className=" mt-4">
-                    <h2 className='text-3xl font-semibold'>Overview Report</h2>
+                    <h2 className='text-2xl md:text-3xl font-semibold'>Overview Report</h2>
                     <div className=" flex justify-between items-center mt-2">
                         <div className="relative flex flex-col justify-center items-center">
                             <span className=' text-green font-bold'><BiSolidCheckCircle className='text-6xl' /></span>
@@ -47,7 +48,7 @@ const BookingConfirmation = () => {
                         </div>
                     </div>
                     <div className="mt-3">
-                        <div className=" grid grid-cols-7 items-center gap-2 text-center border-b py-4 border-gray-300">
+                        <div className=" grid grid-cols-7 items-center gap-2 text-center shadow-lg py-4 border-gray-300">
                             <div className="" />
                             <p>Name</p>
                             <p>Status</p>
@@ -56,7 +57,7 @@ const BookingConfirmation = () => {
                             <p>Destination</p>
                             <p>Track Number</p>
                         </div>
-                        <div className="overflow-auto max-h-[350px] scroll-hidden ">
+                        <div className="overflow-auto max-h-[350px] scrollbar-hide ">
                             {packages.map((pkg) => (
                                 <div key={pkg.id} className="relative grid grid-cols-7 items-center gap-2 py-4 text-center">
                                     <div className="flex justify-center items-center">

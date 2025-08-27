@@ -7,7 +7,7 @@ import imageFour from "../images/edit-package-four.png";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from './DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectPackage } from '../redux/packages/packageSlice';
@@ -45,18 +45,18 @@ const PackageForm = () => {
     return (
         <div>
             <section className="">
-                <div className="h-screen  max-w-7xl mx-auto">
-                    <div className="flex justify-between py-4 items-center">
-                        <h3 className="text-2xl font-semibold">Voyagepro</h3>
-                        <h3 className="text-2xl font-semibold">Travel Packages Form  </h3>
+                <div className="h-screen  max-w-7xl mx-auto px-3">
+                    <div className="flex justify-between py-4 items-center lg:px-3">
+                        <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
+                        <h3 className="hidden md:text-3xl lg:block font-semibold">Travel Packages Form  </h3>
                         <img
                             src={image}
                             alt=""
                             className="h-12 w-12 object-cover rounded-full"
                         />
                     </div>
-                    <main className=' flex gap-10 items-start mt-2'>
-                        <div className=" sm:hidden 2xl:w-[50%] h-[750px] pt-10">
+                    <main className='flex  items-start '>
+                        <div className="hidden lg:block 2xl:w-[50%] h-[750px] pt-10">
                             <div className=" grid grid-cols-2 grid-rows-2 h-full rounded-lg shadow-lg">
                                 <img src={imageOne} alt="" className='w-full h-full  object-cover self-end' />
                                 <img src={imageTwo} alt="" className=' w-full h-full object-cover self-start' />
@@ -64,11 +64,11 @@ const PackageForm = () => {
                                 <img src={imageFour} alt="" className='w-full h-full  object-cover self-end' />
                             </div>
                         </div>
-                        <div className=" sm:w-full sm:p-12 2xl:w-[50%]">
-                            <h1 className='2xl:text-3xl font-semibold text-center mb-2'>Edit Form</h1>
+                        <div className=" w-[90vw] sm:w-[80vw] md:p-12 mx-auto 2xl:w-[50%]">
+                            <h1 className='text-2xl md:text-3xl  font-semibold text-center mb-2 md:hidden'>Edit Form</h1>
                             <div className="bg-lightgray py-6 px-10 rounded-lg h-full  shadow-lg">
                                 <form onSubmit={handleSubmit(onSubmit)} className=''>
-                                    <h2 className='text-2xl font-medium'>{currentPackage.title}</h2>
+                                    <h2 className='text-xl sm:text-2xl font-medium'>{currentPackage.title}</h2>
                                     <div className="">
                                         <label htmlFor="" className="text-zinc-800 text-lg font-semibold ">
                                             Name
@@ -145,7 +145,7 @@ const PackageForm = () => {
                                                     />
                                                     <p className="text-sm">Include Airport pickup</p>
                                                 </div>{" "}
-                                                <div className="flex space-x-2 mt-6 mb-3 justify-center">
+                                                <div className="flex space-x-2 mt-6 mb-3 justify-start items-center">
                                                     <input
                                                         type="checkbox"
                                                         name=""
@@ -153,7 +153,7 @@ const PackageForm = () => {
                                                         className="h-5 w-5 accent-blue rounded"
                                                         {...register("terms")}
                                                     />
-                                                    <p className="text-sm  ">By continuing, you agree to our Terms and Privacy Policy.</p>
+                                                    <p className="text-sm w-72 md:w-full">By continuing, you agree to our <span className='text-blue'>Terms</span> and Privacy <span className='text-blue'>Policy</span>.</p>
                                                 </div>{" "}
                                                 {errors.terms && (
                                                     <p className="text-red text-sm mt-1">
