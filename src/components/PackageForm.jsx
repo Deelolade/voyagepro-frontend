@@ -19,6 +19,7 @@ import Spinner from './ui/Spinner';
 
 
 const PackageForm = () => {
+    const navigate = useNavigate();
     const API_URL = import.meta.env.VITE_API_URL
     const [guestCount, setGuestCount] = useState(1);
     const [ loading, setLoading] = useState(false)
@@ -71,6 +72,9 @@ const PackageForm = () => {
             reset()
             toast.success(res.data.message || "You have successfully created a booking!");
             console.log(res.data);
+            setTimeout(() => {
+                navigate(`/dashboard`);
+            }, 3000);
         } catch (error) {
             console.error("Error during signup:", error);
         } finally {

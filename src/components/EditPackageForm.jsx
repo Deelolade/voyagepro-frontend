@@ -40,7 +40,7 @@ const PackageForm = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-        // navigate(`/packages/${data.id}`);
+        navigate(`/packages/${data.id}`);
     }
 
     return (
@@ -110,9 +110,9 @@ const PackageForm = () => {
                                             <h3 className='text-2xl font-semibold'>Number of Guests ?</h3>
                                             <div className="flex justify-between items-end">
                                                 <div className="">
-                                                    <p className='text-lg italic text-zinc-500'>${currentPackage.price.toLocaleString()}/ person</p>
+                                                    {/* <p className='text-lg italic text-zinc-500'>${currentPackage.price.toLocaleString()}/ person</p> */}
                                                     <p className="text-lg font-semibold">
-                                                        Total: ${(currentPackage.price * guestCount).toLocaleString()}
+                                                        {/* Total: ${(currentPackage.pricePerAdult * guestCount).toLocaleString()} */}
                                                     </p>
                                                 </div>
                                                 <div className="">
