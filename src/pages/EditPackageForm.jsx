@@ -6,7 +6,8 @@ const EditPackageForm = () => {
     <div>
       <EditForm/>
       <div className="mt-10 md:mt-0">
-        <DashboardBottomBar/>
+        {/* till we conclude about it on friday */}
+        {/* <DashboardBottomBar/> */}
       </div>
     </div>
   )

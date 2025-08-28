@@ -1,5 +1,3 @@
-import React from 'react'
-import profileImage from "../images/landing-image-1.png";
 import mainImage from "../images/hero-image.png";
 import airplaneLocation from "../images/airplane-location.png";
 import airplaneTag from "../images/airplane-tag.png";

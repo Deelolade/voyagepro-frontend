@@ -1,58 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import profileImage from "../images/landing-image-1.png";
-import { FaRegBell } from "react-icons/fa";
+import { FaRegBell, FaRegUserCircle } from "react-icons/fa";
 import { RiSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import image from "../images/dashboard-image-three.png";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { selectPackage } from "../redux/packages/packageSlice";
 
 
 const PackageListing = () => {
-  const packages = useSelector((state) => state.package.packages);
+  const dispatch = useDispatch();
+  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("popularity");
   const [selectedPrices, setSelectedPrices] = useState([]);
+  const [packages, setPackages] = useState([]);
 
+
+  useEffect(()=>{
+    const fetchPackages = async()=>{
+      try {
+      const res = await axios.get(`${API_URL}/packages`)
+      localStorage.setItem("allPackages", JSON.stringify(res.data))
+      setPackages(res.data)
+      console.log(packages)
+      } catch (error) { 
+        const cachedPackages = localStorage.getItem("allPackages")
+        if(cachedPackages){
+          setPackages(JSON.parse(cachedPackages))
+        }
+      }
+    }
+    fetchPackages()
+  },[])
   const handlePriceChange = (range) => {
     setSelectedPrices((prev) =>
       prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
     );
   };
 
- const filteredPackages = packages
-  // .filter((pkg) => {
-  //   // Convert price from "₦250,000" or "$150" to number
-  //   const numericPrice = parseFloat(pkg.price.replace(/[^\d.]/g, ""));
-    
-  //   // If no price range is selected, allow all
-  //   if (selectedPrices.length === 0) return true;
-
-  //   // Check if numericPrice falls in any selected range
-  //   return selectedPrices.some((range) => {
-  //     const [min, max] = range.split("-").map(Number);
-  //     return numericPrice >= min && numericPrice <= max;
-  //   });
-  // })
-  .filter(
+ const filteredPackages = packages.filter(
     (pkg) =>
-      pkg.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pkg.location.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pkg.location.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
       pkg.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
-  .sort((a, b) => {
-    if (sortBy === "popularity") return b.popularity - a.popularity;
-    if (sortBy === "rating") return b.rating - a.rating;
-    if (sortBy === "price")
-      return (
-        parseFloat(b.price.replace(/[^\d.]/g, "")) -
-        parseFloat(a.price.replace(/[^\d.]/g, ""))
-      );
-    if (sortBy === "date") return new Date(b.date) - new Date(a.date);
-    return 0;
-  });
+  // .sort((a, b) => {
+  //   if (sortBy === "popularity") return b.popularity - a.popularity;
+  //   if (sortBy === "rating") return b.rating - a.rating;
+  //   if (sortBy === "price")
+  //     return (
+  //       parseFloat(b.price.replace(/[^\d.]/g, "")) -
+  //       parseFloat(a.price.replace(/[^\d.]/g, ""))
+  //     );
+  //   if (sortBy === "date") return new Date(b.date) - new Date(a.date);
+  //   return 0;
+  // });
 
   console.log(packages.length);
   const handlePackage = (pkg) => {
-    navigate(`/packages/${pkg.id}`);
+    dispatch(selectPackage(pkg))
+    navigate(`/packages/${pkg._id}`);
   };
   return (
     <>
@@ -240,13 +250,7 @@ const PackageListing = () => {
           <main className="w-[70vw] p-6">
             <div className=" flex justify-between items-center">
               <h3 className="text-4xl font-semibold">Packages Listing</h3>
-              <div className="">
-                <img
-                  src={profileImage}
-                  alt=""
-                  className="w-14 h-14 object-cover rounded-full"
-                />
-              </div>
+              <span>< FaRegUserCircle className="scale-150 text-2xl"/></span>
             </div>
             <div className=" flex mt-8 justify-between items-center">
               <div className=" flex w-[70%] bg-gray border border-zinc-500 rounded-xl py-2 px-3 items-center space-x-5">
@@ -267,16 +271,16 @@ const PackageListing = () => {
             </div>
             <div className="mt-12 w-full bg-white rounded-xl">
               {/* Header */}
-              <div className="grid grid-cols-6 py-4 px-5  me-auto font-semibold text-lg capitalize">
+              <div className="grid grid-cols-6 py-4 px-5  me-auto font-semibold text-lg capitalize text-center">
                 <div />
                 <p>Name</p>
                 <p>Price</p>
-                <p>Date</p>
+                <p>Duration</p>
                 <p>Destination</p>
                 <p>Track No</p>
               </div>
               {/* Body */}
-              <div className="h-[70vh] rounded-b-xl px-3 py-3 border-t-2 overflow-y-auto scroll-smooth">
+              <div className="h-[70vh] rounded-b-xl px-2 py-3 border-t-2 overflow-y-auto scroll-smooth text-center">
                 {filteredPackages.length > 0 ? (
                   filteredPackages.map((pkg, idx) => (
                     <div
@@ -284,28 +288,17 @@ const PackageListing = () => {
                       className="grid grid-cols-6 items-center gap-4 py-4 px-5  ms-auto "
                     >
                       <img
-                        src={pkg.image}
+                        src={pkg.image || image }
                         alt={pkg.title || "Package image"}
                         className="h-20 w-20 object-cover rounded-lg"
                       />
                       <p className="text-sm text-zinc-500">{pkg.title}</p>
-                      {/* <span
-                        className={`text-xs text-center px-1 py-2 rounded-full text-zinc-700 ${
-                          pkg.status === "completed"
-                            ? "bg-green"
-                            : pkg.status === "pending"
-                            ? "bg-lightpurple"
-                            : "bg-lightorange"
-                        }`}
-                      >
-                        {pkg.status}
-                      </span> */}
-                      <p className="text-sm text-zinc-500">${pkg.price.toLocaleString()}</p>
-                      <p className="text-sm text-zinc-500">{pkg.date}</p>
-                      <p className="text-sm text-zinc-500">{pkg.location}</p>
+                      <p className="text-sm text-zinc-500">#{pkg.pricePerAdult.toLocaleString()}</p>
+                      <p className="text-sm text-zinc-500">{pkg.duration}</p>
+                      <p className="text-sm text-zinc-500">{pkg.location.city}</p>
                       <div className=" flex flex-col items-center justify-center space-y-2  ">
                         <p className="text-sm text-zinc-500">
-                          {pkg.trackNumber}
+                          {pkg._id}
                         </p>
                         <button
                           className="bg-blue px-3 py-2  rounded-lg text-sm text-white"

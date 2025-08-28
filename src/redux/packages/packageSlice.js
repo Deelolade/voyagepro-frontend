@@ -1,27 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import packages from "../../consumables/packages";
 
 const initialState = {
-    packages,
+    packages: [],
     selectedPackage: null,
 }
 const packageSlice = createSlice({
-    name:"package",
+    name: "package",
     initialState,
-    reducers:{
+    reducers: {
         selectPackage: (state, action) => {
-            const selectedPackage = state.packages.find(
-                (pkg) => pkg.id === action.payload
-            );
-            if (selectedPackage) {
-                return {
-                    ...state,
-                    selectedPackage,
-                };
-            }
-            return state;
-        }
-      
+            state.selectedPackage = action.payload; 
+        },
+
     }
 })
 export const { selectPackage } = packageSlice.actions;

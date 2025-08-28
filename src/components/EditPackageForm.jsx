@@ -150,7 +150,7 @@ const PackageForm = () => {
                                                         className="h-5 w-5 accent-blue rounded"
                                                         {...register("terms")}
                                                     />
-                                                    <p className="text-sm w-72 md:w-full">By continuing, you agree to our <span className='text-blue'>Terms</span> and Privacy <span className='text-blue'>Policy</span>.</p>
+                                                    <p className="text-sm w-60 md:w-full">By continuing, you agree to our <span className='text-blue'>Terms</span> and Privacy <span className='text-blue'>Policy</span>.</p>
                                                 </div>{" "}
                                                 {errors.terms && (
                                                     <p className="text-red text-sm mt-1">

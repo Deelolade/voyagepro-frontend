@@ -11,14 +11,17 @@ import DatePicker from './DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Spinner from './ui/Spinner';
 
 
 
 
 const PackageForm = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const API_URL = import.meta.env.VITE_API_URL
     const [guestCount, setGuestCount] = useState(1);
+    const [ loading, setLoading] = useState(false)
     const currentPackage = useSelector((state) => state.package.selectedPackage);
     const paymentOptions = [
         { label: "Credit/Debit card", value: "card" },
@@ -39,27 +42,52 @@ const PackageForm = () => {
         terms: yup.bool().oneOf([true], "You have to agree to our terms and privacy policy "),
 
     })
-    const { control, register, handleSubmit, watch, formState: { errors } } = useForm({
+    const { control, register, handleSubmit, watch, reset, formState: { errors } } = useForm({
         resolver: yupResolver(ValidationSchema)
     })
     const selected = watch("paymentMethod");
-    // console.log(currentPackage)
-
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        const packageId = currentPackage._id;
+        const packageName = currentPackage.title;
+        const travelers = guestCount;
+        const phone = data.contact;
+        const email = data.email;
+        const contactInfo = { phone, email };
+        data = { ...data, packageName, travelers, packageId, contactInfo };
         console.log(data)
-        // navigate(`/packages/${data.id}`);
+        const token = localStorage.getItem("token");
+        if (!token) {
+            toast.error("You must be logged in to update your profile");
+            return;
+        }
+        setLoading(true);
+        try {
+            const res = await axios.post(`${API_URL}/bookings`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(res.data)
+            reset()
+            toast.success(res.data.message || "You have successfully created a booking!");
+            console.log(res.data);
+        } catch (error) {
+            console.error("Error during signup:", error);
+        } finally {
+            setLoading(false);
+        }
     }
-
     return (
         <div>
             <section className="">
-                <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6">
+                {loading && <Spinner/>}
+                <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6 ">
                     <div className="flex justify-between py-4 items-center px-3">
                         <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
                         <h3 className="hidden md:text-3xl lg:block font-semibold">Travel Packages Form  </h3>
                         <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
                     </div>
-                    <main className='md:mt-6 flex gap-10'>
+                    <main className='md:mt-2 flex gap-10'>
                         <motion.div
                             initial={{ opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -79,8 +107,8 @@ const PackageForm = () => {
                             exit={{ opacity: 0, x: -100 }}
                             transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
                             className="w-[90vw] sm:w-[70vw] mx-auto lg:w-[50%]">
-                            <h1 className='text-3xl font-semibold text-center mb-4'>Booking Form</h1>
-                            <div className=" bg-lightgray p-6 px-10 rounded-lg h-full">
+                            <h1 className='text-3xl font-semibold text-center mb-2'>Booking Form</h1>
+                            <div className=" bg-lightgray p-6 px-10 rounded-lg mb-7">
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="">
                                         <label htmlFor="" className="text-zinc-800 text-lg font-semibold ">
@@ -121,14 +149,14 @@ const PackageForm = () => {
                                     <DatePicker control={control}
                                         name="travelDate"
                                         error={errors.travelDate} />
-                                    <div className="mt-6">
+                                    <div className="mt-3">
                                         <div className="">
                                             <h3 className='text-lg md:text-2xl font-semibold'>Number of Guests ?</h3>
                                             <div className="flex justify-between items-end">
                                                 <div className="">
-                                                    <p className='text-lg italic text-zinc-500'>#{currentPackage.price.toLocaleString()}/ person</p>
+                                                    <p className='text-lg italic text-zinc-500'>#{currentPackage.pricePerAdult.toLocaleString()}/ person</p>
                                                     <p className="text-lg font-semibold">
-                                                        Total: #{(currentPackage.price * guestCount).toLocaleString()}
+                                                        Total: #{(currentPackage.pricePerAdult * guestCount).toLocaleString()}
                                                     </p>
                                                 </div>
                                                 <div className="">
@@ -147,7 +175,7 @@ const PackageForm = () => {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div className="mt-3 md:mt-6">
+                                            <div className="mt-3 md:mt-3">
                                                 <label className="block text-lg font-semibold mb-3 text-zinc-800">
                                                     Select a payment method
                                                 </label>
@@ -205,8 +233,8 @@ const PackageForm = () => {
                                         </div>
                                         <motion.button
                                             whileHover={{ scale: 1.1 }}
-                                            whileTap={{ scale: 0.9, rotate: -5 }} type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-6 w-full text-center rounded-lg text-white capitalize">
-                                            Proceed (#{(currentPackage.price * guestCount).toLocaleString()})
+                                            whileTap={{ scale: 0.9,  }} type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
+                                            Proceed (#{(currentPackage.pricePerAdult * guestCount).toLocaleString()})
                                         </motion.button>
                                     </div>
                                 </form>
