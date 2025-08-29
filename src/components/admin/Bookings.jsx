@@ -96,7 +96,7 @@ const Bookings = () => {
           </Link>
         </div>
         <div className="mt-8 flex justify-between items-center ">
-          <Link to='' className="bg-blue flex space-x-5 items-center py-3 px-4 rounded-lg">
+          <Link to='/package' className="bg-blue flex space-x-5 items-center py-3 px-4 rounded-lg">
             <span><FaPlus className='text-2xl ' /></span>
             <span>Add Package</span>
           </Link>

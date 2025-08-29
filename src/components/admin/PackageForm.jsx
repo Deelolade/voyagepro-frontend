@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import imageOne from "../images/package-form-1.png";
-import imageTwo from "../images/package-form-2.png";
-import imageThree from "../images/package-form-3.png";
+import { useState } from 'react'
+import imageOne from "../../images/package-form-1.png";
+import imageTwo from "../../images/package-form-2.png";
+import imageThree from "../../images/package-form-3.png";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from "react-router-dom";
-import DatePicker from './DatePicker';
+import DatePicker from '../DatePicker';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import Spinner from './ui/Spinner';
+import Spinner from '../ui/Spinner';
 
 
 
@@ -21,14 +21,8 @@ const PackageForm = () => {
     const navigate = useNavigate();
     const API_URL = import.meta.env.VITE_API_URL
     const [guestCount, setGuestCount] = useState(1);
-    const [ loading, setLoading] = useState(false)
-    const currentPackage = useSelector((state) => state.package.selectedPackage);
-    const paymentOptions = [
-        { label: "Credit/Debit card", value: "card" },
-        { label: "Bank Transfer", value: "bank-transfer" },
-        { label: "Pay on Arrival", value: "payment-on-arrival" },
-        { label: "Mobile Payment", value: "mobile-payment" },
-    ];
+    const [loading, setLoading] = useState(false)
+
     const ValidationSchema = yup.object().shape({
         email: yup.string().email().required("Incorrect Email"),
         name: yup.string().required("First name is required"),
@@ -38,14 +32,11 @@ const PackageForm = () => {
             .matches(/^(?:\+234|0)[789][01]\d{8}$/, "Enter a valid phone number"),
         travelDate: yup.string().required("Date of travel is important"),
         paymentMethod: yup.string().required("Please select a payment method"),
-        airportPickup: yup.bool(),
-        terms: yup.bool().oneOf([true], "You have to agree to our terms and privacy policy "),
 
     })
-    const { control, register, handleSubmit, watch, reset, formState: { errors } } = useForm({
+    const { control, register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(ValidationSchema)
     })
-    const selected = watch("paymentMethod");
     const onSubmit = async (data) => {
         const packageId = currentPackage._id;
         const packageName = currentPackage.title;
@@ -83,26 +74,26 @@ const PackageForm = () => {
     return (
         <div>
             <section className="">
-                {loading && <Spinner/>}
+                {loading && <Spinner />}
                 <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6 ">
                     <div className="flex justify-between py-4 items-center px-3">
-                        <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
-                        <h3 className="hidden md:text-3xl lg:block font-semibold">Travel Packages Form  </h3>
-                        <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
+                        <h3 className="text-2xl md:text-3xl font-semibold">Package Data Form</h3>
+                        <div className="flex">
+                            <button className='px-4 py-2 bg-orange text-lg font-semibold rounded-md'>Save as Draft</button>
+                        </div>
                     </div>
                     <main className='md:mt-2 flex gap-10'>
                         <motion.div
                             initial={{ opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 100 }}
-                            transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
-                            className=" 2xl:w-[50%] hidden  lg:block lg:w-[50%] mt-7 ">
-                            <div className=" grid grid-cols-2 grid-rows-2 gap-14  ">
-                                <img src={imageOne} alt="voyage-pro-image" className='rounded-full w-[300px] h-[300px] object-cover self-end' />
-                                <img src={imageTwo} alt="voyage-pro-image" className='rounded-xl w-[400px] h-[350px] object-cover self-start' />
-                                <img src={imageThree} alt="voyage-pro-image" className='rounded-xl w-[400px] h-[350px] object-cover self-start' />
-                                <img src={imageOne} alt="voyage-pro-image" className='rounded-full w-[300px] h-[300px] object-cover self-end' />
-                            </div>
+                            transition={{ duration: 0.5 }}
+                            className=" 2xl:w-[50%] hidden min-h-[900px] lg:block lg:w-[50%] ">
+                            <img
+                                src={imageOne}
+                                alt="voyagePro-image"
+                                className="w-full h-full object-cover rounded-xl"
+                            />
                         </motion.div>
                         <motion.div
                             initial={{ opacity: 0, x: 100 }}
@@ -110,20 +101,19 @@ const PackageForm = () => {
                             exit={{ opacity: 0, x: -100 }}
                             transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
                             className="w-[90vw] sm:w-[70vw] mx-auto lg:w-[50%]">
-                            <h1 className='text-3xl font-semibold text-center mb-2'>Booking Form</h1>
                             <div className=" bg-lightgray p-6 px-10 rounded-lg mb-7">
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="">
                                         <label htmlFor="" className="text-zinc-800 text-lg font-semibold ">
-                                            Name
+                                            Package Title
                                         </label>
                                         <input
-                                            type="name"
-                                            {...register('name')}
+                                            type="text"
+                                            {...register('title')}
                                             placeholder="Enter your full Name"
                                             className=" text-lg outline-none border-2 border-zinc-500 w-full px-3 bg-lightgray py-2 rounded-md "
                                         />{" "}
-                                        {errors.email && <p className='text-red mt-1 text-sm'>{errors.name?.message}</p>}
+                                        {errors.title && <p className='text-red mt-1 text-sm'>{errors.title?.message}</p>}
                                     </div>
                                     <div className="mt-4">
                                         <label htmlFor="" className="text-zinc-800 text-lg font-semibold ">
@@ -154,58 +144,8 @@ const PackageForm = () => {
                                         error={errors.travelDate} />
                                     <div className="mt-3">
                                         <div className="">
-                                            <h3 className='text-lg md:text-2xl font-semibold'>Number of Guests ?</h3>
-                                            <div className="flex justify-between items-end">
-                                                <div className="">
-                                                    <p className='text-lg italic text-zinc-500'>#{currentPackage.pricePerAdult.toLocaleString()}/ person</p>
-                                                    <p className="text-lg font-semibold">
-                                                        Total: #{(currentPackage.pricePerAdult * guestCount).toLocaleString()}
-                                                    </p>
-                                                </div>
-                                                <div className="">
-                                                    <p className='text-lg'>{currentPackage.title}</p>
-                                                    <select name="" id="" value={guestCount} onChange={(e) => setGuestCount(Number(e.target.value))} className='outline-none  px-2 py-1 rounded-lg text-base'>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div className="mt-3 md:mt-3">
-                                                <label className="block text-lg font-semibold mb-3 text-zinc-800">
-                                                    Select a payment method
-                                                </label>
 
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    {paymentOptions.map((option) => (
-                                                        <label
-                                                            key={option.value}
-                                                            className={` relative flex  space-x-3  cursor-pointer hover:border-blue-600 transition `}
-                                                        >
-                                                            <input
-                                                                type="radio"
-                                                                value={option.value}
-                                                                {...register("paymentMethod")}
-                                                                className={`  w-6 h-6 rounded-full cursor-pointer transition-all duration-200   ${selected === option.value ? 'border-blue bg-blue  accent-blue' : 'border-gray'} `}
-                                                            />
-                                                            <span className="text-zinc-700">{option.label}</span>
-                                                        </label>
-                                                    ))}
-                                                </div>
 
-                                                {errors.paymentMethod && (
-                                                    <p className="text-red text-sm mt-2">
-                                                        {errors.paymentMethod.message}
-                                                    </p>
-                                                )}
-                                            </div>
                                             <div className=" text-center mx-auto bg-">
                                                 <div className="flex space-x-2 justify-center mt-4">
                                                     <input
@@ -236,8 +176,9 @@ const PackageForm = () => {
                                         </div>
                                         <motion.button
                                             whileHover={{ scale: 1.1 }}
-                                            whileTap={{ scale: 0.9,  }} type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
-                                            Proceed (#{(currentPackage.pricePerAdult * guestCount).toLocaleString()})
+                                            whileTap={{ scale: 0.9, }} type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
+                                            Publish
+                                            {/* Proceed (#{(currentPackage.pricePerAdult * guestCount).toLocaleString()}) */}
                                         </motion.button>
                                     </div>
                                 </form>
@@ -250,4 +191,5 @@ const PackageForm = () => {
     )
 }
 
-export default PackageForm
+export default PackageForm;
+
