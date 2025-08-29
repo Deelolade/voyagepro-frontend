@@ -13,10 +13,11 @@ import dashboardImageTwo from "../images/dashboard-image-two.png";
 const PackagesDetails = () => {
   const navigate = useNavigate();
   const selectedPackage = useSelector((state) => state.package.selectedPackage);
-  console.log("new packages:", selectedPackage);
+  console.log("new packages:", selectedPackage._id);
  
-  const handleChange = () => {
-    navigate("/package-form");
+  const handleClick = (packageId) => {
+    // /packages/:id/package-form
+    navigate(`/packages/${packageId}/package-form`);
   }
   return (
     <>
@@ -125,8 +126,7 @@ const PackagesDetails = () => {
                 </div>
                 <motion.button
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9, rotate: -5 }}
-                 onClick={handleChange} className="bg-blue text-center w-full mt-8 py-3 rounded-xl text-white font-semibold">
+                 onClick={()=>handleClick(selectedPackage._id)} className="bg-blue text-center w-full mt-8 py-3 rounded-xl text-white font-semibold">
                   Book Now
                 </motion.button>
               </div>

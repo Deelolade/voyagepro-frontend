@@ -20,6 +20,7 @@ const PackageForm = () => {
     const dispatch = useDispatch();
     const [guestCount, setGuestCount] = useState(1);
     const currentPackage = useSelector((state) => state.package.selectedPackage);
+    console.log(currentPackage)
     const ValidationSchema = yup.object().shape({
         email: yup.string().email().required("Incorrect Email"),
         name: yup.string().required("First name is required"),
@@ -39,8 +40,9 @@ const PackageForm = () => {
     // console.log(currentPackage)
 
     const onSubmit = (data) => {
+        // PUT /api/packages/:id route to create next 
         console.log(data)
-        navigate(`/packages/${data.id}`);
+        // navigate(`/packages/${data.id}`);
     }
 
     return (
@@ -160,7 +162,8 @@ const PackageForm = () => {
                                             </div>
                                         </div>
                                         <button type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-6 w-full text-center rounded-lg text-white capitalize">
-                                            Proceed (${(currentPackage.price * guestCount).toLocaleString()})
+                                            {/* Proceed (${(currentPackage.price * guestCount).toLocaleString()}) */}
+                                            Done
                                         </button>
                                     </div>
                                 </form>

@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/packages" element={<PackageListing />} />
         <Route path="/packages/:id" element={<PackageDetails />} />
          {/* PackageForm */}
-        <Route path="/package-form" element={<PackageForm />} />
+        <Route path="/packages/:id/package-form" element={<PackageForm />} />
         <Route path="/edit-package" element={<EditPackageForm />} />
         {/* Dashboard */}
         <Route path="/dashboard" element={<Dashboard/>} />

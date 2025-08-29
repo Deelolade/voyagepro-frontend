@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { selectPackage } from "../redux/packages/packageSlice";
 
 const BookingConfirmation = () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -15,6 +16,7 @@ const BookingConfirmation = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleEditPackage = (pkg) => {
+        dispatch(selectPackage(pkg))
         console.log("Edit Package Clicked", pkg);
         navigate('/edit-package');
     }
@@ -44,6 +46,14 @@ const BookingConfirmation = () => {
         }
         fetchData()
     }, [])
+
+    const formatDate = (dateString)=>{
+       return new Date(dateString).toLocaleDateString('en-us',{
+            day: "numeric",
+            month: "short", 
+            year:"numeric"
+        })
+    }
     return (
         <>
             <section className="py-6 px-4 max-h-screen max-w-7xl mx-auto ">
@@ -84,8 +94,8 @@ const BookingConfirmation = () => {
                             <p>Track Number</p>
                         </div>
                         <div className="overflow-auto max-h-[350px] scrollbar-hide ">
-                            {bookings.map((pkg) => (
-                                <div key={pkg.id} className="relative grid grid-cols-7 items-center gap-2 py-4 text-center">
+                            {bookings.map((pkg, idx) => (
+                                <div key={idx} className="relative grid grid-cols-7 items-center gap-2 py-4 text-center">
                                     <div className="flex justify-center items-center">
                                         <img src={pkg.image} alt={pkg.name} className='w-36 h-20 rounded-lg object-cover' />
                                     </div>
@@ -94,7 +104,7 @@ const BookingConfirmation = () => {
                                         <span className={` font-semibold py-2 px-6 rounded-xl text-darkGray ${pkg.status === "completed" ? "bg-lightgreen " : pkg.status === "pending" ? "bg-lightpurple" : "bg-lightorange"}`}>{pkg.status}</span>
                                     </div>
                                     <p className='text-lg font-medium'>${pkg.priceforAdult}</p>
-                                    <p className='text-lg font-medium'>{pkg.date}</p>
+                                    <p className='text-lg font-medium'>{formatDate(pkg.travelDate)}</p>
                                     <p className='text-lg font-medium'>{pkg.title}</p>
                                     <div className="">
                                         <p>{pkg.packageId}</p>
