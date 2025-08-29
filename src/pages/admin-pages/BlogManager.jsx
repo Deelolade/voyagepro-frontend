@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '../../components/admin/Sidebar'
 import Blog from '../../components/admin/Blog'
+import DashboardBottomBar from '../../components/admin/DashboardBottom'
 
 const BlogManager = () => {
   return (
@@ -12,6 +13,7 @@ const BlogManager = () => {
     </aside>
     <main className="md:w-3/4 w-full">
       <Blog />
+      <DashboardBottomBar/>
     </main>
   </section>
 </div>

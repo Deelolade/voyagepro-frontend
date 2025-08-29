@@ -1,4 +1,3 @@
-import profileImage from "../../images/landing-image-1.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { PiSquaresFourBold } from "react-icons/pi";
 import { FaRegCaretSquareUp, FaRegUserCircle } from "react-icons/fa";

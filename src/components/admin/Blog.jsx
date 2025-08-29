@@ -96,8 +96,8 @@ const Blog = () => {
               {
                 blogs.map((blog,idx)=>{
                   return(
-                    <div className="grid grid-cols-3 space-y-8 items-center" key={idx}>
-                      <p className='text-center text-sm'>{blog.name}</p>
+                    <div className="grid grid-cols-3 space-y-6 items-center border-e-sky-500" key={idx}>
+                      <p className='mt-6 text-center text-sm'>{blog.name}</p>
                       <p className='text-center text-sm'>{blog.date}</p>
                       <div className=" text-center">
                       <span className={`text-sm text-center px-3 py-2 rounded-md text-darkGray bg-lightorange ${blog.status === "draft" ? "bg-purple-400":"bg-lightorange"}`}>{blog.status}</span>

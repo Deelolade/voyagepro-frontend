@@ -1,8 +1,7 @@
-import { FaRegBell } from 'react-icons/fa'
+import { FaRegBell, FaRegUserCircle } from 'react-icons/fa'
 import { PiSquaresFourBold } from "react-icons/pi";
 import { BiArrowBack } from "react-icons/bi";
 import { FaPlus, FaChevronDown } from "react-icons/fa6";
-import profileImage from "../../images/landing-image-1.png";
 import { Link } from 'react-router-dom'
 
 
@@ -90,7 +89,7 @@ const Bookings = () => {
           <div className="flex space-x-6 items-center justify-end ">
             <span><PiSquaresFourBold className='text-2xl ' /></span>
             <span><FaRegBell className='text-2xl ' /></span>
-            <img src={profileImage} alt="" className='h-12 w-12 rounded-full object-cover' />
+            <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>            
           </div>
           <Link to="/admin" className=" bg-white w-9 h-9 rounded-md flex items-center justify-center mt-2">
             <span><BiArrowBack className='text-2xl ' /></span>
@@ -101,8 +100,9 @@ const Bookings = () => {
             <span><FaPlus className='text-2xl ' /></span>
             <span>Add Package</span>
           </Link>
-          <div className="">
-            <button className='bg-purple-400'>Filter</button>
+          <div className=" flex  justify-center space-x-4">
+            <button className='bg-purple-400 px-3 py-2 rounded-lg'>Filter</button>
+            <p className='flex space-x-2 items-center'><span>Sort By</span> <span><FaChevronDown/></span></p>
           </div>
         </div>
         <div className=" border border-darkGray/50 rounded-lg px-6 py-6 mt-12">
@@ -118,8 +118,8 @@ const Bookings = () => {
                 return (
                   <div className="grid grid-cols-4 space-y-8 items-center" key={idx}>
                     <p className='text-center text-sm'>{pkg.packageName}</p>
-                    <div className="">
-                      <p className={`flex items-center justify-center text-center px-3 py-2 rounded-md text-darkGray bg-lightorange ${pkg.status === "pending" ? "bg-green" : "bg-lightorange"}`}>{pkg.status}
+                    <div className="flex justify-center items-center">
+                      <p className={`flex items-center space-x-4 text-center px-3 py-2 rounded-md text-darkGray  ${pkg.status === "confirmed" ? "bg-green":pkg.status === "pending" ?"bg-lightorange":"bg-yellow-300" }`}>{pkg.status}
                         <span className='ms-3'><FaChevronDown /></span>
                       </p>
                     </div>
