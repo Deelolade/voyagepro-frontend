@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { getErrorMessage } from "../../helpers/errorMessage";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -31,9 +32,9 @@ const ForgotPassword = () => {
       toast.success(res.data.message || "Otp sent to your email!");
       console.log(res.data);
       localStorage.setItem("resetEmail", data.email);
-      navigate("/email-sent", { state: { email: data.email } });
+      navigate("/otp-sent", { state: { email: data.email } });
     } catch (error) {
-      console.error("Error during signup:", error);
+      toast.error( error.response.data.error || getErrorMessage(error) || "Error occurred during request");
     }
   };
   return (

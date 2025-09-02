@@ -57,7 +57,7 @@ const DashboardMain = () => {
           <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-zinc-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-red font-bold'><FaHeart className='text-2xl'/></span><p className='text-xl '>Wishlist</p></div>
         </div>
         <div className="mt-3">
-          <h4 className='text-xl font-semibold'>Total Packages </h4>
+          <h4 className='text-xl font-semibold'>Explore </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-2">
             {packages.splice( 0,4 ).map((pkg, idx) => {
               return (

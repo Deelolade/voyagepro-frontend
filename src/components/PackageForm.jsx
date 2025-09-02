@@ -38,7 +38,6 @@ const PackageForm = () => {
             .matches(/^(?:\+234|0)[789][01]\d{8}$/, "Enter a valid phone number"),
         travelDate: yup.string().required("Date of travel is important"),
         paymentMethod: yup.string().required("Please select a payment method"),
-        airportPickup: yup.bool(),
         terms: yup.bool().oneOf([true], "You have to agree to our terms and privacy policy "),
 
     })
@@ -87,7 +86,6 @@ const PackageForm = () => {
                 <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6 ">
                     <div className="flex justify-between py-4 items-center px-3">
                         <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
-                        <h3 className="hidden md:text-3xl lg:block font-semibold">Travel Packages Form  </h3>
                         <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
                     </div>
                     <main className='md:mt-2 flex gap-10'>
@@ -206,17 +204,7 @@ const PackageForm = () => {
                                                     </p>
                                                 )}
                                             </div>
-                                            <div className=" text-center mx-auto bg-">
-                                                <div className="flex space-x-2 justify-center mt-4">
-                                                    <input
-                                                        type="checkbox"
-                                                        name=""
-                                                        id=""
-                                                        className="h-5 w-5 accent-blue rounded"
-                                                        {...register("airportPickup")}
-                                                    />
-                                                    <p className="text-sm">Include Airport pickup</p>
-                                                </div>{" "}
+                                            <div className=" text-center mx-auto">
                                                 <div className="flex space-x-2 my-3">
                                                     <input
                                                         type="checkbox"
@@ -236,8 +224,9 @@ const PackageForm = () => {
                                         </div>
                                         <motion.button
                                             whileHover={{ scale: 1.1 }}
-                                            whileTap={{ scale: 0.9,  }} type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
-                                            Proceed (#{(currentPackage.pricePerAdult * guestCount).toLocaleString()})
+                                            whileTap={{ scale: 0.9 }} 
+                                            type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
+                                            Proceed
                                         </motion.button>
                                     </div>
                                 </form>

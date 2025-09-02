@@ -29,7 +29,6 @@ const PackageForm = () => {
             .required("Phone number is required")
             .matches(/^(?:\+234|0)[789][01]\d{8}$/, "Enter a valid phone number"),
         travelDate: yup.string().required("Date of travel is important"),
-        airportPickup: yup.bool(),
         terms: yup.bool().oneOf([true], "You have to agree to our terms and privacy policy "),
 
     })
@@ -51,7 +50,7 @@ const PackageForm = () => {
                 <div className="h-screen  max-w-7xl mx-auto px-3">
                     <div className="flex justify-between py-4 items-center lg:px-3">
                         <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
-                        <h3 className="hidden md:text-3xl lg:block font-semibold">Travel Packages Form  </h3>
+                        <h3 className="hidden md:text-3xl lg:block font-semibold">Edit Bookings</h3>
                         <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl"/></span>
                     </div>
                     <main className='flex  items-start '>
@@ -67,7 +66,7 @@ const PackageForm = () => {
                             <h1 className='text-2xl md:text-3xl  font-semibold text-center mb-2 md:hidden'>Edit Form</h1>
                             <div className="bg-lightgray py-6 px-10 rounded-lg h-full  shadow-lg">
                                 <form onSubmit={handleSubmit(onSubmit)} className=''>
-                                    <h2 className='text-xl sm:text-2xl font-medium'>{currentPackage.title}</h2>
+                                    <h2 className='text-xl sm:text-2xl font-medium'>{currentPackage.packageName}</h2>
                                     <div className="">
                                         <label htmlFor="" className="text-zinc-800 text-lg font-semibold ">
                                             Name
@@ -134,16 +133,6 @@ const PackageForm = () => {
                                                 </div>
                                             </div>
                                             <div className=" text-center mx-auto">
-                                                <div className="flex space-x-2 justify-start mt-4">
-                                                    <input
-                                                        type="checkbox"
-                                                        name=""
-                                                        id=""
-                                                        className="h-5 w-5 accent-blue rounded"
-                                                        {...register("airportPickup")}
-                                                    />
-                                                    <p className="text-sm">Include Airport pickup</p>
-                                                </div>{" "}
                                                 <div className="flex space-x-2 mt-6 mb-3 justify-start items-center">
                                                     <input
                                                         type="checkbox"

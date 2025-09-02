@@ -12,23 +12,17 @@ import axios from "axios";
 import { signInSuccess } from "../../redux/users/userSlice";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import { getErrorMessage } from "../../helpers/errorMessage";
 
 const Login = () => {
   const dispatch = useDispatch();
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
-  const [passwordType, setPasswordType] = useState("password");
-  const [passwordIcon, setPasswordIcon] = useState(FaEye);
+   const [showPassword, setShowPassword] = useState(false);
 
-  const visiblePassword = () => {
-    if (passwordType === "password") {
-      setPasswordType("text");
-      setPasswordIcon(FaEyeSlash);
-    }
-    if (passwordType === "text") {
-      setPasswordIcon(FaEye);
-      setPasswordType("password");
-    }
+    const togglePassword = (e) => {
+      e.preventDefault();
+    setShowPassword((prev) => !prev);
   };
 
   const ValidationSchema = yup.object().shape({
@@ -64,7 +58,8 @@ const Login = () => {
       localStorage.setItem("token", res.data.token); 
       navigate("/dashboard");
     } catch (error) {
-      console.error("Error during signup:", error);
+      toast.error(error.response.data.error || getErrorMessage(error) || "Login failed. Please try again.");
+      console.error("Error during signup:", error.response.data.error);
     }
   };
   return (
@@ -88,11 +83,11 @@ const Login = () => {
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.5 }}
         className="xs:w-full xxs:px-5 xxs:py-3 sm:px-8  md:w-[70%] md:py-8 lg:w-[50%] 2xl:w-[50%] 2xl:p-10 relative flex flex-col justify-between">
-          <h1 className="xxs:text-2xl xs:text-3xl 2xl:text-3xl font-semibold xxs:mb-6 lg:mb-0">VoyagePro</h1>
+          <h1 className="text-sm md:text-sm font-semibold xxs:mb-6 lg:mb-0">VoyagePro</h1>
           <div className="2xl:w-[70%] ">
             <div className="">
-              <h1 className="xxs:text-2xl xs:text-3xl 2xl:text-3xl font-semibold xxs:my-2 2xl:my-5">
-                Login to your account
+              <h1 className="text-xl  md:text-3xl font-semibold xxs:my-2 2xl:my-5">
+                Login 
               </h1>
               <p className="text-zinc-500 text-sm text-left">
                 Login now to stay connected and continue to explore.
@@ -154,16 +149,16 @@ const Login = () => {
                     }`}
                 >
                   <input
-                    type={passwordType}
+                    type={showPassword ? "text" : "password"}
                     {...register("password")}
                     className=" text-sm outline-none w-[90%]  py-1"
                     placeholder="Enter password "
                   />
                   <button
                     className="scale-150 text-zinc-500"
-                    onClick={visiblePassword}
+                    onClick={togglePassword}
                   >
-                    {passwordIcon}
+                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
                 {errors.password && (
@@ -193,8 +188,8 @@ const Login = () => {
 
               <div className=" xxs:mt-3 md:mt-6 lg:mt-3 2xl:mt-6 flex flex-col">
                 <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9, rotate: -5 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9,}}
                  className="bg-blue/90 hover:bg-blue w-full  py-2 text-xl text-center rounded-lg text-white capitalize">
                   Login
                 </motion.button>

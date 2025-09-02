@@ -11,10 +11,6 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        signInPending: (state,action) => {
-            state.loading = false;
-            state.currentUser = action.payload;
-        },
         signInStart: (state) => {
             state.loading = true;
             state.error = null
@@ -29,6 +25,7 @@ const userSlice = createSlice({
             state.error = action.payload
         },
         logOut: (state) => {
+            localStorage.removeItem("token");
             state.currentUser = null
             state.loading = false;
             state.error = null;
@@ -36,6 +33,6 @@ const userSlice = createSlice({
         }
     }
 })
-export const { signInPending, signInStart, signInSuccess, signInError, logOut } = userSlice.actions;
+export const {  signInStart, signInSuccess, signInError, logOut } = userSlice.actions;
 
 export default userSlice.reducer;

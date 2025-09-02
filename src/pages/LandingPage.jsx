@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import HeroSection from "../components/HeroSection";
 import PackageImage from "../images/package-image.png";
 import imageOne from "../images/landing-image-1.png";
@@ -20,10 +20,16 @@ import { MdOutlineStar } from "react-icons/md";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { LiaAwardSolid } from "react-icons/lia";
 import Footer from "../components/Footer";
-import { Link, useNavigate } from "react-router-dom";
-import packages from "../consumables/packages";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectPackage } from "../redux/packages/packageSlice";
+import axios from "axios";
 
 const LandingPage = () => {
+  const dispatch = useDispatch();
+  const API_URL = import.meta.env.VITE_API_URL;
+  console.log(API_URL)
+  const [packages, setPackages] = useState([]);
   const navigate = useNavigate();
   const sliderRef = useRef(null);
   const handleNext = () => {
@@ -51,16 +57,35 @@ const LandingPage = () => {
       image: blogImageTwo,
     },
   ];
+
+  useEffect(()=>{
+    console.log("helloo")
+    const fetchPackages = async()=>{
+      try {
+      const res = await axios.get(`${API_URL}/packages`)
+      console.log("neww packages: ",res.data)
+      localStorage.setItem("allPackages", JSON.stringify(res.data))
+      setPackages(res.data)
+      } catch (error) {
+        console.log(error)
+        const cachedPackages = localStorage.getItem("allPackages")
+        if(cachedPackages){
+          setPackages(JSON.parse(cachedPackages))
+        }
+      }
+    }
+    fetchPackages()
+  },[])
   const handlePackage = (pkg) => {
-    console.log(pkg);
-    navigate(`/packages/${pkg.id}`);
+    dispatch(selectPackage(pkg))
+    navigate(`/packages/${pkg._id}`);
   };
   return (
     <>
       <div className="scroll-smooth">
         <HeroSection />
         {/* Popular Packages */}
-        <section className="h-auto pl-20 py-20">
+        <section className="h-auto pl-20 py-20" id="popular-packages">
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Popular Packages</h1>
             <p className="mt-4 text-xl">
@@ -87,20 +112,20 @@ const LandingPage = () => {
             className="flex overflow-x-auto scroll-smooth max-w-max mx-auto scrollbar-hide py-6 px-4 space-x-6 mt-10"
             ref={sliderRef}
           >
-            {packages.map((pkg, idx) => (
+            {packages.slice(0, 15).map((pkg, idx) => (
               <div className="flex-shrink-0 w-[450px]" key={idx}>
                 <div className="bg-white rounded-xl shadow-lg h-[400px]  ">
                   <img
                     src={pkg.image}
-                    alt={pkg.location}
+                    alt={pkg.location.coutry}
                     className="w-full h-60 object-cover rounded-t-xl mb-4"
                   />
                   <div className="text-gray-800  space-y-2 px-5 ">
                     <h3 className="text-xl font-semibold mt-6 mb-8">
-                      {pkg.location}
+                      {pkg.location.city}, {pkg.location.country}
                     </h3>
                     <div className="text-blue-600 font-light flex justify-between items-center ">
-                      <span className="font-normal">{pkg.price}</span>
+                      <span className="font-normal">#{pkg.pricePerAdult.toLocaleString()}</span>
                       <button
                         onClick={() => handlePackage(pkg)}
                         className="px-3 py-3 bg-blue rounded-xl text-white font-medium"
@@ -115,7 +140,7 @@ const LandingPage = () => {
           </div>
         </section>
         {/* Why Choose Us*/}
-        <section className="h-auto py-20">
+        <section className="h-auto py-20" id="why-choose-us">
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Why choose Us</h1>
             <p className="mt-4 text-xl">
@@ -200,19 +225,19 @@ const LandingPage = () => {
                   world-class travel services with confidence and efficiency.
                 </p>
                 <div className="mt-8">
-                  <Link
-                    to="/packages"
+                  <a href="#popular-packages"
+                    // to="/packages"
                     className="text-white px-4 py-3 rounded-xl bg-blue"
                   >
                     Explore Packages
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </section>
         {/* Contact Us */}
-        <section className="h-auto py-20">
+        <section className="h-auto py-20" id="contact-us">
           <div className="text-center  max-w-6xl mx-auto">
             <h1 className="text-5xl font-semibold">Contact Us</h1>
           </div>
@@ -347,7 +372,7 @@ const LandingPage = () => {
           </div>
         </section>
         {/* Our Blogs */}
-        <section className="h-auto py-20 pb-40 max-w-7xl mx-auto">
+        <section className="h-auto py-20 pb-40 max-w-7xl mx-auto" id="blogs">
           <div className="text-center  max-w-7xl mx-auto">
             <h1 className="text-5xl font-semibold">Our Blog</h1>
             <p className="mt-4 text-xl">

@@ -2,7 +2,6 @@ import mainImage from "../images/hero-image.png";
 import airplaneLocation from "../images/airplane-location.png";
 import airplaneTag from "../images/airplane-tag.png";
 import { BiSolidCheckCircle } from "react-icons/bi";
-import packages from '../consumables/packages';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -18,7 +17,7 @@ const BookingConfirmation = () => {
     const handleEditPackage = (pkg) => {
         dispatch(selectPackage(pkg))
         console.log("Edit Package Clicked", pkg);
-        navigate('/edit-package');
+        navigate('/edit-booking');
     }
     useEffect(() => {
         const token = localStorage.getItem("token");

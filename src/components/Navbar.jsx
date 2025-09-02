@@ -38,10 +38,10 @@ const Navbar = () => {
         <Link to="/" className="font-semibold text-3xl">VoyagePro</Link>
 
         <ul className="flex gap-5">
-          <Link to="/" className="text-lg">Packages</Link>
-          <Link to="/" className="text-lg">About us</Link>
-          <Link to="/" className="text-lg">Contact us</Link>
-          <Link to="/" className="text-lg">Blog</Link>
+          <a href="#popular-packages" className="text-lg">Packages</a>
+          <a href="#why-choose-us" className="text-lg">About us</a>
+          <a href="#contact-us" className="text-lg">Contact us</a>
+          <a href="#blogs" className="text-lg">Blog</a>
         </ul>
 
         <Link to="/signup" className="bg-orange text-white text-lg font-medium py-2 px-4 rounded-lg">

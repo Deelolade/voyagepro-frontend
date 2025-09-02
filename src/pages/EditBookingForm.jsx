@@ -1,5 +1,5 @@
 import React from 'react'
-import EditForm from '../components/EditPackageForm';
+import EditForm from '../components/EditBookingForm';
 import DashboardBottomBar from '../components/DashboardBottomBar';
 const EditPackageForm = () => {
   return (

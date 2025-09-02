@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import SignUp from "./pages/signup/SignUp";
 import Emailverification from "./pages/signup/Emailverification";
 import PersonalInfo from "./pages/signup/PersonalInfo";
@@ -14,45 +14,58 @@ import PackageForm from "./pages/PackageForm";
 import Dashboard from "./pages/Dashboard";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import ConfirmationDetails from "./pages/ConfirmationDetails";
-import EditPackageForm from "./pages/EditPackageForm";
+import EditPackageForm from "./pages/EditBookingForm";
 import AdminDashboard from "./pages/admin-pages/AdminDashboard";
 import PackageData from "./pages/admin-pages/PackageData";
 import BlogManager from "./pages/admin-pages/BlogManager";
 import AdminBookings from "./pages/admin-pages/AdminBookings";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "./redux/users/userSlice";
 const App = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+
   return (
     <>
+{/* <button onClick={()=>dispatch(logOut())}>logOut</button> */}
       <ToastContainer />
       <Routes>
+
+        {/* public routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/personal" element={<PersonalInfo />} />
         <Route path="/verify-otp" element={<Emailverification />} />
-        {/* Login */}
         <Route path="/login" element={<Login />} />
-        {/* forgot-password */}
-        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/otp-sent" element={<EmailSent />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/create-password" element={<CreatePassword />} />
-        {/* PackageDetails */}
-        <Route path="/packages" element={<PackageListing />} />
         <Route path="/packages/:id" element={<PackageDetails />} />
-         {/* PackageForm */}
-        <Route path="/packages/:id/package-form" element={<PackageForm />} />
-        <Route path="/edit-package" element={<EditPackageForm />} />
-        {/* Dashboard */}
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/bookings" element={<BookingConfirmation/>} />
-        <Route path="/confirm-details" element={<ConfirmationDetails/>} />
 
-
-
-
+        {/* private routes */}
+        {currentUser?.role === "user" && (
+          <>
+            <Route path="/packages" element={<PackageListing />} />
+            <Route path="/packages/:id/package-form" element={<PackageForm />} />
+            <Route path="/edit-booking" element={<EditPackageForm />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/bookings" element={<BookingConfirmation />} />
+            <Route path="/confirm-details" element={<ConfirmationDetails />} />
+            <Route path="*" element={<Dashboard />} />
+          </>
+        )}
         {/* admin routes */}
-        <Route path="/admin" element={<AdminDashboard/>} />
-        <Route path="/package" element={<PackageData/>} />
-        <Route path="/blog" element={<BlogManager/>} />
-        <Route path="/booking" element={<AdminBookings/>} />
+        {currentUser?.role === "admin" && (
+          <>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/package" element={<PackageData />} />
+            <Route path="/blog" element={<BlogManager />} />
+            <Route path="/booking" element={<AdminBookings />} />
+          </>
+        )}
+        {!currentUser && <Route path="*" element={<LandingPage />} />}
+
 
       </Routes>
     </>

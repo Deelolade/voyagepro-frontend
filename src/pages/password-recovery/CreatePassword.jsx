@@ -57,11 +57,10 @@ const CreatePassword = () => {
     };
     try {
       const res = await axios.post(`${API_URL}/auth/reset-password`, payload);
-      console.log(res.data);
       toast.success("Email verified successfully!");
       navigate("/login");
     } catch (err) {
-      toast.error(getErrorMessage(err) || "OTP verification failed");
+      toast.error(err.response.data.error || getErrorMessage(err) || "OTP verification failed");
     }
   };
 

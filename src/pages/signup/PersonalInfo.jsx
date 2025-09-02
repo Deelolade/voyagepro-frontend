@@ -216,7 +216,7 @@ const PersonalInfo = () => {
               </div>
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9, rotate: -5 }}
+                whileTap={{ scale: 0.9,}}
                 type="submit" className="bg-blue/90 hover:bg-blue py-2 text-xl text-center rounded-lg text-white capitalize">
                 {loading ? "Saving..." : "Create account"}
               </motion.button>

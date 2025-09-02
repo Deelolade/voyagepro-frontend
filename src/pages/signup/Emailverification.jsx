@@ -1,6 +1,6 @@
 import { useState } from "react";
 import BreadCrumbs from "../../components/SignUpBreadCrumbs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../../images/voyage-pro-1.png";
 import { BiArrowBack } from "react-icons/bi";
 import OtpInput from "../../components/OTPInput";
@@ -12,11 +12,12 @@ import { signInSuccess } from "../../redux/users/userSlice";
 import { motion } from "framer-motion";
 
 const Emailverification = () => {
+  const location = useLocation();
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [otpValue, setOtpValue] = useState("");
-  const email = useSelector((state) => state.user.currentUser?.email);
+  const email = location.state?.email || localStorage.getItem("signUpEmail");
   const handleOtpChange = (value) => {
     setOtpValue(value); // This receives the joined OTP string
   };
@@ -41,7 +42,7 @@ const Emailverification = () => {
       console.log("Login response:", res.data);
       navigate("/personal");
     } catch (err) {
-      toast.error(getErrorMessage(err) || "OTP verification failed");
+      toast.error(err.response.data.error || getErrorMessage(err) || "OTP verification failed");
     }
   };
   return (

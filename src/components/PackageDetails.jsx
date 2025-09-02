@@ -12,11 +12,13 @@ import dashboardImageTwo from "../images/dashboard-image-two.png";
 
 const PackagesDetails = () => {
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.currentUser);
   const selectedPackage = useSelector((state) => state.package.selectedPackage);
   console.log("new packages:", selectedPackage._id);
+  console.log(selectedPackage)
  
   const handleClick = (packageId) => {
-    // /packages/:id/package-form
+    !currentUser ? navigate('/signup') :
     navigate(`/packages/${packageId}/package-form`);
   }
   return (
@@ -77,7 +79,7 @@ const PackagesDetails = () => {
                 </div>
               </div>
               <hr className="text-zinc-400 mt-6" />
-              <h4 className="mt-4 text-2xl font-semibold">What' Included</h4>
+              <h4 className="mt-4 text-2xl font-semibold">What's Included</h4>
               <div className=" grid grid-cols-2 gap-5 mt-5">
                 {
                   selectedPackage.whatsIncluded.map((item, idx)=>{
@@ -126,6 +128,7 @@ const PackagesDetails = () => {
                 </div>
                 <motion.button
                 whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9,}}
                  onClick={()=>handleClick(selectedPackage._id)} className="bg-blue text-center w-full mt-8 py-3 rounded-xl text-white font-semibold">
                   Book Now
                 </motion.button>
