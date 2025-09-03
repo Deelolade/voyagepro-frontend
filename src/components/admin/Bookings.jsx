@@ -91,7 +91,7 @@ const Bookings = () => {
             <span><FaRegBell className='text-2xl ' /></span>
             <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>            
           </div>
-          <Link to="/admin" className=" bg-white w-9 h-9 rounded-md flex items-center justify-center mt-2">
+          <Link to="/dashboard" className=" bg-white w-9 h-9 rounded-md flex items-center justify-center mt-2">
             <span><BiArrowBack className='text-2xl ' /></span>
           </Link>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import DashboardSidebar from '../components/DashboardSidebar'
 import DashboardMain from '../components/DashboardMain'
-import DashboardBottomBar from '../components/DashboardBottomBar'
 
 const Dashboard = () => {
   return (
@@ -12,7 +11,6 @@ const Dashboard = () => {
         </aside>
         <main className="md:w-3/4 w-full">
           <DashboardMain />
-          <DashboardBottomBar/>
         </main>
       </section>
     </div>

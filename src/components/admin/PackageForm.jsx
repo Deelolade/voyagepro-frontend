@@ -20,7 +20,7 @@ import Spinner from '../ui/Spinner';
 
 const PackageForm = () => {
     const navigate = useNavigate();
-    const API_URL = import.meta.env.VITE_API_URL
+    const API_URL = import.meta.env.VITE_API_URL;
     const [imageUrls, setImageUrls] = useState([]);
     const [uploadedUrls, setUploadedUrls] = useState([]);
     const [loading, setLoading] = useState(false)
@@ -68,24 +68,19 @@ const PackageForm = () => {
         control,
         name: "itinerary",
     });
-    const handleIconClick = () => {
+    const handleIconClick = (e) => {
+        e.preventDefault();
         fileInputRef.current.click();
     }
 
     const handleFileChange = async (event) => {
-        event.preventDefault();
         const files = Array.from(event.target.files); // convert FileList → array
-
-        // Add new files to state
         setImageUrls((prev) => [...prev, ...files]);
-
-
         for (let i = 0; i < files.length; i++) {
             const data = new FormData();
-            data.append("file", files[1]);
+            data.append("file", files[i]);
             data.append("upload_preset", "voyagepro"); // Replace with your preset
             data.append("cloud_name", "dluhzoptp"); // Replace with your Cloudinary cloud name
-
             try {
                 const res = await axios.post("https://api.cloudinary.com/v1_1/dluhzoptp/image/upload", data);
                 console.log(res.data.secure_url)
@@ -101,13 +96,38 @@ const PackageForm = () => {
     const onSubmit = async (data) => {
 
         const { country, city, roomType, resortType, whatisIncluded, ...rest } = data;
-        const image = uploadedUrls;
+        const images = uploadedUrls;
         const location = { country, city };
         const accommodation = { roomType, resortType };
         const whatsIncluded = data.whatisIncluded.map(item => item.value);
+        const payload = { ...rest, whatsIncluded, location, accommodation, images };
 
-        const payload = { ...rest, whatsIncluded, location, accommodation, image };
         console.log(payload)
+
+        const token = localStorage.getItem("token");
+        if (!token) {
+            toast.error("You must be logged in to update your profile");
+            return;
+        }
+        setLoading(true);
+        try {
+            const res = await axios.post(`${API_URL}/packages`, payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(res.data)
+            reset()
+            toast.success(res.data.message || "You have successfully created a booking!");
+            console.log(res.data);
+            setTimeout(() => {
+                navigate(`/dashboard`);
+            }, 3000);
+        } catch (error) {
+            console.error("Error during signup:", error);
+        } finally {
+            setLoading(false);
+        }
     }
     return (
         <div>
@@ -304,7 +324,7 @@ const PackageForm = () => {
                                             ref={fileInputRef}
                                             className='hidden'
                                             onChange={handleFileChange} />
-                                        <button onClick={(e) => handleIconClick()} className='w-full bg-lightgray border-2 border-dashed border-zinc-500 h-20 rounded-lg flex flex-col justify-center items-center text-zinc-600 text-3xl font-semibold'>
+                                        <button onClick={handleIconClick} className='w-full bg-lightgray border-2 border-dashed border-zinc-500 h-20 rounded-lg flex flex-col justify-center items-center text-zinc-600 text-3xl font-semibold'>
                                             <MdOutlineFileUpload />
                                         </button>
                                         <div className="grid grid-cols-4 gap-1 mt-2">

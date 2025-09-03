@@ -2,12 +2,13 @@ import mainImage from "../images/hero-image.png";
 import airplaneLocation from "../images/airplane-location.png";
 import airplaneTag from "../images/airplane-tag.png";
 import { BiSolidCheckCircle } from "react-icons/bi";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { selectPackage } from "../redux/packages/packageSlice";
+import { BsCloudUpload } from "react-icons/bs";
 
 const BookingConfirmation = () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -93,7 +94,7 @@ const BookingConfirmation = () => {
                             <p>Track Number</p>
                         </div>
                         <div className="overflow-auto max-h-[350px] scrollbar-hide ">
-                            {bookings.map((pkg, idx) => (
+                            { bookings > 0 ? bookings.map((pkg, idx) => (
                                 <div key={idx} className="relative grid grid-cols-7 items-center gap-2 py-4 text-center">
                                     <div className="flex justify-center items-center">
                                         <img src={pkg.image} alt={pkg.name} className='w-36 h-20 rounded-lg object-cover' />
@@ -112,7 +113,10 @@ const BookingConfirmation = () => {
                                             className='mt-2 bg-blue py-2 px-6 text-lg text-white rounded-lg'>Edit Package</button>
                                     </div>
                                 </div>
-                            ))}
+                            )) : <div className=" flex flex-col justify-center items-center h-64 gap-4">
+                                <p className=" text-center text-sm md:text-lg ">You have no bookings yet. <br />  Click the button below  to Book a package to see it here.</p>
+                                <Link to='/packages' className=' py-2 px-3  text-lg  font-medium rounded-lg text-white bg-green'>Book package</Link>
+                            </div>}
                         </div>
                     </div>
                 </div>

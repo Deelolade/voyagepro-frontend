@@ -55,7 +55,7 @@ const PersonalInfo = () => {
       });
       dispatch(signInSuccess(res.data));
       toast.success(res.data.message || "Your details have been saved successfully!");
-      setTimeout(() => navigate("/dashboard"), 1500)
+      setTimeout(() => navigate("/login"), 1500)
     } catch (err) {
       toast.error(err.response?.data?.message || "Error occurred while saving details");
     } finally {

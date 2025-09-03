@@ -20,18 +20,20 @@ import PackageData from "./pages/admin-pages/PackageData";
 import BlogManager from "./pages/admin-pages/BlogManager";
 import AdminBookings from "./pages/admin-pages/AdminBookings";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "./redux/users/userSlice";
+import DashboardBottomBar from '../src/components/DashboardBottomBar'
+import DashboardBottom from '../src/components/admin/DashboardBottom'
+
 const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
 
-
+// console.log(currentUser.role);
   return (
     <>
-{/* <button onClick={()=>dispatch(logOut())}>logOut</button> */}
+      {/* <button className="absolute bg-red px-3 py-2 text-white rounded-lg " onClick={() => dispatch(logOut())}>logOut</button> */}
+
       <ToastContainer />
       <Routes>
-
         {/* public routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUp />} />
@@ -58,16 +60,18 @@ const App = () => {
         {/* admin routes */}
         {currentUser?.role === "admin" && (
           <>
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
             <Route path="/package" element={<PackageData />} />
             <Route path="/blog" element={<BlogManager />} />
             <Route path="/booking" element={<AdminBookings />} />
           </>
         )}
         {!currentUser && <Route path="*" element={<LandingPage />} />}
-
-
       </Routes>
+      { currentUser?.role === "user"?
+      
+        < DashboardBottomBar/>: <DashboardBottom/>
+       }
     </>
   );
 };

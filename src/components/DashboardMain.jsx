@@ -9,8 +9,10 @@ import { FaRegBell } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const DashboardMain = () => {
+  const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const [packages, setPackages] = useState([]);
   const currentUser = useSelector(state=> state.user.currentUser)
@@ -30,9 +32,12 @@ const DashboardMain = () => {
     }
     fetchPackages()
   },[])
+  const handleData = (pkg) =>{
+    navigate(`/packages/${pkg._id}`)
+  }
   return (
     <div>
-      <section className="py-6 px-4 max-h-screen overflow-y-auto mb-10 sm:mb-0 "> 
+      <section className="py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide mb-10 "> 
         <div className="flex justify-between items-center">
           <h2 className='xxs:text-2xl sm:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
           <div className="flex space-x-6 items-center">
@@ -59,7 +64,7 @@ const DashboardMain = () => {
         <div className="mt-3">
           <h4 className='text-xl font-semibold'>Explore </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-2">
-            {packages.splice( 0,4 ).map((pkg, idx) => {
+            {packages.slice( 0,4 ).map((pkg, idx) => {
               return (
                 <div className="" key={idx}>
                   <img src={pkg.image || dashboardImageTwo } className='rounded-lg shadow-lg' />
@@ -77,7 +82,7 @@ const DashboardMain = () => {
                       </div>
                       <span className='text-sm text-zinc-700'>{pkg.rating}</span>
                     </div>
-                    <button type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
+                    <button type="submit" onClick={()=>handleData(pkg)} className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
                       Proceed
                     </button>
                   </div>
