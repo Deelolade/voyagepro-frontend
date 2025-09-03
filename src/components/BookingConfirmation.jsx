@@ -56,7 +56,7 @@ const BookingConfirmation = () => {
     }
     return (
         <>
-            <section className="py-6 px-4 max-h-screen max-w-7xl mx-auto ">
+            <section className="py-6 px-2 max-h-screen max-w-7xl mx-auto ">
                 <div className="flex justify-between items-center">
                     <h2 className='hidden md:text-3xl md:block font-semibold'>VoyagePro</h2>
                     <h2 className='text-2xl md:text-3xl font-semibold'>Bookings</h2>
@@ -66,24 +66,26 @@ const BookingConfirmation = () => {
                     <img src={mainImage} alt="voyagepro booking confirmation image" className='h-44 md:h-64 w-full object-cover rounded-xl' />
                 </div>
                 <div className=" mt-4">
-                    <h2 className='text-2xl md:text-3xl font-semibold'>Overview Report</h2>
-                    <div className=" flex justify-between items-center mt-2">
+                    <h2 className='text-2xl md:text-3xl font-semibold text-center md:text-left'>Overview Report</h2>
+                    <div className=" flex flex-col md:flex-row justify-between items-center mt-2">
                         <div className="relative flex flex-col justify-center items-center">
                             <span className=' text-green font-bold'><BiSolidCheckCircle className='text-6xl' /></span>
                             <span className='text-lg  font-semibold'>Booking</span>
                         </div>
-                        <div className="h-px w-96 bg-darkGray"></div>
+                        <div className="w-[1px] h-16 md:hidden bg-darkGray my-2"></div>
+                        <div className=" hidden md:block h-px w-96 bg-darkGray"></div>
                         <div className="relative flex flex-col justify-center items-center">
                             <div className=' flex justify-center items-center  border border-zinc-500 rounded-full w-14 h-14'><img src={airplaneTag} className=' absolute scale-125' /></div>
                             <span className='text-lg mt-1 font-semibold text-center'>Ticketing</span>
                         </div>
-                        <div className="h-px w-96  bg-darkGray"></div>
+                        <div className="w-[1px] h-16 md:hidden bg-darkGray my-2"></div>
+                        <div className=" hidden md:block h-px w-96 bg-darkGray"></div>
                         <div className="relative flex flex-col justify-center items-center">
                             <div className=' flex justify-center items-center  border border-zinc-500 rounded-full w-14 h-14'><img src={airplaneLocation} className=' absolute scale-125' /></div>
                             <span className='text-lg mt-1 font-semibold'>Travel</span>
                         </div>
                     </div>
-                    <div className="mt-3">
+                    <div className="mt-6">
                         <div className=" grid grid-cols-7 items-center gap-2 text-center shadow-lg py-4 border-gray-300">
                             <div className="" />
                             <p>Name</p>
