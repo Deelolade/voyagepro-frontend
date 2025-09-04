@@ -8,7 +8,6 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { selectPackage } from "../redux/packages/packageSlice";
-import { BsCloudUpload } from "react-icons/bs";
 
 const BookingConfirmation = () => {
     const API_URL = import.meta.env.VITE_API_URL;

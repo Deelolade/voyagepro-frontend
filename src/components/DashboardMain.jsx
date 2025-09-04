@@ -37,7 +37,6 @@ const DashboardMain = () => {
   const handleData = (pkg) =>{
     navigate(`/packages/${pkg._id}`)
     dispatch(selectPackage(pkg))
-    
   }
   return (
     <div>
