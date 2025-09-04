@@ -6,12 +6,14 @@ import { ImAirplane } from "react-icons/im";
 import { BiSolidCheckCircle } from "react-icons/bi";
 import { FaHeart, FaRegUserCircle } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa6";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { selectPackage } from "../redux/packages/packageSlice";
 
 const DashboardMain = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const [packages, setPackages] = useState([]);
@@ -34,6 +36,8 @@ const DashboardMain = () => {
   },[])
   const handleData = (pkg) =>{
     navigate(`/packages/${pkg._id}`)
+    dispatch(selectPackage(pkg))
+    
   }
   return (
     <div>
@@ -55,7 +59,7 @@ const DashboardMain = () => {
           <div className=""><img src={dashboardImageOne} alt="" className='h-44 sm:h-64 w-full object-cover rounded-xl' />
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 place-items-center justify-items-center ">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6 place-items-center justify-items-center ">
           <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-sky-200/40 px-10 text-center flex flex-col justify-center space-y-3 items-center"><span className='scale-150 text-blue font-bold'><FiGlobe className='text-2xl'/></span><p className='text-xl '>Total packages</p></div>
           <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-yellow-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-orange font-bold'><ImAirplane className='text-2xl'/></span><p className='text-xl '>Upcoming trips</p></div>
           <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-rose-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-green font-bold'><BiSolidCheckCircle className='text-2xl' /></span><p className='text-xl '>Completed trips</p></div>

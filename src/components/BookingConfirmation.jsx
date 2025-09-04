@@ -46,6 +46,7 @@ const BookingConfirmation = () => {
         }
         fetchData()
     }, [])
+    console.log(bookings)
 
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-us', {
@@ -96,7 +97,7 @@ const BookingConfirmation = () => {
                             <p>Track Number</p>
                         </div>
                         <div className="overflow-auto max-h-[350px] scrollbar-hide ">
-                            {bookings > 0 ? bookings.map((pkg, idx) => (
+                            {bookings.length > 0 ? bookings.map((pkg, idx) => (
                                 <div key={idx} className="relative grid grid-cols-7 items-center gap-2 py-4 text-center">
                                     <div className="flex justify-center items-center">
                                         <img src={pkg.image} alt={pkg.name} className='w-36 h-20 rounded-lg object-cover' />
