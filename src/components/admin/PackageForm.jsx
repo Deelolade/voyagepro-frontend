@@ -95,12 +95,13 @@ const PackageForm = () => {
     }
     const onSubmit = async (data) => {
 
-        const { country, city, roomType, resortType, whatisIncluded, ...rest } = data;
+        const { country, city, roomType, resortType,price , whatisIncluded, ...rest } = data;
         const images = uploadedUrls;
+        const  pricePerAdult = price;
         const location = { country, city };
         const accommodation = { roomType, resortType };
         const whatsIncluded = data.whatisIncluded.map(item => item.value);
-        const payload = { ...rest, whatsIncluded, location, accommodation, images };
+        const payload = { ...rest,pricePerAdult, whatsIncluded, location, accommodation, images };
 
         console.log(payload)
 
