@@ -22,6 +22,7 @@ import AdminBookings from "./pages/admin-pages/AdminBookings";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardBottomBar from '../src/components/DashboardBottomBar'
 import DashboardBottom from '../src/components/admin/DashboardBottom'
+import { logOut } from "./redux/users/userSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const App = () => {
 // console.log(currentUser.role);
   return (
     <>
-      {/* <button className="absolute bg-red px-3 py-2 text-white rounded-lg " onClick={() => dispatch(logOut())}>logOut</button> */}
+      <button className="absolute bg-red px-3 py-2 text-white rounded-lg " onClick={() => dispatch(logOut())}>logOut</button>
 
       <ToastContainer />
       <Routes>
@@ -68,10 +69,10 @@ const App = () => {
         )}
         {!currentUser && <Route path="*" element={<LandingPage />} />}
       </Routes>
-      { currentUser?.role === "user"?
+      {/* { currentUser?.role === "user"?
       
         < DashboardBottomBar/>: <DashboardBottom/>
-       }
+       } */}
     </>
   );
 };
