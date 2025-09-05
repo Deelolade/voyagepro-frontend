@@ -1,3 +1,4 @@
+import imageOne from "../images/edit-package-one.png";
 import mainImage from "../images/hero-image.png";
 import airplaneLocation from "../images/airplane-location.png";
 import airplaneTag from "../images/airplane-tag.png";
@@ -12,11 +13,11 @@ import { selectPackage } from "../redux/packages/packageSlice";
 const BookingConfirmation = () => {
     const API_URL = import.meta.env.VITE_API_URL;
     const [bookings, setBookings] = useState([])
+    const [isMobile, setIsMobile] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleEditPackage = (pkg) => {
         dispatch(selectPackage(pkg))
-        console.log("Edit Package Clicked", pkg);
         navigate('/edit-booking');
     }
     useEffect(() => {
@@ -54,6 +55,25 @@ const BookingConfirmation = () => {
             year: "numeric"
         })
     }
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768);
+        }
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        return () => window.removeEventListener('resize', checkScreenSize)
+    }, [])
+
+    if (isMobile) {
+        return (
+            <div className="flex items-center justify-center h-screen bg-black text-white text-xl text-center p-6">
+                🚫 This app is not available on mobile.
+                Please use a laptop or larger screen.
+            </div>
+        )
+    }
+
     return (
         <>
             <section className="py-6 px-2 max-h-screen max-w-7xl mx-auto ">
@@ -86,7 +106,7 @@ const BookingConfirmation = () => {
                         </div>
                     </div>
                     <div className="mt-6">
-                        <div className=" grid grid-cols-7 items-center gap-2 text-center shadow-lg py-4 border-gray-300">
+                        <div className=" max-w-6xl mx-auto grid grid-cols-7 items-center gap-2 text-center shadow-sm py-4 border-gray-300">
                             <div className="" />
                             <p>Name</p>
                             <p>Status</p>
@@ -96,26 +116,28 @@ const BookingConfirmation = () => {
                             <p>Track Number</p>
                         </div>
                         <div className="overflow-auto max-h-[350px] scrollbar-hide ">
-                            {bookings.length > 0 ? bookings.map((pkg, idx) => (
-                                <div key={idx} className="relative grid grid-cols-7 items-center gap-2 py-4 text-center">
-                                    <div className="flex justify-center items-center">
-                                        <img src={pkg.image} alt={pkg.name} className='w-36 h-20 rounded-lg object-cover' />
+                            {bookings.length > 0 ? bookings
+                                .sort((a, b) => (new Date(b.travelDate) - new Date(a.travelDate)))
+                                .map((pkg, idx) => (
+                                    <div key={idx} className=" max-w-6xl mx-auto relative grid grid-cols-7 items-center gap-2 py-4 text-center">
+                                        <div className="flex justify-center items-center">
+                                            <img src={pkg.packageImages[0] || imageOne} alt={pkg.name} className='w-36 h-20 rounded-lg object-cover' />
+                                        </div>
+                                        <p className='text-lg font-'>{pkg.packageName}</p>
+                                        <div className="">
+                                            <span className={` font-semibold py-2 px-6 rounded-xl text-darkGray ${pkg.status === "completed" ? "bg-lightgreen " : pkg.status === "pending" ? "bg-lightpurple" : "bg-lightorange"}`}>{pkg.status}</span>
+                                        </div>
+                                        <p className='text-lg font-medium'>#{pkg?.priceforAdult?.toLocaleString()}</p>
+                                        <p className='text-lg font-medium'>{formatDate(pkg.travelDate)}</p>
+                                        <p className='text-lg font-medium'>{pkg?.title}</p>
+                                        <div className="mx-auto">
+                                            <p>{pkg.packageId}</p>
+                                            <button
+                                                onClick={() => handleEditPackage(pkg)}
+                                                className='mt-2 bg-blue py-2 px-3 text-lg text-white rounded-lg'>Edit Package</button>
+                                        </div>
                                     </div>
-                                    <p className='text-lg font-'>{pkg.packageName}</p>
-                                    <div className="">
-                                        <span className={` font-semibold py-2 px-6 rounded-xl text-darkGray ${pkg.status === "completed" ? "bg-lightgreen " : pkg.status === "pending" ? "bg-lightpurple" : "bg-lightorange"}`}>{pkg.status}</span>
-                                    </div>
-                                    <p className='text-lg font-medium'>${pkg.priceforAdult}</p>
-                                    <p className='text-lg font-medium'>{formatDate(pkg.travelDate)}</p>
-                                    <p className='text-lg font-medium'>{pkg.title}</p>
-                                    <div className="">
-                                        <p>{pkg.packageId}</p>
-                                        <button
-                                            onClick={() => handleEditPackage(pkg)}
-                                            className='mt-2 bg-blue py-2 px-6 text-lg text-white rounded-lg'>Edit Package</button>
-                                    </div>
-                                </div>
-                            )) : <div className=" flex flex-col justify-center items-center h-64 gap-4">
+                                )) : <div className=" flex flex-col justify-center items-center h-64 gap-4">
                                 <p className=" text-center text-sm md:text-lg ">You have no bookings yet. <br />  Click the button below  to Book a package to see it here.</p>
                                 <Link to='/packages' className=' py-2 px-3  text-lg  font-medium rounded-lg text-white bg-green'>Book package</Link>
                             </div>}

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import profileImage from "../images/landing-image-1.png";
 import { FaRegBell, FaRegUserCircle } from "react-icons/fa";
 import { RiSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -13,35 +12,55 @@ const PackageListing = () => {
   const dispatch = useDispatch();
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("popularity");
   const [selectedPrices, setSelectedPrices] = useState([]);
   const [packages, setPackages] = useState([]);
 
 
-  useEffect(()=>{
-    const fetchPackages = async()=>{
+  useEffect(() => {
+    const fetchPackages = async () => {
       try {
-      const res = await axios.get(`${API_URL}/packages`)
-      localStorage.setItem("allPackages", JSON.stringify(res.data))
-      setPackages(res.data)
-      console.log(packages)
-      } catch (error) { 
+        const res = await axios.get(`${API_URL}/packages`)
+        localStorage.setItem("allPackages", JSON.stringify(res.data))
+        setPackages(res.data)
+        console.log(packages)
+      } catch (error) {
         const cachedPackages = localStorage.getItem("allPackages")
-        if(cachedPackages){
+        if (cachedPackages) {
           setPackages(JSON.parse(cachedPackages))
         }
       }
     }
     fetchPackages()
-  },[])
+  }, [])
   const handlePriceChange = (range) => {
     setSelectedPrices((prev) =>
       prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
     );
   };
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    }
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
 
- const filteredPackages = packages.filter(
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  if (isMobile) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-black text-white text-xl text-center p-6">
+        🚫 This app is not available on mobile.
+        Please use a laptop or larger screen.
+      </div>
+    )
+  }
+
+
+  const filteredPackages = packages.filter(
     (pkg) =>
       pkg.location.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
       pkg.location.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -68,7 +87,7 @@ const PackageListing = () => {
     <>
       <section id="packages" className="max-h-screen h-screen flex">
         <div className="max-w-7xl mx-auto flex justify-between ">
-      {/* <Sidebar/> */}
+          {/* <Sidebar/> */}
           <div className=" w-[25vw] bg-zinc-200 p-6">
             <div className="mt-20">
               <div className="">
@@ -236,7 +255,7 @@ const PackageListing = () => {
                   <div className="">
                     <input
                       type="checkbox"
-                       onChange={() => handlePriceChange("1000-2000")}
+                      onChange={() => handlePriceChange("1000-2000")}
                       checked={selectedPrices.includes("1000-2000")}
                       className="h-5 w-5 mt-2"
                     />{" "}
@@ -250,7 +269,7 @@ const PackageListing = () => {
           <main className="w-[70vw] p-6">
             <div className=" flex justify-between items-center">
               <h3 className="text-4xl font-semibold">Package Listing</h3>
-              <span>< FaRegUserCircle className="scale-150 text-2xl"/></span>
+              <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
             </div>
             <div className=" flex mt-8 justify-between items-center">
               <div className=" flex w-[70%] bg-gray border border-zinc-500 rounded-xl py-2 px-3 items-center space-x-5">
@@ -288,17 +307,17 @@ const PackageListing = () => {
                       className="grid grid-cols-6 items-center gap-4 py-4 px-5  ms-auto "
                     >
                       <img
-                        src={pkg.images[0] || image }
+                        src={pkg.images[0] || image}
                         alt={pkg.title || "Package image"}
                         className="h-20 w-20 object-cover rounded-lg"
                       />
-                      <p className="text-sm text-zinc-500">{pkg.title}</p>
-                      <p className="text-sm text-zinc-500">#{pkg.pricePerAdult.toLocaleString()}</p>
-                      <p className="text-sm text-zinc-500">{pkg.duration}</p>
-                      <p className="text-sm text-zinc-500">{pkg.location.city}</p>
+                      <p className="text-sm text-zinc-500">{pkg?.title}</p>
+                      <p className="text-sm text-zinc-500"> #{pkg?.priceforAdult?.toLocaleString()}</p>
+                      <p className="text-sm text-zinc-500">{pkg?.duration}</p>
+                      <p className="text-sm text-zinc-500">{pkg?.location?.city}</p>
                       <div className=" flex flex-col items-center justify-center space-y-2  ">
                         <p className="text-sm text-zinc-500">
-                          {pkg._id}
+                          {pkg?._id}
                         </p>
                         <button
                           className="bg-blue px-3 py-2  rounded-lg text-sm text-white"
