@@ -69,10 +69,10 @@ const App = () => {
         )}
         {!currentUser && <Route path="*" element={<LandingPage />} />}
       </Routes>
-      {/* { currentUser?.role === "user"?
+      { currentUser?.role === "user"?
       
         < DashboardBottomBar/>: <DashboardBottom/>
-       } */}
+       }
     </>
   );
 };

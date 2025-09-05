@@ -14,9 +14,6 @@ const PackagesDetails = () => {
   const navigate = useNavigate();
   const currentUser = useSelector((state) => state.user.currentUser);
   const selectedPackage = useSelector((state) => state.package.selectedPackage);
-  console.log("new packages:", selectedPackage._id);
-  console.log(selectedPackage)
-
   const handleClick = (packageId) => {
     !currentUser ? navigate('/signup') :
       navigate(`/packages/${packageId}/package-form`);
@@ -26,7 +23,7 @@ const PackagesDetails = () => {
       <section className="">
         <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6 ">
           <div className="flex justify-between pb-4 items-center">
-            <h3 className="text-xs font-semibold">Voyagepro</h3>
+            <h3 className="text-sm font-semibold">Voyagepro</h3>
             <h3 className=" text-lg md:text-3xl font-semibold">Package Details</h3>
             <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
 
@@ -59,7 +56,7 @@ const PackagesDetails = () => {
                 <div className="md:border-r-2 border-zinc-400 flex space-x-5 pr-6 items-center">
                   <LuNotebookPen className="scale-[200%]" />
                   <span className="flex md:flex-col items-center space-x-2">
-                    <p className="text-xl font-medium">#{selectedPackage?.pricePerAdult}</p>
+                    <p className="text-xl font-medium">#{selectedPackage?.pricePerAdult?.toLocaleString()}</p>
                     <p className="text-sm font-light text-zinc-500 ">Per Adult</p>
                   </span>
                 </div>

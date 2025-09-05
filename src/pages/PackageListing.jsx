@@ -17,6 +17,8 @@ const PackageListing = () => {
   const [sortBy, setSortBy] = useState("popularity");
   const [selectedPrices, setSelectedPrices] = useState([]);
   const [packages, setPackages] = useState([]);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [showPackageMenu, setShowPackageMenu] = useState(false);
 
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const PackageListing = () => {
         const res = await axios.get(`${API_URL}/packages`)
         localStorage.setItem("allPackages", JSON.stringify(res.data))
         setPackages(res.data)
-        console.log(packages)
+        console.log(packages);
       } catch (error) {
         const cachedPackages = localStorage.getItem("allPackages")
         if (cachedPackages) {
@@ -52,10 +54,13 @@ const PackageListing = () => {
 
   if (isMobile) {
     return (
-      <div className="flex items-center justify-center h-screen bg-black text-white text-xl text-center p-6">
-        🚫 This app is not available on mobile.
-        Please use a laptop or larger screen.
-      </div>
+      <>
+        <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-xl text-center p-6">
+          <h1 className="text-3xl font-semibold">VoyagePro</h1>
+          <p className="mt-3">🚫 This app is not available on mobile.
+            Please use a laptop or larger screen.</p>
+        </div>
+      </>
     )
   }
 
@@ -78,7 +83,6 @@ const PackageListing = () => {
   //   return 0;
   // });
 
-  console.log(packages);
   const handlePackage = (pkg) => {
     dispatch(selectPackage(pkg))
     navigate(`/packages/${pkg._id}`);
@@ -88,7 +92,7 @@ const PackageListing = () => {
       <section id="packages" className="max-h-screen h-screen flex">
         <div className="max-w-7xl mx-auto flex justify-between ">
           {/* <Sidebar/> */}
-          <div className=" w-[25vw] bg-zinc-200 p-6">
+          <div className=" w-[20vw] bg-zinc-200 p-6">
             <div className="mt-20">
               <div className="">
                 <h5>Popularity</h5>
@@ -266,7 +270,7 @@ const PackageListing = () => {
             </div>
           </div>
           {/* Main section */}
-          <main className="w-[70vw] p-6">
+          <main className="w-[full] p-6">
             <div className=" flex justify-between items-center">
               <h3 className="text-4xl font-semibold">Package Listing</h3>
               <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
@@ -312,12 +316,12 @@ const PackageListing = () => {
                         className="h-20 w-20 object-cover rounded-lg"
                       />
                       <p className="text-sm text-zinc-500">{pkg?.title}</p>
-                      <p className="text-sm text-zinc-500"> #{pkg?.priceforAdult?.toLocaleString()}</p>
+                      <p className="text-sm text-zinc-500"> #{pkg?.pricePerAdult?.toLocaleString()}</p>
                       <p className="text-sm text-zinc-500">{pkg?.duration}</p>
                       <p className="text-sm text-zinc-500">{pkg?.location?.city}</p>
                       <div className=" flex flex-col items-center justify-center space-y-2  ">
                         <p className="text-sm text-zinc-500">
-                          {pkg?._id}
+                          {/* {pkg?._id} */}
                         </p>
                         <button
                           className="bg-blue px-3 py-2  rounded-lg text-sm text-white"

@@ -35,9 +35,7 @@ const BookingConfirmation = () => {
                 })
                 setBookings(res.data)
                 localStorage.setItem("bookings", JSON.stringify(res.data));
-                console.log(res.data)
             } catch (error) {
-                console.log(error)
                 const cacheBookings = localStorage.getItem("bookings");
                 if (cacheBookings) {
                     setBookings(JSON.parse(cacheBookings))
@@ -46,7 +44,6 @@ const BookingConfirmation = () => {
         }
         fetchData()
     }, [])
-    console.log(bookings)
 
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-us', {
@@ -67,10 +64,13 @@ const BookingConfirmation = () => {
 
     if (isMobile) {
         return (
-            <div className="flex items-center justify-center h-screen bg-black text-white text-xl text-center p-6">
-                🚫 This app is not available on mobile.
-                Please use a laptop or larger screen.
+        <>
+            <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-xl text-center p-6">
+                <h1 className="text-3xl font-semibold">VoyagePro</h1>
+                <p className="mt-3">🚫 This app is not available on mobile.
+                Please use a laptop or larger screen.</p>
             </div>
+        </>
         )
     }
 

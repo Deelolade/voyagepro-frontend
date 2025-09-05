@@ -18,7 +18,6 @@ const DashboardMain = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [packages, setPackages] = useState([]);
   const currentUser = useSelector(state=> state.user.currentUser)
-  console.log(currentUser);
   useEffect(()=>{
     const fetchPackages = async()=>{
       try {
@@ -40,19 +39,19 @@ const DashboardMain = () => {
   }
   return (
     <div>
-      <section className="py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide mb-10 "> 
+      <section className="pt-6 pb-12 lg:py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide mb-10 "> 
         <div className="flex justify-between items-center">
-          <h2 className='xxs:text-2xl sm:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
+          <h2 className='text-xl lg:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
           <div className="flex space-x-6 items-center">
-            <span><FaRegBell className='text-3xl '/></span>
-             <span>< FaRegUserCircle className="scale-150 text-2xl"/></span>
+            <span><FaRegBell className='text-xl lg:text-3xl '/></span>
+             <span>< FaRegUserCircle className="scale-150 text-lg lg:text-2xl"/></span>
           </div>
         </div>
         <div className="mt-6 relative">
-          <div className="absolute top-6 right-8 z-20 text-sm text-gray-600 font-medium">
-            <p className='text-white text-xl'>Your next trip</p>  </div>
+          <div className="absolute top-3 md:top-6 right-4 md:right-8 z-20 text-sm text-gray-600 font-medium">
+            <p className='text-white text-lg lg:text-xl'>Your next trip</p>  </div>
           <div className="absolute bottom-4 left-4 z-20 text-sm text-gray-600 font-medium">
-            <p className='text-white text-sm sm:text-lg'>Zanzibar,Tanzania</p>
+            <p className='text-white text-sm lg:text-lg'>Zanzibar,Tanzania</p>
             <span className='text-white text-lg sm:text-xl'>July 25 - July 30, 2025</span>
           </div>
           <div className=""><img src={dashboardImageOne} alt="" className='h-44 sm:h-64 w-full object-cover rounded-xl' />
