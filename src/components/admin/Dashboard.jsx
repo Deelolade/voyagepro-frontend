@@ -4,10 +4,12 @@ import { FaRegBell, FaRegUserCircle } from 'react-icons/fa'
 import { IoCloudUploadOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { useQueries, } from '@tanstack/react-query'
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
     const API_URL = import.meta.env.VITE_API_URL;
     const token = localStorage.getItem('token');
+    const currentUser = useSelector(state => state.user.currentUser);
 
     const fetchTotalUsers = async (token) => {
         const res = await axios.get(`${API_URL}/admin/dashboard/users`, {
@@ -91,7 +93,7 @@ const Dashboard = () => {
         <div>
             <section className="py-6 px-3 md:px-4  max-h-screen overflow-y-auto scrollbar-hide">
                 <div className="flex justify-between items-center">
-                    <h2 className='text-2xl md:text-3xl font-semibold'>Welcome Admin </h2>
+                    <h2 className='text-2xl md:text-3xl font-semibold'>Welcome {currentUser?.firstname} </h2>
                     <div className="flex space-x-6 items-center">
                         <span><FaRegBell className='text-3xl' /></span>
                         <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>

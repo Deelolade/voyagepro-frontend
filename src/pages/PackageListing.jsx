@@ -59,7 +59,7 @@ const PackageListing = () => {
   //   return 0;
   // });
 
-  console.log(packages.length);
+  console.log(packages);
   const handlePackage = (pkg) => {
     dispatch(selectPackage(pkg))
     navigate(`/packages/${pkg._id}`);
@@ -249,7 +249,7 @@ const PackageListing = () => {
           {/* Main section */}
           <main className="w-[70vw] p-6">
             <div className=" flex justify-between items-center">
-              <h3 className="text-4xl font-semibold">Packages Listing</h3>
+              <h3 className="text-4xl font-semibold">Package Listing</h3>
               <span>< FaRegUserCircle className="scale-150 text-2xl"/></span>
             </div>
             <div className=" flex mt-8 justify-between items-center">
@@ -288,7 +288,7 @@ const PackageListing = () => {
                       className="grid grid-cols-6 items-center gap-4 py-4 px-5  ms-auto "
                     >
                       <img
-                        src={pkg.image || image }
+                        src={pkg.images[0] || image }
                         alt={pkg.title || "Package image"}
                         className="h-20 w-20 object-cover rounded-lg"
                       />

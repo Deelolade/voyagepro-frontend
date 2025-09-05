@@ -27,7 +27,7 @@ const PackagesDetails = () => {
         <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6 ">
           <div className="flex justify-between pb-4 items-center">
             <h3 className="text-xs font-semibold">Voyagepro</h3>
-            <h3 className=" text-lg md:text-3xl font-semibold">Packages Details</h3>
+            <h3 className=" text-lg md:text-3xl font-semibold">Package Details</h3>
             <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
 
           </div>

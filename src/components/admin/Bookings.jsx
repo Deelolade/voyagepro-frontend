@@ -3,83 +3,26 @@ import { PiSquaresFourBold } from "react-icons/pi";
 import { BiArrowBack } from "react-icons/bi";
 import { FaPlus, FaChevronDown } from "react-icons/fa6";
 import { Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 
 const Bookings = () => {
-  const Packages = [
-    {
-      "packageName": "Dubai",
-      "date": "05 Aug, 2025",
-      "status": "confirmed",
-      "update": "payment booked"
-    },
-    {
-      "packageName": "Qatar",
-      "date": "12 Aug, 2025",
-      "status": "pending",
-      "update": "payment pending"
-    },
-    {
-      "packageName": "Bali",
-      "date": "18 Aug, 2025",
-      "status": "confirmed",
-      "update": "traveler contacted"
-    },
-    {
-      "packageName": "Maldives",
-      "date": "25 Aug, 2025",
-      "status": "confirmed",
-      "update": "payment booked"
-    },
-    {
-      "packageName": "Paris",
-      "date": "01 Sep, 2025",
-      "status": "pending",
-      "update": "payment pending"
-    },
-    {
-      "packageName": "New York",
-      "date": "08 Sep, 2025",
-      "status": "confirmed",
-      "update": "traveler contacted"
-    },
-    {
-      "packageName": "London",
-      "date": "15 Sep, 2025",
-      "status": "confirmed",
-      "update": "payment booked"
-    },
-    {
-      "packageName": "Singapore",
-      "date": "22 Sep, 2025",
-      "status": "pending",
-      "update": "payment pending"
-    },
-    {
-      "packageName": "Istanbul",
-      "date": "30 Sep, 2025",
-      "status": "cancelled",
-      "update": "traveler contacted"
-    },
-    {
-      "packageName": "Rome",
-      "date": "05 Oct, 2025",
-      "status": "confirmed",
-      "update": "payment booked"
-    },
-    {
-      "packageName": "Tokyo",
-      "date": "12 Oct, 2025",
-      "status": "pending",
-      "update": "payment pending"
-    },
-    {
-      "packageName": "Cape Town",
-      "date": "20 Oct, 2025",
-      "status": "cancelled",
-      "update": "traveler contacted"
-    }
-  ]
+  const API_URL = import.meta.env.VITE_API_URL;
+  const token = localStorage.getItem("token");
+  const getAllBookings = async(token)=>{
+    const res = await axios.get(`${API_URL}/admin/getAllBooking`,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    console.log(res.data);
+    return res.data;
+  }
+  const {data: bookings, isLoading, isError} = useQuery({
+    queryKey: ['bookings',token],
+    queryFn: ()=>getAllBookings(token)
+  })
   return (
     <section className="py-6 px-4 max-h-screen ">
       <div className="max-w-7xl mx-auto">
@@ -114,7 +57,8 @@ const Bookings = () => {
           </div>
           <div className="h-96 overflow-y-auto scrollbar-hide py-2">
             {
-              Packages.map((pkg, idx) => {
+              bookings?.length > 0 ?
+              bookings.map((pkg, idx) => {
                 return (
                   <div className="grid grid-cols-4 space-y-8 items-center" key={idx}>
                     <p className='text-center text-sm'>{pkg.packageName}</p>
@@ -126,9 +70,8 @@ const Bookings = () => {
                     <p className='text-center'>{pkg.date}</p>
                     <p className='text-center'>{pkg.update}</p>
                   </div>
-
                 )
-              })
+              }) : <p className='text-center'>No bookings found</p> 
             }
           </div>
         </div>

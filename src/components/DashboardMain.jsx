@@ -18,7 +18,7 @@ const DashboardMain = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [packages, setPackages] = useState([]);
   const currentUser = useSelector(state=> state.user.currentUser)
-
+  console.log(currentUser);
   useEffect(()=>{
     const fetchPackages = async()=>{
       try {
