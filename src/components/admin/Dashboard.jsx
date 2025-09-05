@@ -5,6 +5,7 @@ import { IoCloudUploadOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { useQueries, } from '@tanstack/react-query'
 import { useSelector } from 'react-redux';
+import { Chart } from './DashboardGraph';
 
 const Dashboard = () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -144,6 +145,9 @@ const Dashboard = () => {
                     </div>
                     <div className="col-span-2 md:col-span-1 bg-gray border-darkGray/50 border rounded-xl p-6">
                         <h2 className='text-2xl font-medium mb-4'>Bookings</h2>
+                         <div className="w-full h-80">
+    <Chart />
+  </div>
                     </div>
                     <div className="col-span-2 md:col-span-1">
                         <h2 className='text-2xl font-medium ms-3'>Recent Bookings</h2>

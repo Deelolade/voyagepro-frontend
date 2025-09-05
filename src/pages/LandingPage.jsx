@@ -155,8 +155,7 @@ const LandingPage = () => {
               </span>
               <h4 className=" text-2xl my-6">Best Price Guarantee</h4>
               <p className="text-lg ">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                non inventore pariatur
+                Your dream vacation shouldn’t cost more than it should. Book with us and enjoy the assurance that you’re always getting the best value.
               </p>
             </div>
             <div className=" text-center p-2">
@@ -165,8 +164,7 @@ const LandingPage = () => {
               </span>
               <h4 className=" text-2xl my-6">Easy Booking</h4>
               <p className="text-lg ">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                non inventore pariatur
+                From browsing packages to final confirmation, we’ve made everything seamless so you can book your getaway with ease.
               </p>
             </div>
             <div className=" text-center p-2">
@@ -175,8 +173,7 @@ const LandingPage = () => {
               </span>
               <h4 className=" text-2xl my-6">Customer support 24/7</h4>
               <p className="text-lg ">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                non inventore pariatur
+                Travel with confidence knowing our team is here for you anytime, day or night.
               </p>
             </div>
           </div>

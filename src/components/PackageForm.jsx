@@ -59,24 +59,24 @@ const PackageForm = () => {
             toast.error("You must be logged in to update your profile");
             return;
         }
-        setLoading(true);
-        try {
-            const res = await axios.post(`${API_URL}/bookings`, data, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            reset()
-            toast.success(res.data.message || "You have successfully created a booking!");
-            console.log(res.data);
-            setTimeout(() => {
-                navigate(`/dashboard`);
-            }, 3000);
-        } catch (error) {
-            console.error("Error during signup:", error);
-        } finally {
-            setLoading(false);
-        }
+        // setLoading(true);
+        // try {
+        //     const res = await axios.post(`${API_URL}/bookings`, data, {
+        //         headers: {
+        //             Authorization: `Bearer ${token}`,
+        //         },
+        //     })
+        //     reset()
+        //     toast.success(res.data.message || "You have successfully created a booking!");
+        //     console.log(res.data);
+        //     setTimeout(() => {
+        //         navigate(`/dashboard`);
+        //     }, 3000);
+        // } catch (error) {
+        //     console.error("Error during signup:", error);
+        // } finally {
+        //     setLoading(false);
+        // }
         createPaymentGateway(data);
 
     }
@@ -91,6 +91,7 @@ const PackageForm = () => {
         const packageName = currentPackage.title;
         const costPerPerson = currentPackage.pricePerAdult;
         const totalAmountPaid = currentPackage.pricePerAdult * guestCount;
+        // const redirectUrl  = "https://www.google.com"
         const redirectUrl = `${import.meta.env.VITE_CLIENT_URL}/confirm-details`;
         const payload = {fullName, email,contactNumber, travelDate, numberOfGuests, paymentMethod, packageId, packageName, costPerPerson, totalAmountPaid, redirectUrl}
         console.log("payment gateway, new payload;", payload)

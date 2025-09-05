@@ -5,6 +5,7 @@ import { FaPlus, FaChevronDown } from "react-icons/fa6";
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import Spinner from '../ui/Spinner';
 
 
 const Bookings = () => {
@@ -25,6 +26,7 @@ const Bookings = () => {
   })
   return (
     <section className="py-6 px-4 max-h-screen ">
+      {isLoading && <Spinner/>}
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-3 justify-between items-center">
           <div />
@@ -58,17 +60,17 @@ const Bookings = () => {
           <div className="h-96 overflow-y-auto scrollbar-hide py-2">
             {
               bookings?.length > 0 ?
-              bookings.map((pkg, idx) => {
+              bookings.map((booking, idx) => {
                 return (
                   <div className="grid grid-cols-4 space-y-8 items-center" key={idx}>
-                    <p className='text-center text-sm'>{pkg.packageName}</p>
+                    <p className='text-center text-sm'>{booking.packageName}</p>
                     <div className="flex justify-center items-center">
-                      <p className={`flex items-center space-x-4 text-center px-3 py-2 rounded-md text-darkGray  ${pkg.status === "confirmed" ? "bg-green":pkg.status === "pending" ?"bg-lightorange":"bg-yellow-300" }`}>{pkg.status}
+                      <p className={`flex items-center space-x-4 text-center px-3 py-2 rounded-md text-darkGray  ${booking.status === "confirmed" ? "bg-green":booking.status === "pending" ?"bg-lightorange":"bg-yellow-300" }`}>{booking.status}
                         <span className='ms-3'><FaChevronDown /></span>
                       </p>
                     </div>
-                    <p className='text-center'>{pkg.date}</p>
-                    <p className='text-center'>{pkg.update}</p>
+                    <p className='text-center'>{booking?.date}</p>
+                    <p className='text-center'>{booking?.update}</p>
                   </div>
                 )
               }) : <p className='text-center'>No bookings found</p> 

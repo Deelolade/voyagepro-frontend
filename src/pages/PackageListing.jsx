@@ -80,13 +80,13 @@ const PackageListing = () => {
       <section id="packages" className="max-h-screen h-screen flex">
         <div className="max-w-7xl mx-auto flex justify-between ">
           {/* Main section */}
-          <main className="w-full p-3 md:p-6 ">
+          <main className="max-w-7xl p-3 md:p-6 ">
             <div className=" flex justify-between items-center">
               <h3 className="text-2xl md:text-4xl font-semibold">Package Listing</h3>
               <span>< FaRegUserCircle className="scale-150 text-xl md:text-2xl" /></span>
             </div>
             <div className="flex mt-4 justify-between items-center">
-              <div className="flex w-[60%] bg-gray border border-zinc-500 rounded-xl md:py-2 px-3 items-center space-x-5">
+              <div className="flex w-[60%] bg-gray border border-zinc-500 rounded-xl md:py-1 px-3 items-center space-x-5">
                 <span>
                   <RiSearchLine className="scale-150" />
                 </span>
@@ -101,10 +101,10 @@ const PackageListing = () => {
               <div className="flex space-x-6 items-center relative">
                 <button
                   onClick={() => setShowSidebar((prev) => !prev)}
-                  className="p-2 bg-darkGray/20 rounded-md my-3 flex items-center space-x-2"
+                  className="p-2 bg-darkGray/20 rounded-md my-3 flex items-center space-x-3"
                 >
                   <span>Filter</span>
-                  <IoFilter className="inline scale-150" />
+                  <IoFilter className="inline scale-110" />
                 </button>
 
                 <span>
@@ -114,10 +114,10 @@ const PackageListing = () => {
                 {/* Dropdown Menu */}
                 {showSidebar && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10, x:10 }}
-                    animate={{ opacity: 1, y: 0 , x:0}}
+                    initial={{ opacity: 0, y: -10, x: 10 }}
+                    animate={{ opacity: 1, y: 0, x: 0 }}
                     duration={{ duration: 0.5 }}
-                   className="absolute top-full right-0 mt-2 w-60 bg-zinc-200 rounded-lg shadow-lg p-4 z-50">
+                    className="absolute top-full right-0 mt-2 w-60 bg-zinc-200 rounded-lg shadow-lg p-4 z-50">
                     {/* Location */}
                     <div className="mb-4">
                       <h5 className="font-semibold mb-2">Location</h5>
@@ -157,7 +157,7 @@ const PackageListing = () => {
                 <p>Action</p>
               </div>
               {/* Body */}
-              <div className="max-h-[70vh] rounded-b-xl px-2 py-3  overflow-y-auto scrollbar-hide text-center">
+              <div className=" max-h-[70vh] rounded-b-xl px-2 py-3  overflow-y-auto scrollbar-hide text-center">
                 {packages.length > 0 ? (
                   packages.map((pkg, idx) => (
                     <div
@@ -181,11 +181,11 @@ const PackageListing = () => {
                         </button>
                       </div>
                       {openMenuId === pkg._id && (
-                        <motion.div 
+                        <motion.div
                           initial={{ opacity: 0, y: 0 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5 }}
-                        className="col-span-5 bg-white shadow-lg rounded-sm p-4 mt-2 text-left space-y-3">
+                          className="col-span-5 bg-white shadow-lg rounded-sm p-4 mt-2 text-left space-y-3">
                           <h3 className="text-lg font-semibold">{pkg.title}</h3>
                           <p className="text-sm text-gray-600">{pkg.tagline}</p>
 
@@ -211,10 +211,13 @@ const PackageListing = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="w-[100vw] flex  justify-center bg-green text-center items-center mt-10">
-                    <p className="text-gray-500 text-sm mt-6">
-                      No packages found.
-                    </p>
+                  <div className=" w-[100%] h-full flex justify-center items-center">
+                    <div className="flex flex-col justify-center items-center">
+                      <p className="text-center text-sm md:text-lg">
+                        No packages found.
+                      </p>
+
+                    </div>
                   </div>
                 )}
               </div>
