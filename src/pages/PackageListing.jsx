@@ -13,21 +13,26 @@ const PackageListing = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState("popularity");
-  const [selectedPrices, setSelectedPrices] = useState([]);
   const [packages, setPackages] = useState([]);
   const [showSidebar, setShowSidebar] = useState(false);
-  const [showPackageMenu, setShowPackageMenu] = useState(false);
-
+  const [openMenuId, setOpenMenuId] = useState(null);
+const [search, setSearch] = useState("");
+const [location, setLocation] = useState("");
+const [sortBy, setSortBy] = useState("createdAt");
 
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const res = await axios.get(`${API_URL}/packages`)
+        const res = await axios.get(`${API_URL}/packages`,{
+          params: {
+            search,
+            location,
+            sortBy
+          }
+        })
         localStorage.setItem("allPackages", JSON.stringify(res.data))
         setPackages(res.data)
-        console.log(packages);
+
       } catch (error) {
         const cachedPackages = localStorage.getItem("allPackages")
         if (cachedPackages) {
@@ -36,12 +41,8 @@ const PackageListing = () => {
       }
     }
     fetchPackages()
-  }, [])
-  const handlePriceChange = (range) => {
-    setSelectedPrices((prev) =>
-      prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
-    );
-  };
+  }, [search, location, sortBy])
+  
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -63,26 +64,6 @@ const PackageListing = () => {
       </>
     )
   }
-
-
-  const filteredPackages = packages.filter(
-    (pkg) =>
-      pkg.location.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pkg.location.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pkg.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-  // .sort((a, b) => {
-  //   if (sortBy === "popularity") return b.popularity - a.popularity;
-  //   if (sortBy === "rating") return b.rating - a.rating;
-  //   if (sortBy === "price")
-  //     return (
-  //       parseFloat(b.price.replace(/[^\d.]/g, "")) -
-  //       parseFloat(a.price.replace(/[^\d.]/g, ""))
-  //     );
-  //   if (sortBy === "date") return new Date(b.date) - new Date(a.date);
-  //   return 0;
-  // });
-
   const handlePackage = (pkg) => {
     dispatch(selectPackage(pkg))
     navigate(`/packages/${pkg._id}`);
@@ -92,185 +73,39 @@ const PackageListing = () => {
       <section id="packages" className="max-h-screen h-screen flex">
         <div className="max-w-7xl mx-auto flex justify-between ">
           {/* <Sidebar/> */}
-          <div className=" w-[20vw] bg-zinc-200 p-6">
-            <div className="mt-20">
-              <div className="">
-                <h5>Popularity</h5>
-                <div className="flex flex-col">
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>Less than 10 people</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>10 to 20 people</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>20 to 50 people</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>50 to 100 people</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>100 to 200 people</span>
-                  </div>
-                </div>
+          <div className="w-[20vw] bg-zinc-200 p-6">
+            <div className="mt-20 space-y-6">
+              {/* Location */}
+              <div>
+                <h5 className="font-medium mb-2">Location</h5>
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="Enter city or country"
+                  className="w-full border px-2 py-1 rounded"
+                />
               </div>
-              <div className="">
-                <h5>Duration</h5>
-                <div className="flex flex-col">
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>Less than 3 Days</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>3 to 5 Days</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>5 to 10 Days</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>10 to 20 Days</span>
-                  </div>
-                </div>
+
+              {/* Sort By */}
+              <div>
+                <h5 className="font-medium mb-2">Sort By</h5>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full border px-2 py-1 rounded"
+                >
+                  <option value="createdAt">Newest</option>
+                  <option value="price">Price</option>
+                  <option value="duration">Duration</option>
+                </select>
               </div>
-              <div className="">
-                <h5>Ratings</h5>
-                <div className="flex flex-col">
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>1 star</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>2 stars</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>3 stars</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>4 stars</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>5 stars</span>
-                  </div>
-                </div>
-              </div>
-              <div className="">
-                <h5>Price</h5>
-                <div className="flex flex-col">
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      onChange={() => handlePriceChange("0-1000")}
-                      checked={selectedPrices.includes("0-1000")}
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>Less than 1,000</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>1,000 - 2,000</span>
-                  </div>
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      onChange={() => handlePriceChange("1000-2000")}
-                      checked={selectedPrices.includes("1000-2000")}
-                      className="h-5 w-5 mt-2"
-                    />{" "}
-                    <span>200,000 - 500,000</span>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
+
           {/* Main section */}
-          <main className="w-[full] p-6">
+          <main className="w-[full] p-6 ">
             <div className=" flex justify-between items-center">
               <h3 className="text-4xl font-semibold">Package Listing</h3>
               <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
@@ -282,8 +117,8 @@ const PackageListing = () => {
                 </span>
                 <input
                   type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                   className="w-full py-2 px-3 bg-gray outline-none"
                   placeholder="Search"
                 />
@@ -294,42 +129,61 @@ const PackageListing = () => {
             </div>
             <div className="mt-12 w-full bg-white rounded-xl">
               {/* Header */}
-              <div className="grid grid-cols-6 py-4 px-5  me-auto font-semibold text-lg capitalize text-center">
+              <div className="grid grid-cols-5 py-4 px-5  me-auto font-semibold text-lg capitalize text-center shadow-sm">
                 <div />
                 <p>Name</p>
                 <p>Price</p>
-                <p>Duration</p>
                 <p>Destination</p>
-                <p>Track No</p>
+                <p>Action</p>
               </div>
               {/* Body */}
-              <div className="h-[70vh] rounded-b-xl px-2 py-3 border-t-2 overflow-y-auto scroll-smooth text-center">
-                {filteredPackages.length > 0 ? (
-                  filteredPackages.map((pkg, idx) => (
+              <div className="max-h-[70vh] rounded-b-xl px-2 py-3  overflow-y-auto scrollbar-hide text-center">
+                {packages.length > 0 ? (
+                  packages.map((pkg, idx) => (
                     <div
                       key={idx}
-                      className="grid grid-cols-6 items-center gap-4 py-4 px-5  ms-auto "
+                      className="grid grid-cols-5 items-center gap-4 py-4 px-5  ms-auto "
                     >
                       <img
                         src={pkg.images[0] || image}
                         alt={pkg.title || "Package image"}
-                        className="h-20 w-20 object-cover rounded-lg"
+                        className="h-28 w-full object-cover rounded-lg"
                       />
                       <p className="text-sm text-zinc-500">{pkg?.title}</p>
                       <p className="text-sm text-zinc-500"> #{pkg?.pricePerAdult?.toLocaleString()}</p>
-                      <p className="text-sm text-zinc-500">{pkg?.duration}</p>
                       <p className="text-sm text-zinc-500">{pkg?.location?.city}</p>
-                      <div className=" flex flex-col items-center justify-center space-y-2  ">
-                        <p className="text-sm text-zinc-500">
-                          {/* {pkg?._id} */}
-                        </p>
+                      <div className=" flex flex-col items-center justify-center space-y-2">
                         <button
                           className="bg-blue px-3 py-2  rounded-lg text-sm text-white"
-                          onClick={() => handlePackage(pkg)}
+                          onClick={() => setOpenMenuId(openMenuId === pkg._id ? null : pkg._id)}
                         >
-                          See All
+                          {openMenuId === pkg._id ? "Close" : "View More"}
                         </button>
                       </div>
+                      {openMenuId === pkg._id && (
+                        <div className="col-span-5 bg-white shadow-lg rounded-lg p-4 mt-2 text-left space-y-3">
+                          <h3 className="text-lg font-semibold">{pkg.title}</h3>
+                          <p className="text-sm text-gray-600">{pkg.tagline}</p>
+
+                          <div className="grid grid-cols-2 gap-3 text-sm text-gray-500">
+                            <p><strong>Duration:</strong> {pkg.duration}</p>
+                            <p><strong>Location:</strong> {pkg.location.city}, {pkg.location.country}</p>
+                            <p><strong>Accommodation:</strong> {pkg.accommodation.roomType} - {pkg.accommodation.resortType}</p>
+                            <p><strong>Price:</strong> #{pkg.pricePerAdult.toLocaleString()}</p>
+                          </div>
+
+                          <div>
+                            <strong>What’s Included:</strong>
+                            <ul className="list-disc list-inside text-sm">
+                              {pkg.whatsIncluded.map((item, i) => <li key={i}>{item}</li>)}
+                            </ul>
+                          </div>
+
+                          <div className="flex justify-end gap-3 pt-3">
+                            <button onClick={() => handlePackage(pkg)} className="px-3 py-2 bg-blue text-white rounded-lg text-sm">View Details</button>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))
                 ) : (
