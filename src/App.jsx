@@ -31,7 +31,7 @@ const App = () => {
 // console.log(currentUser.role);
   return (
     <>
-      <button className="absolute bg-red px-3 py-2 text-white rounded-lg " onClick={() => dispatch(logOut())}>logOut</button>
+      {/* <button className="absolute bg-red px-3 py-2 text-white rounded-lg " onClick={() => dispatch(logOut())}>logOut</button> */}
 
       <ToastContainer />
       <Routes>

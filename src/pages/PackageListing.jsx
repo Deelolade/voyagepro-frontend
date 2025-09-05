@@ -6,24 +6,28 @@ import image from "../images/dashboard-image-three.png";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { selectPackage } from "../redux/packages/packageSlice";
-
+import { IoFilter } from "react-icons/io5";
+import Spinner from "../components/ui/Spinner";
+import { motion } from "framer-motion";
 
 const PackageListing = () => {
   const dispatch = useDispatch();
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [packages, setPackages] = useState([]);
   const [showSidebar, setShowSidebar] = useState(false);
   const [openMenuId, setOpenMenuId] = useState(null);
-const [search, setSearch] = useState("");
-const [location, setLocation] = useState("");
-const [sortBy, setSortBy] = useState("createdAt");
+  const [search, setSearch] = useState("");
+  const [location, setLocation] = useState("");
+  const [sortBy, setSortBy] = useState("createdAt");
 
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const res = await axios.get(`${API_URL}/packages`,{
+        setLoading(true)
+        const res = await axios.get(`${API_URL}/packages`, {
           params: {
             search,
             location,
@@ -32,17 +36,19 @@ const [sortBy, setSortBy] = useState("createdAt");
         })
         localStorage.setItem("allPackages", JSON.stringify(res.data))
         setPackages(res.data)
-
       } catch (error) {
+        setLoading(false)
         const cachedPackages = localStorage.getItem("allPackages")
         if (cachedPackages) {
           setPackages(JSON.parse(cachedPackages))
         }
+      } finally {
+        setLoading(false)
       }
     }
     fetchPackages()
   }, [search, location, sortBy])
-  
+
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -70,48 +76,17 @@ const [sortBy, setSortBy] = useState("createdAt");
   };
   return (
     <>
+      {loading && <Spinner />}
       <section id="packages" className="max-h-screen h-screen flex">
         <div className="max-w-7xl mx-auto flex justify-between ">
-          {/* <Sidebar/> */}
-          <div className="w-[20vw] bg-zinc-200 p-6">
-            <div className="mt-20 space-y-6">
-              {/* Location */}
-              <div>
-                <h5 className="font-medium mb-2">Location</h5>
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Enter city or country"
-                  className="w-full border px-2 py-1 rounded"
-                />
-              </div>
-
-              {/* Sort By */}
-              <div>
-                <h5 className="font-medium mb-2">Sort By</h5>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full border px-2 py-1 rounded"
-                >
-                  <option value="createdAt">Newest</option>
-                  <option value="price">Price</option>
-                  <option value="duration">Duration</option>
-                </select>
-              </div>
-
-            </div>
-          </div>
-
           {/* Main section */}
-          <main className="w-[full] p-6 ">
+          <main className="w-full p-3 md:p-6 ">
             <div className=" flex justify-between items-center">
-              <h3 className="text-4xl font-semibold">Package Listing</h3>
-              <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
+              <h3 className="text-2xl md:text-4xl font-semibold">Package Listing</h3>
+              <span>< FaRegUserCircle className="scale-150 text-xl md:text-2xl" /></span>
             </div>
-            <div className=" flex mt-8 justify-between items-center">
-              <div className=" flex w-[70%] bg-gray border border-zinc-500 rounded-xl py-2 px-3 items-center space-x-5">
+            <div className="flex mt-8 justify-between items-center">
+              <div className="flex w-[60%] bg-gray border border-zinc-500 rounded-xl md:py-2 px-3 items-center space-x-5">
                 <span>
                   <RiSearchLine className="scale-150" />
                 </span>
@@ -123,9 +98,54 @@ const [sortBy, setSortBy] = useState("createdAt");
                   placeholder="Search"
                 />
               </div>
-              <span>
-                <FaRegBell className="scale-150" />
-              </span>
+              <div className="flex space-x-6 items-center relative">
+                <button
+                  onClick={() => setShowSidebar((prev) => !prev)}
+                  className="p-2 bg-darkGray/20 rounded-md my-3 flex items-center space-x-2"
+                >
+                  <span>Filter</span>
+                  <IoFilter className="inline scale-150" />
+                </button>
+
+                <span>
+                  <FaRegBell className="scale-150" />
+                </span>
+
+                {/* Dropdown Menu */}
+                {showSidebar && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, x:10 }}
+                    animate={{ opacity: 1, y: 0 , x:0}}
+                    duration={{ duration: 0.5 }}
+                   className="absolute top-full right-0 mt-2 w-60 bg-zinc-200 rounded-lg shadow-lg p-4 z-50">
+                    {/* Location */}
+                    <div className="mb-4">
+                      <h5 className="font-semibold mb-2">Location</h5>
+                      <input
+                        type="text"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        placeholder="Enter city or country"
+                        className="rounded-lg border border-zinc-500 text-black w-full py-2 px-3 outline-none"
+                      />
+                    </div>
+
+                    {/* Sort By */}
+                    <div>
+                      <h5 className="font-semibold mb-2">Sort By</h5>
+                      <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value)}
+                        className="rounded-lg w-full py-2 px-3 outline-none"
+                      >
+                        <option value="createdAt">Newest</option>
+                        <option value="price">Price</option>
+                        <option value="duration">Duration</option>
+                      </select>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
             </div>
             <div className="mt-12 w-full bg-white rounded-xl">
               {/* Header */}
@@ -161,7 +181,11 @@ const [sortBy, setSortBy] = useState("createdAt");
                         </button>
                       </div>
                       {openMenuId === pkg._id && (
-                        <div className="col-span-5 bg-white shadow-lg rounded-lg p-4 mt-2 text-left space-y-3">
+                        <motion.div 
+                          initial={{ opacity: 0, y: 0 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5 }}
+                        className="col-span-5 bg-white shadow-lg rounded-sm p-4 mt-2 text-left space-y-3">
                           <h3 className="text-lg font-semibold">{pkg.title}</h3>
                           <p className="text-sm text-gray-600">{pkg.tagline}</p>
 
@@ -180,16 +204,18 @@ const [sortBy, setSortBy] = useState("createdAt");
                           </div>
 
                           <div className="flex justify-end gap-3 pt-3">
-                            <button onClick={() => handlePackage(pkg)} className="px-3 py-2 bg-blue text-white rounded-lg text-sm">View Details</button>
+                            <button onClick={() => handlePackage(pkg)} className="px-3 py-2 bg-blue text-white rounded-lg text-sm">Book Now</button>
                           </div>
-                        </div>
+                        </motion.div>
                       )}
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500 text-sm mt-6">
-                    No packages found.
-                  </p>
+                  <div className="w-[100vw] flex  justify-center bg-green text-center items-center mt-10">
+                    <p className="text-gray-500 text-sm mt-6">
+                      No packages found.
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
