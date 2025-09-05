@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import image from "../images/landing-image-1.png";
+import { useState } from 'react'
 import imageOne from "../images/edit-package-one.png";
 import imageTwo from "../images/edit-package-two.png";
 import imageThree from "../images/edit-package-three.png";
@@ -7,20 +6,20 @@ import imageFour from "../images/edit-package-four.png";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DatePicker from './DatePicker';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectPackage } from '../redux/packages/packageSlice';
+import { useSelector } from 'react-redux';
 import { FaRegUserCircle } from 'react-icons/fa';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
 const PackageForm = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const API_URL = import.meta.env.VITE_API_URL;
     const [guestCount, setGuestCount] = useState(1);
     const currentPackage = useSelector((state) => state.package.selectedPackage);
-    console.log(currentPackage)
     const ValidationSchema = yup.object().shape({
         email: yup.string().email().required("Incorrect Email"),
         name: yup.string().required("First name is required"),
@@ -29,19 +28,42 @@ const PackageForm = () => {
             .required("Phone number is required")
             .matches(/^(?:\+234|0)[789][01]\d{8}$/, "Enter a valid phone number"),
         travelDate: yup.string().required("Date of travel is important"),
-        terms: yup.bool().oneOf([true], "You have to agree to our terms and privacy policy "),
-
     })
-    const { control, register, handleSubmit, watch, formState: { errors } } = useForm({
+    const { control, register, handleSubmit, watch, reset, formState: { errors } } = useForm({
         resolver: yupResolver(ValidationSchema)
     })
     const selected = watch("paymentMethod");
     // console.log(currentPackage)
 
-    const onSubmit = (data) => {
-        // PUT /api/packages/:id route to create next 
-        console.log(data)
-        // navigate(`/packages/${data.id}`);
+    const onSubmit = async(data) => {
+        const contactInfo = {
+            phone: data.contact,
+            email: data.email,
+        }
+        const travelDate = data.travelDate;
+        const travelers = guestCount;
+        const payload= { travelers, contactInfo, travelDate }
+        const token = localStorage.getItem("token");
+        if (!token) {
+            toast.error("You must be logged in to update your profile");
+            return;
+        }
+        setLoading(true);
+        try {
+            const res = await axios.put(`${API_URL}/bookings/${currentPackage._id}`, payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            reset()
+            toast.success(res.data.message || "You have successfully updated your booking!");
+            console.log(res.data);
+            setTimeout(() => {
+                navigate(`/dashboard`);
+            }, 3000);
+        } catch (error) {
+            toast.error(error.response?.data?.message || "An error occurred while updating your booking. Please try again.");
+        } 
     }
 
     return (
@@ -51,7 +73,7 @@ const PackageForm = () => {
                     <div className="flex justify-between py-4 items-center lg:px-3">
                         <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
                         <h3 className="hidden md:text-3xl lg:block font-semibold">Edit Bookings</h3>
-                        <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl"/></span>
+                        <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
                     </div>
                     <main className='flex  items-start '>
                         <div className="hidden lg:block 2xl:w-[50%] h-[750px] pt-10">
@@ -81,7 +103,7 @@ const PackageForm = () => {
                                     </div>
                                     <div className="mt-4">
                                         <label htmlFor="" className="text-zinc-800 text-lg font-semibold ">
-                                            Email 
+                                            Email
                                         </label>
                                         <input
                                             type="email"
@@ -131,23 +153,6 @@ const PackageForm = () => {
                                                         <option value="10">10</option>
                                                     </select>
                                                 </div>
-                                            </div>
-                                            <div className=" text-center mx-auto">
-                                                <div className="flex space-x-2 mt-6 mb-3 justify-start items-center">
-                                                    <input
-                                                        type="checkbox"
-                                                        name=""
-                                                        id=""
-                                                        className="h-5 w-5 accent-blue rounded"
-                                                        {...register("terms")}
-                                                    />
-                                                    <p className="text-sm w-60 md:w-full">By continuing, you agree to our <span className='text-blue'>Terms</span> and Privacy <span className='text-blue'>Policy</span>.</p>
-                                                </div>{" "}
-                                                {errors.terms && (
-                                                    <p className="text-red text-sm mt-1">
-                                                        {errors.terms?.message}
-                                                    </p>
-                                                )}
                                             </div>
                                         </div>
                                         <button type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-6 w-full text-center rounded-lg text-white capitalize">
