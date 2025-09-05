@@ -22,13 +22,13 @@ const DashboardBottomBar = () => {
 
         <div className=" bg-white h-[8vh] fixed  bottom-0 max-w-[100vw] md:hidden text-white md:px-5 py-2  flex justify-between shadow-md">
             <div className="links w-[100vw] flex justify-evenly items-center text-black ">
-                <Link to='/dashboard' className={`text-[12px]  md:text-[15px]  font-bold  text-center flex flex-col justify-center items-center`}>
+                <Link to='/dashboard' className={`text-[12px]    font-bold  text-center flex flex-col justify-center items-center`}>
                     <GoHomeFill className={`text-5xl   my-1 rounded-md me-3   hover:bg-gray-500 px-2 ${location.pathname === '/dashboard' ? 'bg-zinc-200' : ''}`} />
                 </Link>
-                <Link to='/bookings' className={`text-[12px]  md:text-[15px]  font-bold  text-center flex flex-col justify-center items-center`}>
+                <Link to='/bookings' className={`text-[12px]  font-bold  text-center flex flex-col justify-center items-center`}>
                     <FaRegCaretSquareUp className={`text-5xl   my-1 rounded-md me-3   hover:bg-gray-500 px-2 ${location.pathname === '/bookings' ? 'bg-zinc-200' : ''}`} />
                 </Link>
-                <Link to='/packages' className={`text-[12px]  md:text-[15px]  font-bold  text-center flex flex-col justify-center items-center`}>
+                <Link to='/packages' className={`text-[12px]  font-bold  text-center flex flex-col justify-center items-center`}>
                     <LuClipboardList className={`text-5xl  my-1 rounded-md me-3   hover:bg-gray-500 px-2 ${location.pathname === '/packages' ? 'bg-zinc-200' : ''}`} />
                 </Link>
                 {/* <Link to='' className={`text-[12px]  md:text-[15px]  font-bold  text-center flex flex-col justify-center items-center`}>

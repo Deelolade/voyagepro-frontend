@@ -85,7 +85,7 @@ const PackageListing = () => {
               <h3 className="text-2xl md:text-4xl font-semibold">Package Listing</h3>
               <span>< FaRegUserCircle className="scale-150 text-xl md:text-2xl" /></span>
             </div>
-            <div className="flex mt-8 justify-between items-center">
+            <div className="flex mt-4 justify-between items-center">
               <div className="flex w-[60%] bg-gray border border-zinc-500 rounded-xl md:py-2 px-3 items-center space-x-5">
                 <span>
                   <RiSearchLine className="scale-150" />
@@ -147,7 +147,7 @@ const PackageListing = () => {
                 )}
               </div>
             </div>
-            <div className="mt-12 w-full bg-white rounded-xl">
+            <div className="mt-6 w-full bg-white rounded-xl ">
               {/* Header */}
               <div className="grid grid-cols-5 py-4 px-5  me-auto font-semibold text-lg capitalize text-center shadow-sm">
                 <div />

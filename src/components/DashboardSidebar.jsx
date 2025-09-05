@@ -12,12 +12,12 @@ const DashboardSidebar = () => {
   return (
     <div className='bg-white h-screen shadow-md rounded-lg p-6  flex flex-col justify-between'>
       <div className="">
-        <h3 className='text-3xl font-semibold mt-3'>VoyagePro</h3>
+        <h3 className='2xl:text-2xl font-semibold mt-3'>VoyagePro</h3>
         <ul className='mt-12'>
-            <Link to='' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium '><span className='scale-150 me-3 '><PiSquaresFourBold/></span> Dashboard</Link>
-            <Link to="/bookings" className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3 '><FaRegCaretSquareUp/></span>Bookings</Link>
-            <Link to='/packages' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><LuClipboardList/></span>Package Listings</Link>
-            <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><RiSettings4Fill/></span>Settings</li>
+            <Link to='' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center 2xl:text-lg font-medium '><span className='scale-150 me-3 '><PiSquaresFourBold/></span> Dashboard</Link>
+            <Link to="/bookings" className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center 2xl:text-lg font-medium'><span className='scale-150 me-3 '><FaRegCaretSquareUp/></span>Bookings</Link>
+            <Link to='/packages' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center 2xl:text-lg font-medium'><span className='scale-150 me-3'><LuClipboardList/></span>Package Listings</Link>
+            {/* <li className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3'><RiSettings4Fill/></span>Settings</li> */}
         </ul>
       </div>
       <div className=" flex items-center justify-between ">

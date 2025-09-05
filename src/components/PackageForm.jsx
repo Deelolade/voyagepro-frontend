@@ -77,30 +77,30 @@ const PackageForm = () => {
         } finally {
             setLoading(false);
         }
-        // createPaymentGateway(data);
+        createPaymentGateway(data);
 
     }
-    // const createPaymentGateway = async(data)=>{
-    //     const fullName = data.name;
-    //     const email = data.email;
-    //     const travelDate = data.travelDate;
-    //     const numberOfGuests = guestCount;
-    //     const contactNumber = data.contact;
-    //     const paymentMethod = data.paymentMethod;
-    //     const packageId = currentPackage._id;
-    //     const packageName = currentPackage.title;
-    //     const costPerPerson = currentPackage.pricePerAdult;
-    //     const totalAmountPaid = currentPackage.pricePerAdult * guestCount;
-    //     const redirectUrl = `${import.meta.env.VITE_CLIENT_URL}/confirm-details`;
-    //     const payload = {fullName, email,contactNumber, travelDate, numberOfGuests, paymentMethod, packageId, packageName, costPerPerson, totalAmountPaid, redirectUrl}
-    //     console.log("payment gateway, new payload;", payload)
-    //       try {
-    //         const res = await axios.post(`${API_URL}/payment/initiate`,payload)
-    //         console.log(res.data)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const createPaymentGateway = async(data)=>{
+        const fullName = data.name;
+        const email = data.email;
+        const travelDate = data.travelDate;
+        const numberOfGuests = guestCount;
+        const contactNumber = data.contact;
+        const paymentMethod = data.paymentMethod;
+        const packageId = currentPackage._id;
+        const packageName = currentPackage.title;
+        const costPerPerson = currentPackage.pricePerAdult;
+        const totalAmountPaid = currentPackage.pricePerAdult * guestCount;
+        const redirectUrl = `${import.meta.env.VITE_CLIENT_URL}/confirm-details`;
+        const payload = {fullName, email,contactNumber, travelDate, numberOfGuests, paymentMethod, packageId, packageName, costPerPerson, totalAmountPaid, redirectUrl}
+        console.log("payment gateway, new payload;", payload)
+          try {
+            const res = await axios.post(`${API_URL}/payment/initiate`,payload)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div>
             <section className="">
