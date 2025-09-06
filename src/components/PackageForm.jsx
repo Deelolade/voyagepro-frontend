@@ -21,13 +21,13 @@ const PackageForm = () => {
     const navigate = useNavigate();
     const API_URL = import.meta.env.VITE_API_URL
     const [guestCount, setGuestCount] = useState(1);
-    const [ loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const currentPackage = useSelector((state) => state.package.selectedPackage);
     const paymentOptions = [
-        { label: "Credit/Debit card", value: "card" },
-        { label: "Bank Transfer", value: "bank-transfer" },
-        { label: "Pay on Arrival", value: "payment-on-arrival" },
-        { label: "Mobile Payment", value: "mobile-payment" },
+        { label: "Credit/Debit card", value: "Credit/Debit Card" },
+        { label: "Bank Transfer", value: "Bank Transfer" },
+        // { label: "Pay on Arrival", value: "ussd" },
+        { label: "Mobile Payment", value: "Mobile Payment" },
     ];
     const ValidationSchema = yup.object().shape({
         email: yup.string().email().required("Incorrect Email"),
@@ -59,28 +59,28 @@ const PackageForm = () => {
             toast.error("You must be logged in to update your profile");
             return;
         }
-        // setLoading(true);
-        // try {
-        //     const res = await axios.post(`${API_URL}/bookings`, data, {
-        //         headers: {
-        //             Authorization: `Bearer ${token}`,
-        //         },
-        //     })
-        //     reset()
-        //     toast.success(res.data.message || "You have successfully created a booking!");
-        //     console.log(res.data);
-        //     setTimeout(() => {
-        //         navigate(`/dashboard`);
-        //     }, 3000);
-        // } catch (error) {
-        //     console.error("Error during signup:", error);
-        // } finally {
-        //     setLoading(false);
-        // }
+        setLoading(true);
+        try {
+            const res = await axios.post(`${API_URL}/bookings`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            reset()
+            toast.success(res.data.message || "You have successfully created a booking!");
+            console.log(res.data);
+            setTimeout(() => {
+                navigate(`/dashboard`);
+            }, 3000);
+        } catch (error) {
+            console.error("Error during signup:", error);
+        } finally {
+            setLoading(false);
+        }
         createPaymentGateway(data);
 
     }
-    const createPaymentGateway = async(data)=>{
+    const createPaymentGateway = async (data) => {
         const fullName = data.name;
         const email = data.email;
         const travelDate = data.travelDate;
@@ -91,13 +91,17 @@ const PackageForm = () => {
         const packageName = currentPackage.title;
         const costPerPerson = currentPackage.pricePerAdult;
         const totalAmountPaid = currentPackage.pricePerAdult * guestCount;
-        // const redirectUrl  = "https://www.google.com"
         const redirectUrl = `${import.meta.env.VITE_CLIENT_URL}/confirm-details`;
-        const payload = {fullName, email,contactNumber, travelDate, numberOfGuests, paymentMethod, packageId, packageName, costPerPerson, totalAmountPaid, redirectUrl}
+        const payload = { fullName, email, contactNumber, travelDate, numberOfGuests, paymentMethod, packageId, packageName, costPerPerson, totalAmountPaid, redirectUrl }
         console.log("payment gateway, new payload;", payload)
-          try {
-            const res = await axios.post(`${API_URL}/payment/initiate`,payload)
+        try {
+            const res = await axios.post(`${API_URL}/payment/initiate`, payload)
             console.log(res.data)
+            if (res.data.status === "success") {
+              localStorage.setItem("pendingPayment", JSON.stringify(payload));
+                // Redirect user to Flutterwave checkout page
+                window.location.href = (res.data.paymentLink);
+            }
         } catch (error) {
             console.log(error)
         }
@@ -105,7 +109,7 @@ const PackageForm = () => {
     return (
         <div>
             <section className="">
-                {loading && <Spinner/>}
+                {loading && <Spinner />}
                 <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6 ">
                     <div className="flex justify-between py-4 items-center px-3">
                         <h3 className="text-sm font-semibold">Voyagepro</h3>
@@ -247,7 +251,7 @@ const PackageForm = () => {
                                         </div>
                                         <motion.button
                                             whileHover={{ scale: 1.1 }}
-                                            whileTap={{ scale: 0.9 }} 
+                                            whileTap={{ scale: 0.9 }}
                                             type="submit" className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
                                             Proceed
                                         </motion.button>
