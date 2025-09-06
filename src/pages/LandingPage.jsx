@@ -117,7 +117,7 @@ const LandingPage = () => {
                 <div className="bg-white rounded-xl shadow-lg h-[300px] md:h-[400px]  ">
                   <img
                     loading="lazy"
-                    src={pkg.image}
+                    src={pkg.images[0]}
                     alt={pkg.location.coutry}
                     className="w-full h-44 md:h-60 object-cover rounded-t-xl mb-2 md:mb-4"
                   />
