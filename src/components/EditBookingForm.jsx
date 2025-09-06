@@ -71,7 +71,7 @@ const PackageForm = () => {
             <section className="">
                 <div className="h-screen  max-w-7xl mx-auto px-3">
                     <div className="flex justify-between py-4 items-center lg:px-3">
-                        <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
+                        <h3 className="text-sm font-semibold">Voyagepro</h3>
                         <h3 className="hidden md:text-3xl lg:block font-semibold">Edit Bookings</h3>
                         <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
                     </div>

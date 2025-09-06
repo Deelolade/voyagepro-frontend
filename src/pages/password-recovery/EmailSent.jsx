@@ -17,7 +17,7 @@ const EmailSent = () => {
     <>
       <section className=" 2xl:p-20 px-3 md:px-5 lg:px-10">
         <div className="flex flex-col lg:flex-row justify-between items-center   lg:w-[70%] 2xl:w-[64%]">
-          <h1 className="mr-auto md:mr-0 text-2xl xs:text-3xl 2xl:text-4xl font-semibold">VoyagePro</h1>
+          <h1 className="mr-auto md:mr-0 text-sm font-semibold">VoyagePro</h1>
           <div className="mt-3 md:mt-6">
             <ForgottenPassWordBreadCrumbs />
           </div>

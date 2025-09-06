@@ -11,7 +11,7 @@ const Footer = () => {
       <footer className="bg-lightblue max-w-7xl mx-auto px-3 h-auto">
         <div className=" flex flex-col gap-5 lg:gap-0 lg:flex-row px-3 pt-12 pb-6 justify-between">
           <div className="flex flex-col justify-between ">
-            <h4 className="text-2xl md:text-4xl font-bold">VoyagePro</h4>
+            <h4 className="text-sm md:text-4xl font-bold">VoyagePro</h4>
             <p className="max-w-md text-gray text-left md:text-lg mt-2 md:mt-20">
               Embark on a luxurious journey to the heart . This curated
               experience blends adventure, relaxation, and culture in one of the

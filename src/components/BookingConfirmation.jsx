@@ -80,7 +80,7 @@ const BookingConfirmation = () => {
         <>
             <section className="py-6 px-3 max-h-screen max-w-7xl mx-auto ">
                 <div className="flex justify-between items-center">
-                    <h2 className='hidden text-lg md:block font-semibold'>VoyagePro</h2>
+                    <h2 className='hidden text-sm md:block font-semibold'>VoyagePro</h2>
                     <h2 className='text-2xl md:text-2xl font-semibold'>Bookings</h2>
                     <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
                 </div>

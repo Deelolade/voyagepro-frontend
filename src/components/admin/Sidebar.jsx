@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <div className='bg-white h-screen shadow-md rounded-lg p-6  flex flex-col justify-between'>
       <div className="">
-        <h3 className='text-3xl font-semibold mt-3'>VoyagePro</h3>
+        <h3 className='text-sm font-semibold mt-3'>VoyagePro</h3>
         <ul className='mt-12'>
           <Link to='/dashboard' className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium '><span className='scale-150 me-3 '><PiSquaresFourBold /></span> Dashboard</Link>
           <Link to="/booking" className='w-full hover:bg-slate-200 p-3 rounded-lg my-2 flex items-center text-lg font-medium'><span className='scale-150 me-3 '><FaRegCaretSquareUp /></span>Bookings</Link>

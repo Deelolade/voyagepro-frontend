@@ -83,7 +83,7 @@ const Login = () => {
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.5 }}
         className="xs:w-full xxs:px-5 xxs:py-3 sm:px-8  md:w-[70%] md:py-8 lg:w-[50%] 2xl:w-[50%] 2xl:p-10 relative flex flex-col justify-between">
-          <h1 className="text-sm md:text-sm font-semibold xxs:mb-6 lg:mb-0">VoyagePro</h1>
+          <h1 className="text-sm font-semibold xxs:mb-6 lg:mb-0">VoyagePro</h1>
           <div className="2xl:w-[70%] ">
             <div className="">
               <h1 className="text-xl  md:text-3xl font-semibold xxs:my-2 2xl:my-5">

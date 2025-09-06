@@ -108,7 +108,7 @@ const PackageForm = () => {
                 {loading && <Spinner/>}
                 <div className="h-screen  max-w-7xl mx-auto px-3 md:px-6 ">
                     <div className="flex justify-between py-4 items-center px-3">
-                        <h3 className="text-2xl md:text-3xl font-semibold">Voyagepro</h3>
+                        <h3 className="text-sm font-semibold">Voyagepro</h3>
                         <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
                     </div>
                     <main className='md:mt-2 flex gap-10'>
