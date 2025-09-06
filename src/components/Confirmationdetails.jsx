@@ -26,9 +26,12 @@ const Confirmationdetails = () => {
             try {
                 const res = await axios.post(`${API_URL}/payment/confirmPayment`, { tx_ref });
                 console.log(res.data)
-                if (res.data.status === "success"|| res.data.status === "successful") {
+                if (res.data.status === "success" || res.data.status === "successful") {
                     setStatus(" Payment confirmed! Check your email for details.");
                     console.log("Saved booking details:", savedPayment);
+                    const booked = JSON.parse(localStorage.getItem("bookedPackages")) || [];
+                    booked.push(savedPayment.packageId); // savedPayment contains your package info
+                    localStorage.setItem("bookedPackages", JSON.stringify(booked));
                     // localStorage.removeItem("pendingPayment"); 
                 } else {
                     setStatus(" Payment not confirmed. Please contact support.");
@@ -40,7 +43,7 @@ const Confirmationdetails = () => {
         };
 
         // Only verify if status from Flutterwave says completed
-        if (statusFromUrl === "completed" ||statusFromUrl === "successful") {
+        if (statusFromUrl === "completed" || statusFromUrl === "successful") {
             verifyPayment();
         } else {
             setStatus("Payment not completed.");

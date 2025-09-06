@@ -129,7 +129,6 @@ const BookingConfirmation = () => {
                                         </div>
                                         <p className='text-lg font-medium'>{formatDate(booking?.travelDate)}</p>
                                         <div className="mx-auto">
-                                            {/* <p>{booking.packageId}</p> */}
                                             <button
                                                 onClick={() => setOpenMenuId(openMenuId === booking._id ? null : booking._id)}
                                                 className='mt-2 bg-blue py-2 px-3 text-sm text-white rounded-lg'>

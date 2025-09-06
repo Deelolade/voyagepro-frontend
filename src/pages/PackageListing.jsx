@@ -20,8 +20,19 @@ const PackageListing = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [openMenuId, setOpenMenuId] = useState(null);
   const [search, setSearch] = useState("");
+  const [isBooked, setIsBooked] = useState(false);
   const [location, setLocation] = useState("");
   const [sortBy, setSortBy] = useState("createdAt");
+
+
+  // confirm bookings 
+  // const packageId = pkg._id
+  // useEffect(() => {
+  //   const booked = JSON.parse(localStorage.getItem("bookedPackages")) || [];
+  //   if (booked.includes(packageId)) {
+  //     setIsBooked(true);
+  //   }
+  // }, [packageId]);
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -78,9 +89,9 @@ const PackageListing = () => {
     <>
       {loading && <Spinner />}
       <section id="packages" className="max-h-screen h-screen flex">
-        <div className="max-w-7xl mx-auto flex justify-between ">
+        <div className="max-w-6xl mx-auto flex justify-between ">
           {/* Main section */}
-          <main className="max-w-7xl p-3 md:p-6 ">
+          <main className="max-w-6xl p-3 md:p-6 ">
             <div className=" flex justify-between items-center">
               <h3 className="text-2xl md:text-4xl font-semibold">Package Listing</h3>
               <span>< FaRegUserCircle className="scale-150 text-xl md:text-2xl" /></span>
@@ -174,7 +185,7 @@ const PackageListing = () => {
                       <p className="text-sm text-zinc-500">{pkg?.location?.city}</p>
                       <div className=" flex flex-col items-center justify-center space-y-2">
                         <button
-                          className="bg-blue px-3 py-2  rounded-lg text-sm text-white"
+                          className="bg-blue px-3 py-2  rounded-md text-sm text-white"
                           onClick={() => setOpenMenuId(openMenuId === pkg._id ? null : pkg._id)}
                         >
                           {openMenuId === pkg._id ? "Close" : "View More"}
@@ -204,7 +215,7 @@ const PackageListing = () => {
                           </div>
 
                           <div className="flex justify-end gap-3 pt-3">
-                            <button onClick={() => handlePackage(pkg)} className="px-3 py-2 bg-blue text-white rounded-lg text-sm">Book Now</button>
+                            <button onClick={() => handlePackage(pkg)} className="px-3 py-2 bg-blue text-white rounded-md text-sm">Book Now</button>
                           </div>
                         </motion.div>
                       )}

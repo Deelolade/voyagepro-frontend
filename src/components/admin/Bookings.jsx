@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Spinner from '../ui/Spinner';
+import { IoFilter } from 'react-icons/io5';
 
 
 const Bookings = () => {
@@ -24,6 +25,13 @@ const Bookings = () => {
     queryKey: ['bookings',token],
     queryFn: ()=>getAllBookings(token)
   })
+  const formatDate = (dateString) => {
+        return new Date(dateString).toLocaleDateString('en-us', {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        })
+    }
   return (
     <section className="py-6 px-4 max-h-screen ">
       {isLoading && <Spinner/>}
@@ -46,7 +54,8 @@ const Bookings = () => {
             <span>Add Package</span>
           </Link>
           <div className=" flex  justify-center space-x-4">
-            <button className='bg-purple-400 px-3 py-2 rounded-lg'>Filter</button>
+            <button className='bg-purple-400 px-3 py-2 rounded-lg space-x-4'><span>Filter</span>
+                              <IoFilter className="inline scale-110" /></button>
             <p className='flex space-x-2 items-center'><span>Sort By</span> <span><FaChevronDown/></span></p>
           </div>
         </div>
@@ -69,8 +78,8 @@ const Bookings = () => {
                         <span className='ms-3'><FaChevronDown /></span>
                       </p>
                     </div>
-                    <p className='text-center'>{booking?.date}</p>
-                    <p className='text-center'>{booking?.update}</p>
+                    <p className='text-center'>{formatDate(booking?.travelDate)}</p>
+                    <p className='text-center'>Payment Received</p>
                   </div>
                 )
               }) : <p className='text-center'>No bookings found</p> 
