@@ -1,7 +1,7 @@
 import { useState } from "react";
 import BreadCrumbs from "../../components/SignUpBreadCrumbs";
 import { Link } from "react-router-dom";
-import image from "../../images/voyage-pro-1.png";
+import image from "../../images/voyage-pro-1.webp";
 import { FcGoogle } from "react-icons/fc";
 import { IoMail } from "react-icons/io5";
 import { FaEye, FaEyeSlash } from "react-icons/fa";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import mainImage from "../images/hero-image.png";
+import mainImage from "../images/hero-image.webp";
 import { BiLogOut } from "react-icons/bi";
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';

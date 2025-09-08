@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaRegBell, FaRegUserCircle } from "react-icons/fa";
 import { RiSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import image from "../images/dashboard-image-three.png";
+import image from "../images/dashboard-image-three.webp";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { selectPackage } from "../redux/packages/packageSlice";

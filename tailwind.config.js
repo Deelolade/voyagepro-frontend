@@ -41,8 +41,8 @@ module.exports = {
         lightgreen: "#84EBB4",
       },
       backgroundImage: {
-        'hero-pattern': "url('/src/images/hero-image.png')",
-        'confirm-pattern': "url('/src/images/confirm-pattern.png')",
+        'hero-pattern': "url('/src/images/hero-image.webp')",
+        'confirm-pattern': "url('/src/images/confirm-pattern.webp')",
       },
     },
   },

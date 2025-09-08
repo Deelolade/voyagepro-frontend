@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import image from "../../images/voyagepro-login.png";
+import image from "../../images/voyagepro-login.webp";
 import { FcGoogle } from "react-icons/fc";
 import { IoMail } from "react-icons/io5";
 import { FaEye, FaEyeSlash } from "react-icons/fa";

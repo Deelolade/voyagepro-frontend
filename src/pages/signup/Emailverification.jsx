@@ -1,7 +1,7 @@
 import { useState } from "react";
 import BreadCrumbs from "../../components/SignUpBreadCrumbs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import image from "../../images/voyage-pro-1.png";
+import image from "../../images/voyage-pro-1.webp";
 import { BiArrowBack } from "react-icons/bi";
 import OtpInput from "../../components/OTPInput";
 import axios from "axios";

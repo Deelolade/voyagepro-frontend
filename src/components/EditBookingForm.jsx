@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import imageOne from "../images/edit-package-one.png";
-import imageTwo from "../images/edit-package-two.png";
-import imageThree from "../images/edit-package-three.png";
-import imageFour from "../images/edit-package-four.png";
+import imageOne from "../images/edit-package-one.webp";
+import imageTwo from "../images/edit-package-two.webp";
+import imageThree from "../images/edit-package-three.webp";
+import imageFour from "../images/edit-package-four.webp";
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'

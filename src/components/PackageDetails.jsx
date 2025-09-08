@@ -7,7 +7,7 @@ import { MdStarRate } from "react-icons/md";
 import { LuNotebookPen } from "react-icons/lu";
 import { motion } from "framer-motion";
 import { FaRegUserCircle } from "react-icons/fa";
-import dashboardImageTwo from "../images/dashboard-image-two.png";
+import dashboardImageTwo from "../images/dashboard-image-two.webp";
 
 
 const PackagesDetails = () => {

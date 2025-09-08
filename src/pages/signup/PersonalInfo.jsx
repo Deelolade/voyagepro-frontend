@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import image from "../../images/voyage-pro-1.png";
+import image from "../../images/voyage-pro-1.webp";
 import { BiArrowBack } from "react-icons/bi";
 import BreadCrumbs from "../../components/SignUpBreadCrumbs";
 import { useForm } from "react-hook-form";
@@ -141,7 +141,7 @@ const PersonalInfo = () => {
                   {/* Flag & Country Code Box */}
                   <div className="flex items-center  sm:px-2 2xl:px-4 py-3 border-r-zinc-300 rounded-l-lg bg-zinc-200">
                     <img
-                      src="https://flagcdn.com/w40/ng.png"
+                      src="https://flagcdn.com/w40/ng.webp"
                       alt="Nigeria"
                       className="w-5 h-5 mr-2"
                     />

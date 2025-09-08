@@ -1,5 +1,5 @@
-import imageOne from "../images/edit-package-one.png";
-import mainImage from "../images/hero-image.png";
+import imageOne from "../images/edit-package-one.webp";
+import mainImage from "../images/hero-image.webp";
 import airplaneLocation from "../images/airplane-location.png";
 import airplaneTag from "../images/airplane-tag.png";
 import { BiSolidCheckCircle } from "react-icons/bi";

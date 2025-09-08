@@ -1,5 +1,5 @@
-import dashboardImageOne from "../images/dashboard-image-one.png";
-import dashboardImageTwo from "../images/dashboard-image-two.png";
+import dashboardImageOne from "../images/dashboard-image-one.webp";
+import dashboardImageTwo from "../images/dashboard-image-two.webp";
 import { IoMdStar, IoIosStarHalf } from "react-icons/io";
 import { FiGlobe } from "react-icons/fi";
 import { ImAirplane } from "react-icons/im";
