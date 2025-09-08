@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import HeroSection from "../components/HeroSection";
 import PackageImage from "../images/package-image.webp";
+import dashboardImageOne from "../images/dashboard-image-one.webp";
 import imageOne from "../images/landing-image-1.webp";
 import imageTwo from "../images/landing-image-2.webp";
 import imageThree from "../images/landing-image-3.webp";
@@ -24,11 +25,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { selectPackage } from "../redux/packages/packageSlice";
 import axios from "axios";
+import Marquee from "react-fast-marquee";
+import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
   const API_URL = import.meta.env.VITE_API_URL;
-  console.log(API_URL)
   const [packages, setPackages] = useState([]);
   const navigate = useNavigate();
   const sliderRef = useRef(null);
@@ -117,7 +119,7 @@ const LandingPage = () => {
                 <div className="bg-white rounded-xl shadow-lg h-[300px] md:h-[400px]  ">
                   <img
                     loading="lazy"
-                    src={pkg.images[0]}
+                    src={pkg.images[0] || PackageImage}
                     alt={pkg.location.coutry}
                     className="w-full h-44 md:h-60 object-cover rounded-t-xl mb-2 md:mb-4"
                   />
@@ -217,7 +219,7 @@ const LandingPage = () => {
                   accommodations.
                   <br />
                   Enjoy real-time booking, transparent pricing, and automated
-                  invoicing—all designed to simplify your workflow.
+                  invoicing all designed to simplify your workflow.
                   <br />
                   Dedicated account managers and 24/7 support ensure you deliver
                   world-class travel services with confidence and efficiency.
@@ -327,44 +329,46 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="bg-green mt-10 md:mt-20 p-3 md:p-10">
-            <div className="max-w-7xl mx-auto flex flex-col gap-5 md:gap-0 md:flex-row items-center justify-between my-3 ">
-              <div className=" flex justify-center items-center space-x-3">
-                <span>
-                  <MdOutlineStar className="text-6xl md:text-7xl text-orange" />
-                </span>
-                <div className="">
-                  <h1 className="text-2xl md:text-4xl font-semibold">20k</h1>
-                  <p className="text-lg md:text-xl">Happy clients</p>
+            <Marquee speed={50} gradient={false}>
+              <div className=" mx-auto flex flex-col space-x-40 md:gap-0 md:flex-row items-center justify-between my-3 ">
+                <div className=" flex justify-center items-center space-x-3">
+                  <span>
+                    <MdOutlineStar className="text-6xl md:text-7xl text-orange" />
+                  </span>
+                  <div className="">
+                    <h1 className="text-2xl md:text-4xl font-semibold">20k</h1>
+                    <p className="text-lg md:text-xl">Happy clients</p>
+                  </div>
+                </div>
+                <div className=" flex justify-center items-center space-x-3">
+                  <span>
+                    <LiaAwardSolid className="text-6xl md:text-7xl text-orange" />
+                  </span>
+                  <div className="">
+                    <h1 className="text-2xl md:text-4xl font-semibold">250+</h1>
+                    <p className="text-lg md:text-xl">Awards Achieved</p>
+                  </div>
+                </div>
+                <div className=" flex justify-center items-center space-x-3">
+                  <span>
+                    <HiOutlineUserGroup className="text-6xl md:text-7xl text-orange" />
+                  </span>
+                  <div className="">
+                    <h1 className="text-2xl md:text-4xl font-semibold">15k</h1>
+                    <p className="text-lg md:text-xl">Active Members</p>
+                  </div>
+                </div>
+                <div className=" flex justify-center items-center space-x-3">
+                  <span>
+                    <FaLocationDot className="text-6xl md:text-7xl text-orange" />
+                  </span>
+                  <div className="">
+                    <h1 className="text-2xl md:text-4xl font-semibold">20+</h1>
+                    <p className="text-lg md:text-xl">Tour Destination</p>
+                  </div>
                 </div>
               </div>
-              <div className=" flex justify-center items-center space-x-3">
-                <span>
-                  <LiaAwardSolid className="text-6xl md:text-7xl text-orange" />
-                </span>
-                <div className="">
-                  <h1 className="text-2xl md:text-4xl font-semibold">250+</h1>
-                  <p className="text-lg md:text-xl">Awards Achieved</p>
-                </div>
-              </div>
-              <div className=" flex justify-center items-center space-x-3">
-                <span>
-                  <HiOutlineUserGroup className="text-6xl md:text-7xl text-orange" />
-                </span>
-                <div className="">
-                  <h1 className="text-2xl md:text-4xl font-semibold">15k</h1>
-                  <p className="text-lg md:text-xl">Active Members</p>
-                </div>
-              </div>
-              <div className=" flex justify-center items-center space-x-3">
-                <span>
-                  <FaLocationDot className="text-6xl md:text-7xl text-orange" />
-                </span>
-                <div className="">
-                  <h1 className="text-2xl md:text-4xl font-semibold">20+</h1>
-                  <p className="text-lg md:text-xl">Tour Destination</p>
-                </div>
-              </div>
-            </div>
+            </Marquee>
           </div>
         </section>
         {/* Our Blogs */}

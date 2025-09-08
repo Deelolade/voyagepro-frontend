@@ -37,6 +37,7 @@ const DashboardMain = () => {
     navigate(`/packages/${pkg._id}`)
     dispatch(selectPackage(pkg))
   }
+  console.log(packages)
   return (
     <div>
       <section className="pt-6 pb-12 lg:py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide mb-10 "> 
@@ -69,7 +70,7 @@ const DashboardMain = () => {
             {packages.slice( 0,4 ).map((pkg, idx) => {
               return (
                 <div className="" key={idx}>
-                  <img src={pkg.image || dashboardImageTwo } className='rounded-lg shadow-lg' />
+                  <img src={pkg.images[0] || dashboardImageTwo } className='rounded-lg shadow-lg' />
                   <div className="mt-2">
                     <p className='text-lg'>{`${pkg.location.country}, ${pkg.location.city}`}</p>
                     <p className='text-sm'>#{pkg.pricePerAdult.toLocaleString()}</p>

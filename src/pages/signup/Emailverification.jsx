@@ -53,7 +53,7 @@ const Emailverification = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 0.5 }}
-         className="2xl:w-[50%] min-h-[900px] hidden lg:block ">
+         className="2xl:w-[50%] min-h-[850px] hidden lg:block ">
           <img
             src={image}
             alt="voyage-pro-"

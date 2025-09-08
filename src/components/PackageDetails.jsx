@@ -18,6 +18,7 @@ const PackagesDetails = () => {
     !currentUser ? navigate('/signup') :
       navigate(`/packages/${packageId}/package-form`);
   }
+  console.log(selectedPackage)
   return (
     <>
       <section className="">
@@ -34,9 +35,9 @@ const PackagesDetails = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5 }}
-              className=" hidden min-h-[900px] lg:block lg:w-[50%] ">
+              className=" hidden h-[850px] lg:block lg:w-[50%] ">
               <img
-                src={selectedPackage?.image || dashboardImageTwo}
+                src={selectedPackage?.images[0] || dashboardImageTwo}
                 alt={selectedPackage?.location.city}
                 className="w-full h-full object-cover rounded-xl"
               />
@@ -98,7 +99,7 @@ const PackagesDetails = () => {
               <div className=" mt-5">
                 <div className="grid md:grid-cols-2 gap- items-center justify-center">
                   <img
-                    src={selectedPackage.image || dashboardImageTwo}
+                    src={selectedPackage.images[0] || dashboardImageTwo}
                     alt={selectedPackage.location.city}
                     className="rounded-2xl md:w-52 md:h-32"
                   />

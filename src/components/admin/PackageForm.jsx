@@ -147,7 +147,7 @@ const PackageForm = () => {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 100 }}
                             transition={{ duration: 0.5 }}
-                            className=" 2xl:w-[50%] hidden min-h-[900px] lg:block lg:w-[50%] ">
+                            className=" 2xl:w-[50%] hidden min-h-[850px] lg:block lg:w-[50%] ">
                             <img
                                 src={imageOne}
                                 alt="voyagePro-image"
