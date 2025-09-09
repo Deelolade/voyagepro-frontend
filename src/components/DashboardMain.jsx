@@ -40,7 +40,7 @@ const DashboardMain = () => {
   console.log(packages)
   return (
     <div>
-      <section className="pt-6 pb-12 lg:py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide mb-10 "> 
+      <section className="pt-6 pb-12 lg:py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide "> 
         <div className="flex justify-between items-center">
           <h2 className='text-xl lg:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
           <div className="flex space-x-6 items-center">
@@ -70,7 +70,7 @@ const DashboardMain = () => {
             {packages.slice( 0,4 ).map((pkg, idx) => {
               return (
                 <div className="" key={idx}>
-                  <img src={pkg.images[0] || dashboardImageTwo } className='rounded-lg shadow-lg' />
+                  <img src={pkg.images[0] || dashboardImageTwo } onError={(e)=> {e.currentTarget.src = dashboardImageOne}} className='rounded-lg shadow-lg w-52 h-36 object-cover' />
                   <div className="mt-2">
                     <p className='text-lg'>{`${pkg.location.country}, ${pkg.location.city}`}</p>
                     <p className='text-sm'>#{pkg.pricePerAdult.toLocaleString()}</p>

@@ -75,6 +75,7 @@ const BookingConfirmation = () => {
             </>
         )
     }
+    console.log(bookings)
 
     return (
         <>
@@ -121,7 +122,7 @@ const BookingConfirmation = () => {
                                 .map((booking, idx) => (
                                     <div key={idx} className=" max-w-6xl mx-auto relative grid grid-cols-5 items-center gap-2 py-4 text-center">
                                         <div className="flex justify-center items-center">
-                                            <img src={booking.packageImages[0] || imageOne} alt={booking.name} className='w-36 h-20 rounded-lg object-cover' />
+                                            <img src={booking.packageImages[0] || imageOne} alt={booking.name} onError={(e)=> {e.currentTarget.src = imageOne}} className='w-36 h-20 rounded-lg object-cover' />
                                         </div>
                                         <p className='text-lg font-'>{booking.packageName}</p>
                                         <div className="">
@@ -175,8 +176,9 @@ const BookingConfirmation = () => {
                                                             {booking.packageImages.map((img, i) => (
                                                                 <img
                                                                     key={i}
-                                                                    src={img}
+                                                                    src={img || imageOne}
                                                                     alt={`package-${i}`}
+                                                                    onError={(e)=> {e.currentTarget.src = imageOne}}
                                                                     className="w-20 h-14 rounded object-cover"
                                                                 />
                                                             ))}
