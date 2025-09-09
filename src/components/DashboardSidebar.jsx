@@ -7,6 +7,7 @@ import { RiSettings4Fill } from "react-icons/ri";
 import { LuClipboardList } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import UserButton from "./ui/UserButton";
 const DashboardSidebar = () => {
   const currentUser =  useSelector((state) => state.user.currentUser);
   return (
@@ -22,7 +23,7 @@ const DashboardSidebar = () => {
       </div>
       <div className=" flex items-center justify-between ">
         <div className="flex items-center space-x-5">
-          <span>< FaRegUserCircle className="scale-150 text-2xl"/></span>
+          <UserButton/>
             <div className="">
                 <h4 className='text-sm font-semibold'>{`${currentUser?.firstname} ${currentUser?.lastname}  `}</h4>
             <p className='text-sm text-zinc-500'>Traveler</p>

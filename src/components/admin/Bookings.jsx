@@ -1,4 +1,4 @@
-import { FaRegBell, FaRegUserCircle } from 'react-icons/fa'
+import { FaRegBell, } from 'react-icons/fa'
 import { PiSquaresFourBold } from "react-icons/pi";
 import { BiArrowBack } from "react-icons/bi";
 import { FaPlus, FaChevronDown } from "react-icons/fa6";
@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Spinner from '../ui/Spinner';
 import { IoFilter } from 'react-icons/io5';
+import UserButton from '../ui/UserButton';
 
 
 const Bookings = () => {
@@ -42,7 +43,7 @@ const Bookings = () => {
           <div className="flex space-x-6 items-center justify-end ">
             <span><PiSquaresFourBold className='text-2xl ' /></span>
             <span><FaRegBell className='text-2xl ' /></span>
-            <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>            
+            <UserButton/>
           </div>
           <Link to="/dashboard" className=" bg-white w-9 h-9 rounded-md flex items-center justify-center mt-2">
             <span><BiArrowBack className='text-2xl ' /></span>

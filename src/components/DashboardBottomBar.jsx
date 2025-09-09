@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { GoHomeFill } from "react-icons/go";
 import { RiSettings4Fill } from "react-icons/ri";
-import { FaRegCaretSquareUp, FaRegUserCircle } from 'react-icons/fa';
+import { FaRegCaretSquareUp } from 'react-icons/fa';
 import { LuClipboardList } from 'react-icons/lu';
 import ProfileModal from './ui/ProfileModal';
 import { useState } from 'react';

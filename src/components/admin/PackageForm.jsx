@@ -8,7 +8,6 @@ import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import { useNavigate } from "react-router-dom";
 import CreatableSelect from 'react-select/creatable';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaRegUserCircle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { MdOutlineFileUpload } from "react-icons/md";
 import axios from 'axios';

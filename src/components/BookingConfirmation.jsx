@@ -4,12 +4,12 @@ import airplaneLocation from "../images/airplane-location.png";
 import airplaneTag from "../images/airplane-tag.png";
 import { BiSolidCheckCircle } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { selectPackage } from "../redux/packages/packageSlice";
 import { motion } from "framer-motion";
+import UserButton from "./ui/UserButton";
 
 const BookingConfirmation = () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -75,7 +75,6 @@ const BookingConfirmation = () => {
             </>
         )
     }
-    console.log(bookings)
 
     return (
         <>
@@ -83,7 +82,7 @@ const BookingConfirmation = () => {
                 <div className="flex justify-between items-center">
                     <h2 className='hidden text-sm md:block font-semibold'>VoyagePro</h2>
                     <h2 className='text-2xl md:text-2xl font-semibold'>Bookings</h2>
-                    <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
+                    <UserButton/>
                 </div>
                 <div className=" mt-4">
                     <img src={mainImage} alt="voyagepro booking confirmation image" className='h-44 md:h-64 w-full object-cover rounded-xl' />
@@ -122,7 +121,7 @@ const BookingConfirmation = () => {
                                 .map((booking, idx) => (
                                     <div key={idx} className=" max-w-6xl mx-auto relative grid grid-cols-5 items-center gap-2 py-4 text-center">
                                         <div className="flex justify-center items-center">
-                                            <img src={booking.packageImages[0] || imageOne} alt={booking.name} onError={(e)=> {e.currentTarget.src = imageOne}} className='w-36 h-20 rounded-lg object-cover' />
+                                            <img src={booking.packageImages[0] || imageOne} alt={booking.name} onError={(e) => { e.currentTarget.src = imageOne }} className='w-36 h-20 rounded-lg object-cover' />
                                         </div>
                                         <p className='text-lg font-'>{booking.packageName}</p>
                                         <div className="">
@@ -178,7 +177,7 @@ const BookingConfirmation = () => {
                                                                     key={i}
                                                                     src={img || imageOne}
                                                                     alt={`package-${i}`}
-                                                                    onError={(e)=> {e.currentTarget.src = imageOne}}
+                                                                    onError={(e) => { e.currentTarget.src = imageOne }}
                                                                     className="w-20 h-14 rounded object-cover"
                                                                 />
                                                             ))}

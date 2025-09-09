@@ -5,7 +5,9 @@ import { X, Trash2, Upload } from 'lucide-react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { BiLogOut } from 'react-icons/bi';
 import { logOut } from '../../redux/users/userSlice';
+import { useDispatch } from 'react-redux';
 const ProfileModal = ({ isOpen, onClose, user }) => {
+    const dispatch = useDispatch();
     console.log(user)
     const fileInputRef = useRef(null)
     return (
@@ -18,7 +20,7 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
                     </div>
 
                     {/* Modal content */}
-                    <div className="bg-white rounded-xl shadow-xl p-6 w-96 flex flex-col items-center space-y-4 relative">
+                    <div className="bg-white rounded-xl shadow-xl p-6 w-96 md:w-[600px] md:h-auto flex flex-col items-center space-y-4 relative">
                         {/* Profile image / icon */}
                         <div className="flex flex-col items-center relative">
                             {user?.profileImage ? (
@@ -44,7 +46,7 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
                             <button
                                 type="button"
                                 onClick={() => fileInputRef.current?.click()}
-                                className="absolute   bg-blue-50 text-blue-700 p-2 rounded-full hover:bg-blue-100 transition-colors"
+                                className="absolute hidden  bg-blue-50 text-blue-700 p-2 rounded-full hover:bg-blue-100 transition-colors"
                             >
                                 <Upload className="w-5 h-5" />
                             </button>
@@ -52,7 +54,7 @@ const ProfileModal = ({ isOpen, onClose, user }) => {
 
                         {/* User info */}
                         <div className="text-center">
-                            <h2 className="text-2xl font-semibold">{user?.fullName || "John Doe"}</h2>
+                            <h2 className="text-2xl font-semibold">{user?.firstname + user?.lastname || "John Doe"}</h2>
                             <p className="text-gray-600">{user?.email || "user@example.com"}</p>
                         </div>
 

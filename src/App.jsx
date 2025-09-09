@@ -14,6 +14,7 @@ import DashboardBottomBar from '../src/components/DashboardBottomBar'
 import DashboardBottom from '../src/components/admin/DashboardBottom'
 import { logOut } from "./redux/users/userSlice";
 import { lazy, Suspense } from "react";
+import Spinner from "./components/ui/Spinner";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,8 +35,7 @@ const App = () => {
       {/* <button className="absolute bg-red px-3 py-2 text-white rounded-lg " onClick={() => dispatch(logOut())}>logOut</button> */}
 
       <ToastContainer />
-      <Suspense fallback={<div>loading...</div>}>
-
+      <Suspense fallback={<Spinner/>}>
         <Routes>
           {/* public routes */}
           <Route path="/" element={<LandingPage />} />

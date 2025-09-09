@@ -1,11 +1,12 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { PiSquaresFourBold } from "react-icons/pi";
-import { FaRegCaretSquareUp, FaRegUserCircle } from "react-icons/fa";
+import { FaRegCaretSquareUp } from "react-icons/fa";
 import { RiSettings4Fill } from "react-icons/ri";
 import { LuClipboardList } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
+import UserButton from "../ui/UserButton";
 
 const Sidebar = () => {
   const currentUser = useSelector(state => state.user.currentUser)
@@ -24,7 +25,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className=" flex items-center justify-between">
-        <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
+        <UserButton/>
         <div className="">
           <h4 className='text-lg font-semibold'>{currentUser.firstname} {currentUser.lastname}</h4>
           <p className='text-sm text-zinc-500'>Admin</p>

@@ -8,7 +8,9 @@ import axios from "axios";
 import { selectPackage } from "../redux/packages/packageSlice";
 import { IoFilter } from "react-icons/io5";
 import Spinner from "../components/ui/Spinner";
+import imageOne from "../images/edit-package-one.webp";
 import { motion } from "framer-motion";
+import UserButton from "../components/ui/UserButton";
 
 const PackageListing = () => {
   const dispatch = useDispatch();
@@ -93,8 +95,8 @@ const PackageListing = () => {
           {/* Main section */}
           <main className="max-w-6xl p-3 md:p-6 ">
             <div className=" flex justify-between items-center">
-              <h3 className="text-2xl md:text-4xl font-semibold">Package Listing</h3>
-              <span>< FaRegUserCircle className="scale-150 text-xl md:text-2xl" /></span>
+              <h3 className="text-2xl md:text-3xl font-semibold">Package Listing</h3>
+              <UserButton/>
             </div>
             <div className="flex mt-4 justify-between items-center">
               <div className="flex w-[60%] bg-gray border border-zinc-500 rounded-xl md:py-1 px-3 items-center space-x-5">
@@ -158,7 +160,7 @@ const PackageListing = () => {
                 )}
               </div>
             </div>
-            <div className="mt-6 w-full bg-white rounded-xl ">
+            <div className="mt-6  bg-white rounded-xl w-[1200px]">
               {/* Header */}
               <div className="grid grid-cols-5 py-4 px-5  me-auto font-semibold text-lg capitalize text-center shadow-sm">
                 <div />
@@ -178,6 +180,7 @@ const PackageListing = () => {
                       <img
                         src={pkg.images[0] || image}
                         alt={pkg.title || "Package image"}
+                        onError={(e)=> {e.currentTarget.src = imageOne}}
                         className="h-28 w-full object-cover rounded-lg"
                       />
                       <p className="text-sm text-zinc-500">{pkg?.title}</p>
@@ -224,7 +227,7 @@ const PackageListing = () => {
                 ) : (
                   <div className=" w-[100%] h-full flex justify-center items-center">
                     <div className="flex flex-col justify-center items-center">
-                      <p className="text-center text-sm md:text-lg">
+                      <p className="text-center text-sm ">
                         No packages found.
                       </p>
 

@@ -4,48 +4,49 @@ import { IoMdStar, IoIosStarHalf } from "react-icons/io";
 import { FiGlobe } from "react-icons/fi";
 import { ImAirplane } from "react-icons/im";
 import { BiSolidCheckCircle } from "react-icons/bi";
-import { FaHeart, FaRegUserCircle } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { selectPackage } from "../redux/packages/packageSlice";
+import UserButton from "./ui/UserButton";
 
 const DashboardMain = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const [packages, setPackages] = useState([]);
-  const currentUser = useSelector(state=> state.user.currentUser)
-  useEffect(()=>{
-    const fetchPackages = async()=>{
+  const currentUser = useSelector(state => state.user.currentUser)
+  useEffect(() => {
+    const fetchPackages = async () => {
       try {
-      const res = await axios.get(`${API_URL}/packages`)
-      localStorage.setItem("allPackages", JSON.stringify(res.data))
-      setPackages(res.data)
+        const res = await axios.get(`${API_URL}/packages`)
+        localStorage.setItem("allPackages", JSON.stringify(res.data))
+        setPackages(res.data)
       } catch (error) {
         const cachedPackages = localStorage.getItem("allPackages")
-        if(cachedPackages){
+        if (cachedPackages) {
           setPackages(JSON.parse(cachedPackages))
         }
       }
     }
     fetchPackages()
-  },[])
-  const handleData = (pkg) =>{
+  }, [])
+  const handleData = (pkg) => {
     navigate(`/packages/${pkg._id}`)
     dispatch(selectPackage(pkg))
   }
   console.log(packages)
   return (
     <div>
-      <section className="pt-6 pb-12 lg:py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide "> 
+      <section className="pt-6 pb-12 lg:py-6 px-4 max-h-screen overflow-y-auto scrollbar-hide ">
         <div className="flex justify-between items-center">
           <h2 className='text-xl lg:text-3xl font-semibold'>Welcome, <span>{currentUser.firstname}</span></h2>
           <div className="flex space-x-6 items-center">
-            <span><FaRegBell className='text-xl lg:text-3xl '/></span>
-             <span>< FaRegUserCircle className="scale-150 text-lg lg:text-2xl"/></span>
+            <span><FaRegBell className='text-xl lg:text-3xl ' /></span>
+            <UserButton/>
           </div>
         </div>
         <div className="mt-6 relative">
@@ -59,18 +60,18 @@ const DashboardMain = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6 place-items-center justify-items-center ">
-          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-sky-200/40 px-10 text-center flex flex-col justify-center space-y-3 items-center"><span className='scale-150 text-blue font-bold'><FiGlobe className='text-2xl'/></span><p className='text-xl '>Total packages</p></div>
-          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-yellow-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-orange font-bold'><ImAirplane className='text-2xl'/></span><p className='text-xl '>Upcoming trips</p></div>
+          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-sky-200/40 px-10 text-center flex flex-col justify-center space-y-3 items-center"><span className='scale-150 text-blue font-bold'><FiGlobe className='text-2xl' /></span><p className='text-xl '>Total packages</p></div>
+          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-yellow-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-orange font-bold'><ImAirplane className='text-2xl' /></span><p className='text-xl '>Upcoming trips</p></div>
           <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-rose-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-green font-bold'><BiSolidCheckCircle className='text-2xl' /></span><p className='text-xl '>Completed trips</p></div>
-          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-zinc-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-red font-bold'><FaHeart className='text-2xl'/></span><p className='text-xl '>Wishlist</p></div>
+          <div className="rounded-xl w-36 h-36 xxs:w-40 xxs:h-40 sm:w-48 sm:h-48 md:w-48 md:h-48 bg-zinc-200/40 px-10 text-center flex  flex-col justify-center space-y-3 items-center"><span className='scale-150 text-red font-bold'><FaHeart className='text-2xl' /></span><p className='text-xl '>Wishlist</p></div>
         </div>
         <div className="mt-3">
           <h4 className='text-xl font-semibold'>Explore </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-2">
-            {packages.slice( 0,4 ).map((pkg, idx) => {
+            {packages.slice(0, 4).map((pkg, idx) => {
               return (
                 <div className="" key={idx}>
-                  <img src={pkg.images[0] || dashboardImageTwo } onError={(e)=> {e.currentTarget.src = dashboardImageOne}} className='rounded-lg shadow-lg w-52 h-36 object-cover' />
+                  <img src={pkg.images[0] || dashboardImageTwo} onError={(e) => { e.currentTarget.src = dashboardImageOne }} className='rounded-lg shadow-lg w-52 h-36 object-cover' />
                   <div className="mt-2">
                     <p className='text-lg'>{`${pkg.location.country}, ${pkg.location.city}`}</p>
                     <p className='text-sm'>#{pkg.pricePerAdult.toLocaleString()}</p>
@@ -85,7 +86,7 @@ const DashboardMain = () => {
                       </div>
                       <span className='text-sm text-zinc-700'>{pkg.rating}</span>
                     </div>
-                    <button type="submit" onClick={()=>handleData(pkg)} className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
+                    <button type="submit" onClick={() => handleData(pkg)} className="bg-blue/90 hover:bg-blue py-2 text-lg mt-3 w-full text-center rounded-lg text-white capitalize">
                       Proceed
                     </button>
                   </div>

@@ -9,9 +9,9 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from "react-router-dom";
 import DatePicker from './DatePicker';
 import { useSelector } from 'react-redux';
-import { FaRegUserCircle } from 'react-icons/fa';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import UserButton from './ui/UserButton';
 
 
 
@@ -33,8 +33,6 @@ const PackageForm = () => {
         resolver: yupResolver(ValidationSchema)
     })
     const selected = watch("paymentMethod");
-    // console.log(currentPackage)
-
     const onSubmit = async(data) => {
         const contactInfo = {
             phone: data.contact,
@@ -73,7 +71,7 @@ const PackageForm = () => {
                     <div className="flex justify-between py-4 items-center lg:px-3">
                         <h3 className="text-sm font-semibold">Voyagepro</h3>
                         <h3 className="hidden md:text-3xl lg:block font-semibold">Edit Bookings</h3>
-                        <span className='w-40 flex justify-end'>< FaRegUserCircle className="scale-150 text-2xl" /></span>
+                        <UserButton/>
                     </div>
                     <main className='flex  items-start '>
                         <div className="hidden lg:block 2xl:w-[50%] h-[750px] pt-10">

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import mainImage from "../images/hero-image.webp";
 import { BiLogOut } from "react-icons/bi";
-import { FaRegUserCircle } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../redux/users/userSlice';
 import { useNavigate } from 'react-router-dom';
+import UserButton from "./ui/UserButton";
 const Confirmationdetails = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -56,7 +56,7 @@ const Confirmationdetails = () => {
                     <div className="flex justify-between items-center">
                         <h2 className='text-sm font-semibold'>VoyagePro</h2>
                         <h2 className='text-xl md:text-2xl font-semibold'>Confirmation Details</h2>
-                        <span>< FaRegUserCircle className="scale-150 md:text-2xl" /></span>
+                        <UserButton/>
                     </div>
                     <div className="2xl:w-[50%] mx-auto mt-4 bg-white p-6 rounded-lg shadow-xl">
                         <div className=" ">

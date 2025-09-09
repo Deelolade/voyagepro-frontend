@@ -1,4 +1,5 @@
-import { FaRegBell, FaRegUserCircle } from 'react-icons/fa'
+import { FaRegBell } from 'react-icons/fa'
+import UserButton from '../ui/UserButton'
 const Blog = () => {
   const blogs = [
     {
@@ -69,7 +70,7 @@ const Blog = () => {
           <h2 className='text-2xl sm:text-3xl font-semibold'>Blog Manager </h2>
           <div className="flex space-x-6 items-center">
             <span><FaRegBell className='text-3xl ' /></span>
-            <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
+            <UserButton/>
           </div>
         </div>
         <div className="grid grid-cols-2 mt-3 md:grid-cols-3 gap-6 my-2 md:my-6 md:p-6">

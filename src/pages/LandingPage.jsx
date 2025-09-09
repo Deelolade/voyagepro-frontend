@@ -61,11 +61,9 @@ const LandingPage = () => {
   ];
 
   useEffect(() => {
-    console.log("helloo")
     const fetchPackages = async () => {
       try {
         const res = await axios.get(`${API_URL}/packages`)
-        console.log("neww packages: ", res.data)
         localStorage.setItem("allPackages", JSON.stringify(res.data))
         setPackages(res.data)
       } catch (error) {

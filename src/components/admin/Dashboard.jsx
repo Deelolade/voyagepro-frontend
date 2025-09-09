@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { FaRegBell, FaRegUserCircle } from 'react-icons/fa'
+import { FaRegBell,  } from 'react-icons/fa'
 import { IoCloudUploadOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { useQueries, } from '@tanstack/react-query'
 import { useSelector } from 'react-redux';
 import { Chart } from './DashboardGraph';
+import UserButton from '../ui/UserButton';
 
 const Dashboard = () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -97,7 +98,7 @@ const Dashboard = () => {
                     <h2 className='text-2xl md:text-3xl font-semibold'>Welcome {currentUser?.firstname} </h2>
                     <div className="flex space-x-6 items-center">
                         <span><FaRegBell className='text-3xl' /></span>
-                        <span>< FaRegUserCircle className="scale-150 text-2xl" /></span>
+                        <UserButton/>
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-6 w-full bg-re p-3 mt-2">
