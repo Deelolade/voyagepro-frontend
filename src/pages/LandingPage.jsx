@@ -328,7 +328,7 @@ const LandingPage = () => {
           </div>
           <div className="bg-green mt-10 md:mt-20 p-3 md:p-10">
             <Marquee speed={50} gradient={false}>
-              <div className=" mx-auto flex flex-col space-x-40 md:gap-0 md:flex-row items-center justify-between my-3 ">
+              <div className=" mx-auto flex  space-x-20 md:gap-0 flex-row items-center justify-between my-3 ">
                 <div className=" flex justify-center items-center space-x-3">
                   <span>
                     <MdOutlineStar className="text-6xl md:text-7xl text-orange" />
